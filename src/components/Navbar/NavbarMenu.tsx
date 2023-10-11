@@ -7,9 +7,10 @@ import { ArrowDownOutlined } from "@ant-design/icons";
 
 type NavbarMenuProps = {
   navbarData: INavbarType;
+  customClass?: string;
 };
 
-const NavbarMenu = ({ navbarData }: NavbarMenuProps) => {
+const NavbarMenu = ({ navbarData, customClass }: NavbarMenuProps) => {
   let items: MenuProps["items"] = [];
 
   if (navbarData.isSubMenu && navbarData.subMenu) {
@@ -22,7 +23,7 @@ const NavbarMenu = ({ navbarData }: NavbarMenuProps) => {
   }
 
   return (
-    <Link href={navbarData.link}>
+    <Link href={navbarData.link} className={customClass && customClass}>
       {navbarData.isSubMenu ? (
         <Dropdown
           menu={{ items }}
@@ -43,11 +44,11 @@ const NavbarMenu = ({ navbarData }: NavbarMenuProps) => {
               viewBox="0 0 330 330"
               xmlSpace="preserve"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {" "}

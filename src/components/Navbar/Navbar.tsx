@@ -1,13 +1,23 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "/public//assists/logo_Asset-1-1.png";
 import Link from "next/link";
 import { INavbarType } from "@/types/NavbarType";
 import NavbarMenu from "./NavbarMenu";
 import { PhoneTwoTone } from "@ant-design/icons";
-import { Button } from "antd";
+import { AppstoreOutlined } from "@ant-design/icons";
+import { Drawer } from "antd";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   const NavbarData: INavbarType[] = [
     {
       name: "Home",
@@ -39,19 +49,19 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="py-[16px] border-b-2 borderColor common flex gap-3 items-center justify-between">
+    <div className="py-[16px] border-b-2 borderColor common flex gap-3 items-center justify-between w-full">
       {/* logo */}
-      <Link
-        style={{
-          padding: "12px 0",
-        }}
-        href={"/"}
-        className="w-full"
-      >
-        <Image src={Logo} alt="" width={130} height={284} />
+      <Link href={"/"} className="md:w-full">
+        <Image
+          src={Logo}
+          alt=""
+          width={130}
+          height={284}
+          className="md:w-[130px] md:h-[54px] w-[100px] h-[51px]"
+        />
       </Link>
       {/* NavData */}
-      <div className="flex gap-5 w-full justify-between px-[50px]">
+      <div className="md:flex hidden gap-5 w-full justify-between px-[50px]">
         {NavbarData?.map((nav: INavbarType, i: number) => (
           <NavbarMenu key={i} navbarData={nav} />
         ))}
@@ -59,17 +69,46 @@ const Navbar = () => {
 
       {/* appoinment */}
 
-      <div className="flex gap-5 items-center w-full">
+      <div className="flex gap-5 items-center w-full justify-end  ">
         {/* emergengy call */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 cursor-pointer">
           <PhoneTwoTone className="text-primary" />
           <p>Emergency Call</p>
         </div>
 
         {/* apointment */}
-        <button className="bg-primary text-white  px-[20px] py-[10px] rounded-xl font-inter shadow-2xl shadow-bgColor scale-100 hover:scale-110 ease-in duration-100">
+        <button className="bg-primary text-white  px-[20px] py-[10px] rounded-xl font-inter shadow-2xl shadow-bgColor scale-100 hover:scale-110 ease-in duration-100 hidden md:block">
           Apointment{" "}
         </button>
+
+        {/* button and drower */}
+        <>
+          <button
+            onClick={showDrawer}
+            className="block md:hidden text-[32px] border rounded-lg "
+          >
+            <AppstoreOutlined />
+          </button>
+
+          <Drawer
+            title="Menu"
+            placement="right"
+            onClose={onClose}
+            open={open}
+            className="text-[20px] text-center"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "column",
+            }}
+          >
+            {NavbarData?.map((nav: INavbarType, i: number) => (
+              <p key={i} className="text-[20px] my-[20px]">
+                {nav.name}
+              </p>
+            ))}
+          </Drawer>
+        </>
       </div>
     </div>
   );
