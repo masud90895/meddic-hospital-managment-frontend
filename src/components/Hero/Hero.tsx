@@ -23,7 +23,7 @@ const Hero = () => {
         <p className="text-primary md:text-[20px] text-[16px] font-semibold">
           WELCOME TO MEDDIC
         </p>
-        <p className="font-poppins md:text-[55px] text-[35px] w-[550px]">
+        <p className="font-poppins md:text-[55px] text-[35px] md:w-[550px]">
           We Are Here to Hear <br /> and Heal Your <br /> Health Problems
         </p>
         <p className="md:w-[500px] text-gray-[400px] font-poppins text-gray-500">
