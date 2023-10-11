@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "/public//assists/logo_Asset-1-1.png";
