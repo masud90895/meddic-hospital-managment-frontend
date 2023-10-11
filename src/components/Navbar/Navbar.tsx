@@ -78,10 +78,14 @@ const Navbar = () => {
         </div>
 
         {/* apointment */}
-        <button className="bg-primary text-white  px-[20px] py-[10px] rounded-xl font-inter shadow-2xl shadow-bgColor scale-100 hover:scale-110 ease-in duration-100 hidden md:block">
+        <button
+          style={{
+            boxShadow: " 3px 3px 3px 0px rgba(109,40,217)",
+          }}
+          className=" hidden md:block appointmentButton"
+        >
           Apointment{" "}
         </button>
-
         {/* button and drower */}
         <>
           <button
