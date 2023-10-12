@@ -5,6 +5,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+body {
+  font-family: "Inter", "sans-serif";
+}
+
 .common {
   @apply md:px-[350px] px-[10px];
 }
@@ -13,6 +17,6 @@
   @apply border-[#4851D524];
 }
 
-.appointmentButton{
-  @apply bg-primary text-white  px-[20px] py-[10px] rounded-xl font-inter  shadow-bgColor scale-100 hover:scale-110 ease-in duration-100
+.appointmentButton {
+  @apply bg-primary text-white  px-[20px] py-[10px] rounded-xl font-inter  shadow-bgColor scale-100 hover:scale-110 ease-in duration-100;
 }
