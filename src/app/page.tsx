@@ -1,4 +1,5 @@
 import About from "@/components/About/About";
+import Apointment from "@/components/Apointment/Apointment";
 import Banner from "@/components/Banner/Banner";
 import BlogPage from "@/components/BlogPage/BlogPage";
 import Faqs from "@/components/Faqs/Faqs";
@@ -14,6 +15,7 @@ export default function Home() {
       <About />
       <Services />
       <HealthCare />
+      <Apointment />
       <Faqs />
       <BlogPage />
     </div>
