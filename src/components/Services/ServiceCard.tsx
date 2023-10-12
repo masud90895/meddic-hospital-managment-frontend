@@ -22,7 +22,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           {service.serviceName}
         </p>
 
-        <p className="bg-blue-300 rounded-full p-1 text-[12px] text-white">
+        <p className="bg-[#6d74dd] rounded-full p-1 text-[12px] text-white">
           {service.serviceStatus}
         </p>
       </div>
@@ -34,11 +34,26 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       </p>
 
       <div className="flex items-center justify-between">
-        <p className="text-[20px] font-inter">${service.servicePrice}</p>
-        <p>{service.category?.categoryName}</p>
+        <p className="text-[18px] font-inter font-semibold">
+          ${service.servicePrice}
+        </p>
+        <p className="bg-[#7f85e2] text-white p-1 rounded-full text-[12px]">
+          {service.category?.categoryName}
+        </p>
       </div>
 
-      <p>{service.location}</p>
+      <p className="text-[12px]">{service.location}</p>
+
+      {/* add to card */}
+
+      <div className="flex items-center gap-3">
+        <button className="bg-primary text-white px-3 py-1 rounded-full text-[12px]">
+          Add to cart
+        </button>
+        <button className="bg-white text-primary px-3 py-1 rounded-full text-[12px] border border-primary">
+          View details
+        </button>
+      </div>
     </div>
   );
 };
