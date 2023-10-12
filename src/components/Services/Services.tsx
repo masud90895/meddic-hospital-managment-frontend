@@ -1,11 +1,11 @@
 import { IServiceTypes } from "@/types/Service";
 import React from "react";
-import image1 from "../../../public/assists/Service/medicin.jpg";
-import image2 from "../../../public/assists/Service/madical.jpg";
-import image3 from "../../../public/assists/Service/checkoup.jpg";
-import image4 from "../../../public/assists/Service/Consultation.jpg";
-import image5 from "../../../public/assists/Service/ambulance.jpg";
-import image6 from "../../../public/assists/Service/Health.jpg";
+import image1 from "/public/assists/Service/medicin.jpg";
+import image2 from "/public/assists/Service/madical.jpg";
+import image3 from "/public/assists/Service/checkoup.jpg";
+import image4 from "/public/assists/Service/Consultation.jpg";
+import image5 from "/public/assists/Service/ambulance.jpg";
+import image6 from "/public/assists/Service/Health.jpg";
 import ServiceCard from "./ServiceCard";
 
 const Services = () => {
