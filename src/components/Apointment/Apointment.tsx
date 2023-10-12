@@ -1,7 +1,19 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import Form from "../FormComponent/FormComponent";
+import InputField from "../InputField/InputField";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const Apointment = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => console.log(data);
+
   return (
     <div className="common md:flex gap-10 items-center mb-[60px]">
       <Image
@@ -25,12 +37,19 @@ const Apointment = () => {
           or disqualify opportunities.
         </p>
 
+        {/* apoinment form */}
 
-        {/*  */}
-
-
-
-
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputField
+            label="Your Name"
+            errors={errors?.name}
+            name="name"
+            placeholder="Enter your name"
+            required={true}
+            register={register}
+            type="text"
+          />
+        </form>
       </div>
     </div>
   );
