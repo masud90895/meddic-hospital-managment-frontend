@@ -9,7 +9,8 @@ const BlogPage = () => {
       blogTitle: "Lorem ipsum dolor sit amet",
       blogDescription:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, elit vel bibendum bibendum, sapien sapien bibendum sapien, vel bibendum sapien sapien vel sapien.",
-      blogImage: "https://res.cloudinary.com/dfvsjdxtb/image/upload/v1697117140/styles/wkba9aarcgcr5yf0nyzs.png",
+      blogImage:
+        "https://res.cloudinary.com/dfvsjdxtb/image/upload/v1697117140/styles/wkba9aarcgcr5yf0nyzs.png",
       createdAt: "2023-10-12T13:25:40.286Z",
       updatedAt: "2023-10-12T13:25:40.286Z",
       profileId: "aab88f72-7454-43fa-a676-d7d35041b912",
@@ -24,7 +25,8 @@ const BlogPage = () => {
       blogTitle: "Lorem ipsum dolor sit amet",
       blogDescription:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, elit vel bibendum bibendum, sapien sapien bibendum sapien, vel bibendum sapien sapien vel sapien.",
-      blogImage: "https://res.cloudinary.com/dfvsjdxtb/image/upload/v1697117140/styles/wkba9aarcgcr5yf0nyzs.png",
+      blogImage:
+        "https://res.cloudinary.com/dfvsjdxtb/image/upload/v1697117140/styles/wkba9aarcgcr5yf0nyzs.png",
       createdAt: "2023-10-12T13:25:40.286Z",
       updatedAt: "2023-10-12T13:25:40.286Z",
       profileId: "aab88f72-7454-43fa-a676-d7d35041b912",
@@ -39,7 +41,8 @@ const BlogPage = () => {
       blogTitle: "Lorem ipsum dolor sit amet",
       blogDescription:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, elit vel bibendum bibendum, sapien sapien bibendum sapien, vel bibendum sapien sapien vel sapien.",
-      blogImage: "https://res.cloudinary.com/dfvsjdxtb/image/upload/v1697117140/styles/wkba9aarcgcr5yf0nyzs.png",
+      blogImage:
+        "https://res.cloudinary.com/dfvsjdxtb/image/upload/v1697117140/styles/wkba9aarcgcr5yf0nyzs.png",
       createdAt: "2023-10-12T13:25:40.286Z",
       updatedAt: "2023-10-12T13:25:40.286Z",
       profileId: "aab88f72-7454-43fa-a676-d7d35041b912",
@@ -55,7 +58,7 @@ const BlogPage = () => {
     <div className="common mb-[60px]">
       {/* blog news */}
 
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex justify-between items-center mb-[100px]">
         <div>
           <p className="text-primary md:text-[20px] text-[16px] font-semibold">
             BLOG NEWS
@@ -71,7 +74,7 @@ const BlogPage = () => {
 
       {/* blogs */}
 
-      <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {blogData.map((blog) => (
           <BlogCard key={blog.blogId} blog={blog} />
         ))}
