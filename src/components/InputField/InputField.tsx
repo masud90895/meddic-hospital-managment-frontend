@@ -4,7 +4,7 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 interface InputFieldProps {
   label?: string;
   name?: string;
-  type?: string;
+  type?: "text" | "number" | "email" | "password" | "date" | "time";
   customClass?: string;
   placeholder?: string;
   required?: boolean;
@@ -35,7 +35,7 @@ const InputField = ({
       {label && (
         <div className="flex gap-1 items-center mb-1">
           <label className={`${errors?.name ? "label_text2" : "label_text"}`}>
-            {label} {required && <span className="text-rose-50">*</span>}
+            {label} {required && <span className="text-rose-500">*</span>}
           </label>
         </div>
       )}
@@ -72,7 +72,7 @@ const InputField = ({
           required={required ? true : false}
         />
       )}
-      {errors?.name && <p className="text-rose-50">{label} is required</p>}
+      {errors?.name && <p className="text-rose-500">{label} is required</p>}
     </div>
   );
 };

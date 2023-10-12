@@ -4,6 +4,7 @@ import React from "react";
 import Form from "../FormComponent/FormComponent";
 import InputField from "../InputField/InputField";
 import { useForm, SubmitHandler } from "react-hook-form";
+import TextArea from "antd/es/input/TextArea";
 
 const Apointment = () => {
   const {
@@ -12,7 +13,10 @@ const Apointment = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <div className="common md:flex gap-10 items-center mb-[60px]">
@@ -25,7 +29,7 @@ const Apointment = () => {
       />
 
       {/* FAQS */}
-      <div className="font-inter my-[20px] md:my-0 flex flex-col h-[400px] justify-around md:w-[400px]">
+      <div className="font-inter my-[20px] md:my-0 flex flex-col md:h-[400px] justify-around md:w-[400px]">
         <p className="text-primary md:text-[20px] text-[16px] font-semibold">
           APPOINTMENT
         </p>
@@ -39,16 +43,78 @@ const Apointment = () => {
 
         {/* apoinment form */}
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="md:w-[500px]">
           <InputField
             label="Your Name"
-            errors={errors?.name}
+            errors={errors}
             name="name"
             placeholder="Enter your name"
             required={true}
             register={register}
             type="text"
           />
+
+          <div className="my-[12px] md:flex gap-2">
+            <InputField
+              label="Phone"
+              errors={errors}
+              name="number"
+              placeholder="Enter your Number"
+              required={true}
+              register={register}
+              type="number"
+            />
+            <InputField
+              label="Email"
+              errors={errors}
+              name="email"
+              placeholder="Enter your Email"
+              required={true}
+              register={register}
+              type="email"
+            />
+          </div>
+          <div className="my-[12px] md:flex gap-2">
+            <InputField
+              label="Date"
+              errors={errors}
+              name="date"
+              placeholder="Select Date"
+              required={true}
+              register={register}
+              type="date"
+            />
+            <InputField
+              label="Time"
+              errors={errors}
+              name="time"
+              placeholder="Enter your Email"
+              required={true}
+              register={register}
+              type="time"
+            />
+          </div>
+
+          <div>
+            <div className="flex gap-1 items-center mb-1">
+              <label className={`label_text`}>
+                message
+                {errors?.message && <span className="text-rose-500">*</span>}
+              </label>
+            </div>
+
+            <TextArea
+              showCount
+              maxLength={100}
+              style={{ height: 120, marginBottom: 24 }}
+              placeholder="can resize"
+              {...register("message")}
+            />
+          </div>
+
+          <button type="submit" className="appointmentButton">
+            Make Appoinment
+          </button>
         </form>
       </div>
     </div>
