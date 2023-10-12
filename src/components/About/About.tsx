@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <div className="common md:flex w-full justify-between md:py-[200px] my-[30px] items-center ">
+    <div className="common md:flex w-full justify-between md:py-[200px] my-[30px] items-center border-b-2">
       <div className="flex flex-col md:flex-row gap-[50px]">
         <Image
           src={aboutImageOne}
