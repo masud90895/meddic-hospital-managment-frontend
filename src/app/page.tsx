@@ -14,8 +14,8 @@ export default function Home() {
       <Banner />
       <About />
       <Services />
-      <HealthCare />
       <Apointment />
+      <HealthCare />
       <Faqs />
       <BlogPage />
     </div>

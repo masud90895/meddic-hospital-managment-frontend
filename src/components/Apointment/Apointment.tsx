@@ -24,6 +24,13 @@ const Apointment = () => {
           The benefits of MEDDPICC are that it allows sellers to quickly qualify
           or disqualify opportunities.
         </p>
+
+
+        {/*  */}
+
+
+
+
       </div>
     </div>
   );
