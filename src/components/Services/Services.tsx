@@ -1,21 +1,15 @@
 import { IServiceTypes } from "@/types/Service";
 import React from "react";
-import image1 from "/public/assists/Service/medicin.jpg";
-import image2 from "/public/assists/Service/madical.jpg";
-import image3 from "/public/assists/Service/checkoup.jpg";
-import image4 from "/public/assists/Service/Consultation.jpg";
-import image5 from "/public/assists/Service/ambulance.jpg";
-import image6 from "/public/assists/Service/Health.jpg";
 import ServiceCard from "./ServiceCard";
 
-const Services = () => {
+ const Services = () => {
   const serviceData: IServiceTypes[] = [
     {
       serviceName: "Pharmacy Services",
       description:
         "We provide a wide range of pharmacy services to meet the needs of our patients and customers in our community.",
       location: "Thakurgaon Sadar, Thakurgaon",
-      serviceImage: image1,
+      serviceImage: "https://i.ibb.co/1f08g2g/medicin.jpg",
       servicePrice: 1000,
       serviceStatus: "Available",
       category: {
@@ -29,7 +23,7 @@ const Services = () => {
       description:
         "We provide a wide range of pharmacy services to meet the needs of our patients and customers in our community.",
       location: "Thakurgaon Sadar, Thakurgaon",
-      serviceImage: image2,
+      serviceImage: "https://i.ibb.co/tCFyqHx/madical.jpg",
       servicePrice: 1000,
       serviceStatus: "Available",
       category: {
@@ -43,7 +37,7 @@ const Services = () => {
       description:
         "We provide a wide range of pharmacy services to meet the needs of our patients and customers in our community.",
       location: "Thakurgaon Sadar, Thakurgaon",
-      serviceImage: image3,
+      serviceImage: "https://i.ibb.co/9rPKyFK/checkoup.jpg",
       servicePrice: 1000,
       serviceStatus: "Available",
       category: {
@@ -57,7 +51,7 @@ const Services = () => {
       description:
         "We provide a wide range of pharmacy services to meet the needs of our patients and customers in our community.",
       location: "Thakurgaon Sadar, Thakurgaon",
-      serviceImage: image4,
+      serviceImage: "https://i.ibb.co/sjqWY7P/Consultation.jpg",
       servicePrice: 1000,
       serviceStatus: "Available",
       category: {
@@ -71,7 +65,7 @@ const Services = () => {
       description:
         "We provide a wide range of pharmacy services to meet the needs of our patients and customers in our community.",
       location: "Thakurgaon Sadar, Thakurgaon",
-      serviceImage: image5,
+      serviceImage: "https://i.ibb.co/qJKWk8j/Ambulance.jpg",
       servicePrice: 1000,
       serviceStatus: "Available",
       category: {
@@ -85,7 +79,7 @@ const Services = () => {
       description:
         "We provide a wide range of pharmacy services to meet the needs of our patients and customers in our community.",
       location: "Thakurgaon Sadar, Thakurgaon",
-      serviceImage: image6,
+      serviceImage: "https://i.ibb.co/V2XgtBr/Health.jpg",
       servicePrice: 1000,
       serviceStatus: "Available",
       category: {
