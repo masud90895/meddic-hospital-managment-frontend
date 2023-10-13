@@ -7,6 +7,14 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "576px",
+      md: "896px",
+      lg: "1024px",
+      xl: "1280px",
+      xxl: "1440px",
+      "2xl": "1920px",
+    },
     extend: {
       backgroundImage: {},
       fontFamily: {

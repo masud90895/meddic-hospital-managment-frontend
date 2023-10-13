@@ -20,7 +20,7 @@ const BlogCard = ({ blog }: Props) => {
         alt="Picture of the author"
         width={500}
         height={500}
-        className=" md:w-[376px] md:h-[250px] rounded-t-xl "
+        className=" max-w-[376px] w-full md:h-[250px] rounded-t-xl "
       />
 
       <div className="p-[15px] font-poppins">

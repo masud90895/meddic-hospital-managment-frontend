@@ -59,7 +59,7 @@ const Faqs = () => {
       />
 
       {/* FAQS */}
-      <div className="font-inter my-[20px] md:my-0 flex flex-col h-[400px] justify-around md:w-[400px]">
+      <div className="font-inter my-[20px] md:my-0 flex flex-col md:h-[400px] justify-around md:w-[400px]">
         <p className="text-primary md:text-[20px] text-[16px] font-semibold">
           ABOUT MEDDIC
         </p>

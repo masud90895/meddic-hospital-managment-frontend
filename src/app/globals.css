@@ -10,7 +10,7 @@ body {
 }
 
 .common {
-  @apply md:px-[350px] px-[10px];
+  @apply px-[10px] 2xl:px-[350px] xl:px-[100px] lg:px-[80px] md:px-[50px];
 }
 
 .borderColor {
