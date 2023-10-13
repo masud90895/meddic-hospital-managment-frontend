@@ -123,8 +123,74 @@ const Navbar = () => {
 
         {/* user */}
 
-        {!user ? (
-          <div></div>
+        {user ? (
+          <div className="flex items-center justify-center ">
+            <div className=" relative inline-block text-left dropdown">
+              <span className="rounded-md shadow-sm">
+                <button
+                  className="inline-flex justify-center w-full  text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out  rounded-md hover:text-gray-500 "
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                  aria-controls="headlessui-menu-items-117"
+                >
+                  <Image
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                    src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                    width={100}
+                    height={100}
+                  />
+                </button>
+              </span>
+              <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
+                <div
+                  className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                  aria-labelledby="headlessui-menu-button-1"
+                  id="headlessui-menu-items-117"
+                  role="menu"
+                >
+                  <div className="px-4 py-3">
+                    <p className="text-sm leading-5">Signed in as</p>
+                    <p className="text-sm font-medium leading-5 text-gray-900 truncate">
+                      masud@gmail.com
+                    </p>
+                  </div>
+                  <div className="py-1">
+                    <Link
+                      href="/profile"
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                      role="menuitem"
+                    >
+                      Profile Settings
+                    </Link>
+                    <a
+                      href="javascript:void(0)"
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                      role="menuitem"
+                    >
+                      Support
+                    </a>
+                    <span
+                      role="menuitem"
+                      className="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 cursor-not-allowed opacity-50"
+                      aria-disabled="true"
+                    >
+                      New feature (soon)
+                    </span>
+                  </div>
+                  <div className="py-1">
+                    <button
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                      role="menuitem"
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         ) : (
           <Link href={"/login"}>
             <div className="relative inline-flex  group">

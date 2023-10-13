@@ -42,3 +42,9 @@ body {
 .input_text3 {
   @apply border w-full bg-[#FFFDF4] rounded-lg py-2 px-[10px] font-inter text-sm leading-6  text-gray-800;
 }
+
+.dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  transform: translate(0) scale(1);
+  visibility: visible;
+}
