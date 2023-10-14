@@ -12,6 +12,14 @@ import {
   CustomerServiceOutlined,
   CloudServerOutlined,
   FolderAddOutlined,
+  DiffOutlined,
+  FileAddOutlined,
+  FileSearchOutlined,
+  SecurityScanOutlined,
+  BoldOutlined,
+  OrderedListOutlined,
+  AlignLeftOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "@/constant/role";
@@ -39,7 +47,7 @@ export const sidebarItems = (role: string) => {
   const userSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/booking-list`}>Booking List</Link>,
+      label: <Link href={`/${role}/booking-list`}>My Booking List</Link>,
       icon: <BookOutlined />,
       key: `/${role}/booking-list`,
     },
@@ -51,7 +59,7 @@ export const sidebarItems = (role: string) => {
   ];
 
   const adminSidebarItems: MenuProps["items"] = [
-    ...userSidebarItems,
+    ...defaultSidebarItems,
     {
       label: "User management",
       key: "user-management",
@@ -89,34 +97,34 @@ export const sidebarItems = (role: string) => {
     {
       label: "booking management",
       key: "booking-management",
-      icon: <TableOutlined />,
+      icon: <DiffOutlined />,
       children: [
         {
           label: <Link href={`/add-booking`}>Add Booking</Link>,
           key: `/add-service`,
-          icon: <BookOutlined />,
+          icon: <FileAddOutlined />,
         },
         {
           label: <Link href={`/booking-list`}>Booking List</Link>,
           key: `/booking-list`,
-          icon: <BookOutlined />,
+          icon: <FileSearchOutlined />,
         },
       ],
     },
     {
       label: "Content Management",
       key: "content-management",
-      icon: <TableOutlined />,
+      icon: <SecurityScanOutlined />,
       children: [
         {
           label: <Link href={`/add-blog`}>Add Blog</Link>,
           key: `/add-blog`,
-          icon: <BookOutlined />,
+          icon: <BoldOutlined />,
         },
         {
           label: <Link href={`/blog-list`}>Blog List</Link>,
           key: `/blog-list`,
-          icon: <BookOutlined />,
+          icon: <OrderedListOutlined />,
         },
         {
           label: <Link href={`/add-faq`}>Add FAQ</Link>,
@@ -126,15 +134,13 @@ export const sidebarItems = (role: string) => {
         {
           label: <Link href={`/faq-list`}>FAQ List</Link>,
           key: `/faq-list`,
-          icon: <BookOutlined />,
+          icon: <AlignLeftOutlined />,
         },
       ],
     },
   ];
 
   const superAdminSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
-    ...userSidebarItems,
     ...adminSidebarItems,
     {
       label: "Admin-Management",
@@ -143,7 +149,7 @@ export const sidebarItems = (role: string) => {
       children: [
         {
           label: <Link href={`/add-admin`}>add Admin</Link>,
-          icon: <TableOutlined />,
+          icon: <PlusCircleOutlined />,
           key: `/add-admin`,
         },
         {
