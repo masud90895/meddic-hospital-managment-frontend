@@ -78,7 +78,7 @@ export const sidebarItems = (role: string) => {
         },
         {
           label: <Link href={`/dashboard/user-list`}>User List</Link>,
-          key: `/dashboard/dashboard/dashboard/dashboard/user-list`,
+          key: `dashboard/dashboard/user-list`,
           icon: <UsergroupAddOutlined />,
         },
       ],
@@ -89,21 +89,13 @@ export const sidebarItems = (role: string) => {
       icon: <CustomerServiceOutlined />,
       children: [
         {
-          label: (
-            <Link href={`/dashboard/dashboard/dashboard/add-service`}>
-              Add Service
-            </Link>
-          ),
-          key: `/dashboard/dashboard/dashboard/add-service`,
+          label: <Link href={`/dashboard/add-service`}>Add Service</Link>,
+          key: `/dashboard/add-service`,
           icon: <FolderAddOutlined />,
         },
         {
-          label: (
-            <Link href={`/dashboard/dashboard/dashboard/service-list`}>
-              Service List
-            </Link>
-          ),
-          key: `/dashboard/dashboard/dashboard/service-list`,
+          label: <Link href={`/dashboard/service-list`}>Service List</Link>,
+          key: `/dashboard/service-list`,
           icon: <CloudServerOutlined />,
         },
       ],
@@ -114,17 +106,13 @@ export const sidebarItems = (role: string) => {
       icon: <DiffOutlined />,
       children: [
         {
-          label: (
-            <Link href={`/dashboard/dashboard/add-booking`}>Add Booking</Link>
-          ),
-          key: `/dashboard/dashboard/add-service`,
+          label: <Link href={`/dashboard/add-booking`}>Add Booking</Link>,
+          key: `/dashboard/add-service`,
           icon: <FileAddOutlined />,
         },
         {
-          label: (
-            <Link href={`/dashboard/dashboard/booking-list`}>Booking List</Link>
-          ),
-          key: `/dashboard/dashboard/booking-list`,
+          label: <Link href={`/dashboard/booking-list`}>Booking List</Link>,
+          key: `/dashboard/booking-list`,
           icon: <FileSearchOutlined />,
         },
       ],
@@ -135,23 +123,23 @@ export const sidebarItems = (role: string) => {
       icon: <SecurityScanOutlined />,
       children: [
         {
-          label: <Link href={`/dashboard/dashboard/add-blog`}>Add Blog</Link>,
-          key: `/dashboard/dashboard/add-blog`,
+          label: <Link href={`/dashboard/add-blog`}>Add Blog</Link>,
+          key: `/dashboard/add-blog`,
           icon: <BoldOutlined />,
         },
         {
-          label: <Link href={`/dashboard/dashboard/blog-list`}>Blog List</Link>,
-          key: `/dashboard/dashboard/blog-list`,
+          label: <Link href={`/dashboard/blog-list`}>Blog List</Link>,
+          key: `/dashboard/blog-list`,
           icon: <OrderedListOutlined />,
         },
         {
-          label: <Link href={`/dashboard/dashboard/add-faq`}>Add FAQ</Link>,
-          key: `/dashboard/dashboard/add-faq`,
+          label: <Link href={`/dashboard/add-faq`}>Add FAQ</Link>,
+          key: `/dashboard/add-faq`,
           icon: <BookOutlined />,
         },
         {
-          label: <Link href={`/dashboard/dashboard/faq-list`}>FAQ List</Link>,
-          key: `/dashboard/dashboard/faq-list`,
+          label: <Link href={`/dashboard/faq-list`}>FAQ List</Link>,
+          key: `/dashboard/faq-list`,
           icon: <AlignLeftOutlined />,
         },
       ],
