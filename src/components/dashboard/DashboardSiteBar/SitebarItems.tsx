@@ -1,12 +1,17 @@
 import type { MenuProps } from "antd";
 import {
-  ProfileOutlined,
+  UsergroupAddOutlined,
   TableOutlined,
   AppstoreOutlined,
-  ScheduleOutlined,
-  ThunderboltOutlined,
-  CreditCardOutlined,
-  FileTextOutlined,
+  UserOutlined,
+  UsergroupDeleteOutlined,
+  BookOutlined,
+  PlusSquareOutlined,
+  UserSwitchOutlined,
+  UserAddOutlined,
+  CustomerServiceOutlined,
+  CloudServerOutlined,
+  FolderAddOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "@/constant/role";
@@ -15,14 +20,16 @@ export const sidebarItems = (role: string) => {
     {
       label: "Profile",
       key: "profile",
-      icon: <ProfileOutlined />,
+      icon: <UsergroupAddOutlined />,
       children: [
         {
           label: <Link href={`/${role}`}>Account Profile</Link>,
+          icon: <UserOutlined />,
           key: `/${role}/profile`,
         },
         {
           label: <Link href={`/${role}/change-password`}>Change Password</Link>,
+          icon: <UsergroupDeleteOutlined />,
           key: `/${role}/change-password`,
         },
       ],
@@ -30,80 +37,96 @@ export const sidebarItems = (role: string) => {
   ];
 
   const userSidebarItems: MenuProps["items"] = [
+    ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/manage-student`}>Manage Students</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/manage-student`,
+      label: <Link href={`/${role}/booking-list`}>Booking List</Link>,
+      icon: <BookOutlined />,
+      key: `/${role}/booking-list`,
     },
     {
-      label: <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/manage-faculty`,
+      label: <Link href={`/${role}/reviews`}>My Reviews</Link>,
+      icon: <PlusSquareOutlined />,
+      key: `/${role}/reviews`,
     },
   ];
 
   const adminSidebarItems: MenuProps["items"] = [
-    ...defaultSidebarItems,
     ...userSidebarItems,
     {
-      label: "Manage academic",
-      key: "manage-academic",
-      icon: <TableOutlined />,
+      label: "User management",
+      key: "user-management",
+      icon: <UserSwitchOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/academic/faculty`}>Faculties</Link>,
-          key: `/${role}/academic/faculty`,
+          label: <Link href={`/add-user`}>Add user</Link>,
+          key: `/add-user`,
+          icon: <UserAddOutlined />,
         },
         {
-          label: <Link href={`/${role}/academic/department`}>Departments</Link>,
-          key: `/${role}/academic/department`,
-        },
-        {
-          label: <Link href={`/${role}/academic/semester`}>Semesters</Link>,
-          key: `/${role}/academic/semester`,
+          label: <Link href={`/user-list`}>User List</Link>,
+          key: `/user-list`,
+          icon: <UsergroupAddOutlined />,
         },
       ],
     },
     {
-      label: "Management",
-      key: "management",
-      icon: <AppstoreOutlined />,
+      label: "service management",
+      key: "service-management",
+      icon: <CustomerServiceOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
+          label: <Link href={`/add-service`}>Add Service</Link>,
+          key: `/add-service`,
+          icon: <FolderAddOutlined />,
         },
         {
-          label: <Link href={`/${role}/building`}>Building</Link>,
-          key: `/${role}/building`,
+          label: <Link href={`/service-list`}>Service List</Link>,
+          key: `/service-list`,
+          icon: <CloudServerOutlined />,
+        },
+      ],
+    },
+    {
+      label: "booking management",
+      key: "booking-management",
+      icon: <TableOutlined />,
+      children: [
+        {
+          label: <Link href={`/add-booking`}>Add Booking</Link>,
+          key: `/add-service`,
+          icon: <BookOutlined />,
         },
         {
-          label: <Link href={`/${role}/room`}>Rooms</Link>,
-          key: `/${role}/room`,
+          label: <Link href={`/booking-list`}>Booking List</Link>,
+          key: `/booking-list`,
+          icon: <BookOutlined />,
+        },
+      ],
+    },
+    {
+      label: "Content Management",
+      key: "content-management",
+      icon: <TableOutlined />,
+      children: [
+        {
+          label: <Link href={`/add-blog`}>Add Blog</Link>,
+          key: `/add-blog`,
+          icon: <BookOutlined />,
         },
         {
-          label: <Link href={`/${role}/course`}>Course</Link>,
-          key: `/${role}/course`,
+          label: <Link href={`/blog-list`}>Blog List</Link>,
+          key: `/blog-list`,
+          icon: <BookOutlined />,
         },
         {
-          label: (
-            <Link href={`/${role}/semester-registration`}>
-              Semester registration
-            </Link>
-          ),
-          key: `/${role}/semester-registration`,
+          label: <Link href={`/add-faq`}>Add FAQ</Link>,
+          key: `/add-faq`,
+          icon: <BookOutlined />,
         },
         {
-          label: <Link href={`/${role}/offered-course`}>Offered courses</Link>,
-          key: `/${role}/offered-course`,
-        },
-        {
-          label: (
-            <Link href={`/${role}/offered-course-section`}>
-              Course sections
-            </Link>
-          ),
-          key: `/${role}/offered-course-section`,
+          label: <Link href={`/faq-list`}>FAQ List</Link>,
+          key: `/faq-list`,
+          icon: <BookOutlined />,
         },
       ],
     },
@@ -112,24 +135,21 @@ export const sidebarItems = (role: string) => {
   const superAdminSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     ...userSidebarItems,
+    ...adminSidebarItems,
     {
-      label: <Link href={`/${role}/admin`}>Manage Admin</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/admin`,
-    },
-    {
-      label: <Link href={`/${role}/user`}>Manage User</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/user`,
-    },
-    {
-      label: "Management",
-      key: "management",
+      label: "Admin-Management",
+      key: "admin-management",
       icon: <AppstoreOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
+          label: <Link href={`/add-admin`}>add Admin</Link>,
+          icon: <TableOutlined />,
+          key: `/add-admin`,
+        },
+        {
+          label: <Link href={`/admin-list`}>Admin List </Link>,
+          icon: <TableOutlined />,
+          key: `/admin-list`,
         },
       ],
     },
@@ -138,29 +158,9 @@ export const sidebarItems = (role: string) => {
   const doctorSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/courses`}>Courses</Link>,
+      label: <Link href={`/booking-list`}>Booking Lists</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/courses`,
-    },
-    {
-      label: <Link href={`/${role}/courses/schedule`}>Course schedules</Link>,
-      icon: <ScheduleOutlined />,
-      key: `/${role}/courses/schedule`,
-    },
-    {
-      label: <Link href={`/${role}/registration`}>Registration</Link>,
-      icon: <ThunderboltOutlined />,
-      key: `/${role}/registration`,
-    },
-    {
-      label: <Link href={`/${role}/payment`}>Payment</Link>,
-      icon: <CreditCardOutlined />,
-      key: `/${role}/payment`,
-    },
-    {
-      label: <Link href={`/${role}/academic-report`}>Academic report</Link>,
-      icon: <FileTextOutlined />,
-      key: `/${role}/academic-report`,
+      key: `/booking-list`,
     },
   ];
 

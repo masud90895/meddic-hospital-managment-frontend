@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-
 import logoWithName from "../../../../public/assists/logo_Asset-1-1.png";
 import logo from "../../../../public/assists/logo.png";
 
@@ -48,7 +47,7 @@ const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
         theme="light"
         mode="inline"
         defaultSelectedKeys={["1"]}
-        items={sidebarItems("user")}
+        items={sidebarItems("admin")}
       />
     </Sider>
   );
