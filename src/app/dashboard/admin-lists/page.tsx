@@ -14,7 +14,7 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
 
-const FaqLists = () => {
+const AdminLists = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -49,11 +49,11 @@ const FaqLists = () => {
   const dataSource = [
     {
       email: "masudhossainmbs129@gmail.com",
-      firstName: "Md Masud",
+      firstName: "masud",
       lastName: "Rana",
       role: "ADMIN",
-      contactNumber: "01745296294",
-      address: "Thakurgoan",
+      contactNumber: "01714486218",
+      address: "Dhaka",
       bloodGroup: "O+",
     },
   ];
@@ -159,27 +159,27 @@ const FaqLists = () => {
             link: "/dashboard",
           },
           {
-            label: "faq-Lists",
-            link: "/dashboard/faq-lists",
+            label: "user-Lists",
+            link: "/dashboard/user-lists",
           },
         ]}
       />
 
       <div className="mt-5">
-        <ActionBar title="FAQ Lists">
+        <ActionBar title="Admin Lists">
           <Input
             type="text"
             size="large"
             placeholder="Search by name, email, role..."
             style={{
-              width: "300px",
+              width: "30%",
             }}
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
           />
           <div>
-            <Link href="/dashboard/add-blog">
+            <Link href="/admin/course/create">
               <Button type="primary">Create</Button>
             </Link>
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
@@ -210,4 +210,4 @@ const FaqLists = () => {
   );
 };
 
-export default FaqLists;
+export default AdminLists;

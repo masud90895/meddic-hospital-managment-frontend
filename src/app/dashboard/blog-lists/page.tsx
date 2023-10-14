@@ -14,7 +14,7 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
 
-const FaqLists = () => {
+const BlogLists = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -159,14 +159,14 @@ const FaqLists = () => {
             link: "/dashboard",
           },
           {
-            label: "faq-Lists",
-            link: "/dashboard/faq-lists",
+            label: "user-Lists",
+            link: "/dashboard/blog-lists",
           },
         ]}
       />
 
       <div className="mt-5">
-        <ActionBar title="FAQ Lists">
+        <ActionBar title="Blog Lists">
           <Input
             type="text"
             size="large"
@@ -210,4 +210,4 @@ const FaqLists = () => {
   );
 };
 
-export default FaqLists;
+export default BlogLists;

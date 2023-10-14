@@ -47,7 +47,7 @@ const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
         theme="light"
         mode="inline"
         defaultSelectedKeys={["1"]}
-        items={sidebarItems("admin")}
+        items={sidebarItems("super_admin")}
       />
     </Sider>
   );

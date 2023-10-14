@@ -8,7 +8,7 @@ import UploadImage from "@/components/ui/UploadImage";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormInput from "@/components/Forms/FormInput";
 
-const AddFaqPage = () => {
+const AddUserPage = () => {
   const adminOnSubmit = async (values: any) => {
     const obj = { ...values };
     const file = obj["file"];
@@ -34,12 +34,12 @@ const AddFaqPage = () => {
       <UMBreadCrumb
         items={[
           { label: `${base}`, link: `/dashboard` },
-          { label: "add-faq", link: `/dashboard/add-faq` },
+          { label: "add-blog", link: `/dashboard/add-blog` },
         ]}
       />
       <div className="mt-3">
         <div className="mb-3">
-          <h1 className="text-lg text-black/70 font-bold">Create New FAQ</h1>
+          <h1 className="text-lg text-black/70 font-bold">Create New Blog</h1>
         </div>
         <Form submitHandler={adminOnSubmit}>
           {/* faculty information */}
@@ -54,24 +54,28 @@ const AddFaqPage = () => {
             <p
               style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}
             >
-              FAQ information
+              Blog information
             </p>
             <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
+              <Col span={3} style={{ margin: "10px 0" }}>
+                <p className="pb-2">Blog Image</p>
+                <UploadImage name="file" />
+              </Col>{" "}
               <Col span={24} style={{ margin: "10px 0" }}>
                 <FormInput
-                  name="faqTitle"
-                  label="FAQ Title"
-                  placeholder="FAQ Title"
+                  name="blogTitle"
+                  label="Blog Title"
+                  placeholder="Blog Title"
                   size="large"
                   type="text"
                 />
               </Col>
               <Col span={24} style={{ margin: "10px 0" }}>
                 <FormTextArea
-                  name="faqDescription"
-                  label="FAQ Description"
+                  name="blogDescription"
+                  label="Blog Description"
                   rows={8}
-                  placeholder="Enter FAQ Description"
+                  placeholder="Enter Blog Description"
                 />
               </Col>{" "}
             </Row>
@@ -88,4 +92,4 @@ const AddFaqPage = () => {
   );
 };
 
-export default AddFaqPage;
+export default AddUserPage;

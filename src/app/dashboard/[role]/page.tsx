@@ -3,7 +3,7 @@
 import React from "react";
 import "./profile.css";
 import InputField from "@/components/InputField/InputField";
-import UploadImage from "@/components/ImageUpload/ImageUpload";
+import UploadImage from "@/components/ui/UploadImage";
 
 const Profile = () => {
   const [isEdit, setIsEdit] = React.useState(false);
@@ -13,7 +13,7 @@ const Profile = () => {
         <div className="col-span-1 border-r">
           <div className="flex flex-col items-center text-center p-3 py-5">
             {isEdit ? (
-              <UploadImage name="userImage" />
+              <UploadImage name="file" />
             ) : (
               <img
                 className="rounded-full mt-5 w-60"

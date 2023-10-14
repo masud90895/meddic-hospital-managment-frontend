@@ -77,8 +77,8 @@ export const sidebarItems = (role: string) => {
           icon: <UserAddOutlined />,
         },
         {
-          label: <Link href={`/dashboard/user-list`}>User List</Link>,
-          key: `dashboard/dashboard/user-list`,
+          label: <Link href={`/dashboard/user-lists`}>User List</Link>,
+          key: `dashboard/dashboard/user-lists`,
           icon: <UsergroupAddOutlined />,
         },
       ],
@@ -128,8 +128,8 @@ export const sidebarItems = (role: string) => {
           icon: <BoldOutlined />,
         },
         {
-          label: <Link href={`/dashboard/blog-list`}>Blog List</Link>,
-          key: `/dashboard/blog-list`,
+          label: <Link href={`/dashboard/blog-lists`}>Blog List</Link>,
+          key: `/dashboard/blog-lists`,
           icon: <OrderedListOutlined />,
         },
         {
@@ -159,7 +159,7 @@ export const sidebarItems = (role: string) => {
           key: `/dashboard/add-admin`,
         },
         {
-          label: <Link href={`/dashboard/admin-list`}>Admin List </Link>,
+          label: <Link href={`/dashboard/admin-lists`}>Admin List </Link>,
           icon: <TableOutlined />,
           key: `/dashboard/admin-list`,
         },
