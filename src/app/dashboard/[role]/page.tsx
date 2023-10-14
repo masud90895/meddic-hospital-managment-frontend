@@ -3,19 +3,25 @@
 import React from "react";
 import "./profile.css";
 import InputField from "@/components/InputField/InputField";
+import UploadImage from "@/components/ImageUpload/ImageUpload";
 
 const Profile = () => {
   const [isEdit, setIsEdit] = React.useState(false);
   return (
     <div className="container rounded bg-white mt-5 mb-5">
-      <div className="md:grid grid-cols-3 gap-4">
+      <form className="md:grid grid-cols-3 gap-4">
         <div className="col-span-1 border-r">
           <div className="flex flex-col items-center text-center p-3 py-5">
-            <img
-              className="rounded-full mt-5 w-60"
-              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-              alt="profile"
-            />
+            {isEdit ? (
+              <UploadImage name="userImage" />
+            ) : (
+              <img
+                className="rounded-full mt-5 w-60"
+                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                alt="profile"
+              />
+            )}
+
             <span className="font-bold mt-5">Md Masud Rana</span>
             <span className="text-gray-500">masudhossainmbs129@gmail.com</span>
           </div>
@@ -171,7 +177,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
