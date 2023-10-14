@@ -13,6 +13,7 @@ interface IInput {
   label?: string;
   required?: boolean;
   errors?: any;
+  disabled?: boolean;
 }
 
 const FormInput = ({
@@ -26,11 +27,12 @@ const FormInput = ({
   label,
   required,
   errors,
+  disabled,
 }: IInput) => {
   const { control } = useFormContext();
 
   return (
-    <>
+    <div className="flex flex-col">
       {label && (
         <div className="flex gap-1 items-center mb-1">
           <label className={`${errors?.name ? "label_text2" : "label_text"}`}>
@@ -50,6 +52,7 @@ const FormInput = ({
               {...field}
               value={value ? value : field.value}
               required={required}
+              disabled={disabled}
             />
           ) : (
             <Input
@@ -59,12 +62,13 @@ const FormInput = ({
               {...field}
               value={value ? value : field.value}
               required={required}
+              disabled={disabled}
             />
           )
         }
       />
       {errors?.name && <p className="text-rose-500">{label} is required</p>}
-    </>
+    </div>
   );
 };
 
