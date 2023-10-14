@@ -1,10 +1,17 @@
 "use client";
 import { Layout } from "antd";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
+import { Dispatch, SetStateAction } from "react";
 
 const { Content } = Layout;
 
-const DashboardContents = ({ children }: { children: React.ReactNode }) => {
+type IContent = {
+  children: React.ReactNode;
+  collapsed: boolean;
+  setCollapsed: Dispatch<SetStateAction<boolean>>;
+};
+
+const DashboardContents = ({ children, collapsed, setCollapsed }: IContent) => {
   return (
     <Content
       style={{
@@ -12,7 +19,7 @@ const DashboardContents = ({ children }: { children: React.ReactNode }) => {
         color: "black",
       }}
     >
-      <DashboardHeader />
+      <DashboardHeader collapsed={collapsed} setCollapsed={setCollapsed} />
 
       <div
         style={{

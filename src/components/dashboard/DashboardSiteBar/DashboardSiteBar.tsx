@@ -1,41 +1,54 @@
 "use client";
 import React, { useState } from "react";
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+
+
+import logoWithName from "../../../../public/assists/logo_Asset-1-1.png";
+import logo from "../../../../public/assists/logo.png";
+
+import { Layout, Menu } from "antd";
+import Image from "next/image";
+import { sidebarItems } from "./SitebarItems";
 
 const { Sider } = Layout;
 
-const DashboardSiteBar: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+interface ISiteBar {
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className="demo-logo-vertical" />
+    <Sider
+      style={{
+        background: "white",
+        borderRight: "1px solid #c8cbf2",
+      }}
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+    >
+      <div className="demo-logo-vertical " />
+
+      {/* add logo */}
+      <div className="my-[23px] w-full flex items-center justify-center">
+        {collapsed ? (
+          <Image
+            alt="Logo"
+            src={logo}
+            width={50}
+            height={50}
+            className="w-[30px]"
+          />
+        ) : (
+          <Image alt="Logo" src={logoWithName} width={100} height={100} />
+        )}
+      </div>
+
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
         defaultSelectedKeys={["1"]}
-        items={[
-          {
-            key: "1",
-            icon: <UserOutlined />,
-            label: "nav 1",
-          },
-          {
-            key: "2",
-            icon: <VideoCameraOutlined />,
-            label: "nav 2",
-          },
-          {
-            key: "3",
-            icon: <UploadOutlined />,
-            label: "nav 3",
-          },
-        ]}
+        items={sidebarItems("user")}
       />
     </Sider>
   );

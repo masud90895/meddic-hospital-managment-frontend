@@ -1,12 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Button, theme } from "antd";
 
 const { Header } = Layout;
 
-const DashboardHeader = () => {
-  const [collapsed, setCollapsed] = useState(false);
+type IHeader = {
+  collapsed: boolean;
+  setCollapsed: Dispatch<SetStateAction<boolean>>;
+};
+
+const DashboardHeader = ({ collapsed, setCollapsed }: IHeader) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
