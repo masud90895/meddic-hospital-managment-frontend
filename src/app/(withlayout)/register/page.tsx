@@ -1,17 +1,35 @@
 "use client";
+import { useCreateUserMutation } from "@/Redux/api/registationApi/registationApi";
 import InputField from "@/components/InputField/InputField";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
+
+  const [createUser, { isLoading,isSuccess }] = useCreateUserMutation();
+  const router = useRouter();
+
   const onSubmit = (data: any) => {
-    console.log(data);
+  console.log("🚀 ~ file: page.tsx:19 ~ onSubmit ~ data:", data)
+  try {
+    createUser(data).then((data:any) => {
+        if (data && isSuccess) {
+          console.log("🚀 ~ file: page.tsx:21 ~ createUser ~ data:", data);
+          router.push("/");
+        }
+      });
+  } catch (error) {
+    console.error(error)
+  }
+    
+      
+    
   };
 
   return (
@@ -239,14 +257,34 @@ const RegisterPage = () => {
 
             <div>
               <InputField
-                label="Name"
-                name="name"
-                placeholder="Enter your name"
+                label="First Name"
+                name="firstName"
+                placeholder="Enter your first name"
                 register={register}
                 errors={errors}
                 required={true}
                 type="text"
               />
+              {errors?.firstName && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  First name is Required
+                </p>
+              )}
+
+              <InputField
+                label="Last Name"
+                name="lastName"
+                placeholder="Enter your Last name"
+                register={register}
+                errors={errors}
+                required={true}
+                type="text"
+              />
+              {errors?.lastName && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  Last name is Required
+                </p>
+              )}
 
               <InputField
                 label="Email"
@@ -257,6 +295,18 @@ const RegisterPage = () => {
                 required={true}
                 type="email"
               />
+
+              {errors?.email && errors?.email?.message === "" && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  Email is Required
+                </p>
+              )}
+              {errors?.email && errors?.email?.message && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  {errors?.email?.message as string}
+                </p>
+              )}
+
               <InputField
                 label="Password"
                 name="password"
@@ -266,6 +316,17 @@ const RegisterPage = () => {
                 required={true}
                 type="password"
               />
+              {errors?.password && errors?.password?.message === "" && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  Password is Required
+                </p>
+              )}
+              {errors?.password && errors?.password?.message && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  {errors?.password?.message as string}
+                </p>
+              )}
+
               {/* already have account */}
               <div className="flex items-center justify-end mt-2">
                 <Link

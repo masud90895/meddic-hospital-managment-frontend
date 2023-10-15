@@ -12,10 +12,11 @@ import { Drawer } from "antd";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const user = {
-    name: "John Doe",
-    email: "masud",
-  };
+  // const user = {
+  //   name: "John Doe",
+  //   email: "masud",
+  // };
+  const user = null;
 
   const showDrawer = () => {
     setOpen(true);
@@ -202,14 +203,13 @@ const Navbar = () => {
           <Link href={"/login"}>
             <div className="relative inline-flex  group">
               <div className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
-              <a
-                href="#"
-                title="Get quote now"
+              <p
+                title="Login"
                 className="relative inline-flex items-center justify-center px-4 py-2 text-lg  text-white transition-all duration-200 bg-gray-700 font-pj rounded-xl "
                 role="button"
               >
                 Login
-              </a>
+              </p>
             </div>
           </Link>
         )}
