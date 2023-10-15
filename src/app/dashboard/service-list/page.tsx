@@ -141,7 +141,7 @@ const ServiceList = () => {
   //   console.log(dataSource);
 
   return (
-    <div className="my-10">
+    <div className="container rounded bg-white mt-1 mb-5 p-4">
       <UMBreadCrumb
         items={[
           {

@@ -44,7 +44,7 @@ const AddService = () => {
   };
   const base = "admin";
   return (
-    <div>
+    <div className="container rounded bg-white mt-1 mb-5 p-4">
       <UMBreadCrumb
         items={[
           { label: `${base}`, link: `/${base}` },

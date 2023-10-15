@@ -137,7 +137,7 @@ const BookingList = () => {
   //   console.log(dataSource);
 
   return (
-    <div className="my-10">
+    <div className="container rounded bg-white mt-1 mb-5 p-4">
       <UMBreadCrumb
         items={[
           {
@@ -145,13 +145,13 @@ const BookingList = () => {
             link: "/dashboard",
           },
           {
-            label: "service-list",
-            link: "/service/service-list",
+            label: "booking-list",
+            link: "/dashboard/booking-list",
           },
         ]}
       />
 
-      <ActionBar title="Course List">
+      <ActionBar title="Booking List">
         <Input
           type="text"
           size="large"

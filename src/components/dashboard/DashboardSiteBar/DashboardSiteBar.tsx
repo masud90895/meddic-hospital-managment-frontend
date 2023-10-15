@@ -17,7 +17,7 @@ interface ISiteBar {
 }
 
 const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
-  const role = USER_ROLE.SUPER_ADMIN ;
+  const role = USER_ROLE.DOCTOR;
 
   return (
     <Sider
