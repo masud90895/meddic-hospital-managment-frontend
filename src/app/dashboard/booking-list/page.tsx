@@ -14,7 +14,7 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
 
-const UserLists = () => {
+const BookingList = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -48,49 +48,35 @@ const UserLists = () => {
 
   const dataSource = [
     {
-      email: "masudhossainmbs129@gmail.com",
-      firstName: "Md Masud",
+      firstName: "Md Masud ",
       lastName: "Rana",
-      role: "ADMIN",
-      contactNumber: "01745296294",
-      address: "Thakurgoan",
-      bloodGroup: "O+",
+      appointmentDate: "15 May 2023",
+      slot: "10.00-10.20 AM",
+      service: "Medicine",
+      servicePrice: 120,
+      createdAt: "2023-10-13T18:20:09.606Z",
     },
   ];
 
   const columns = [
     {
       title: "Full Name",
-
-      render: function (data: Record<string, string>) {
-        const fullName = `${data?.firstName} ${data?.lastName}`;
-        return <>{fullName}</>;
-      },
+      dataIndex: "firstName",
       //   sorter: true,
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Appointment Date",
+      dataIndex: "appointmentDate",
       //   sorter: true,
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      title: "Time Slot",
+      dataIndex: "slot",
       //   sorter: true,
     },
     {
-      title: "Contact No",
-      dataIndex: "contactNumber",
-      //   sorter: true,
-    },
-    {
-      title: "Blood Group",
-      dataIndex: "contactNumber",
-      //   sorter: true,
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
+      title: "Service",
+      dataIndex: "service",
       //   sorter: true,
     },
     {
@@ -151,7 +137,7 @@ const UserLists = () => {
   //   console.log(dataSource);
 
   return (
-    <div className="container rounded bg-white mt-1 mb-5 p-4">
+    <div className="my-10">
       <UMBreadCrumb
         items={[
           {
@@ -159,41 +145,39 @@ const UserLists = () => {
             link: "/dashboard",
           },
           {
-            label: "user-Lists",
-            link: "/dashboard/user-lists",
+            label: "service-list",
+            link: "/service/service-list",
           },
         ]}
       />
 
-      <div>
-        <ActionBar title="User list">
-          <Input
-            type="text"
-            size="large"
-            placeholder="Search by name, email, role..."
-            style={{
-              width: "20% !important",
-            }}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-          />
-          <div>
-            <Link href="/admin/course/create">
-              <Button type="primary">Create</Button>
-            </Link>
-            {(!!sortBy || !!sortOrder || !!searchTerm) && (
-              <Button
-                onClick={resetFilters}
-                type="primary"
-                style={{ margin: "0px 5px" }}
-              >
-                <ReloadOutlined />
-              </Button>
-            )}
-          </div>
-        </ActionBar>
-      </div>
+      <ActionBar title="Course List">
+        <Input
+          type="text"
+          size="large"
+          placeholder="Search..."
+          style={{
+            width: "20%",
+          }}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
+        <div>
+          <Link href="/service/add-service">
+            <Button type="primary">Create</Button>
+          </Link>
+          {(!!sortBy || !!sortOrder || !!searchTerm) && (
+            <Button
+              onClick={resetFilters}
+              type="primary"
+              style={{ margin: "0px 5px" }}
+            >
+              <ReloadOutlined />
+            </Button>
+          )}
+        </div>
+      </ActionBar>
 
       <UMTable
         // loading={isLoading}
@@ -210,4 +194,4 @@ const UserLists = () => {
   );
 };
 
-export default UserLists;
+export default BookingList;

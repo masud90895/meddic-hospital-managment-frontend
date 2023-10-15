@@ -48,7 +48,7 @@ const AddService = () => {
       <UMBreadCrumb
         items={[
           { label: `${base}`, link: `/${base}` },
-          { label: "course", link: `/${base}/course` },
+          { label: "add-service", link: `/${base}/add-service` },
         ]}
       />
       <h1 className="text-lg text-black/70 font-bold">Create Service</h1>
@@ -67,15 +67,30 @@ const AddService = () => {
               />
             </div>
             <div style={{ margin: "10px 0px" }}>
-              <FormInput name="code" label="Description" size="large" placeholder="Enter Service Description" />
+              <FormInput
+                name="code"
+                label="Description"
+                size="large"
+                placeholder="Enter Service Description"
+              />
             </div>
           </Col>
           <Col span={12} style={{ margin: "10px 0" }}>
             <div style={{ margin: "10px 0px" }}>
-              <FormInput name="title" label="Location" size="large" placeholder="Enter Location" />
+              <FormInput
+                name="title"
+                label="Location"
+                size="large"
+                placeholder="Enter Location"
+              />
             </div>
             <div style={{ margin: "10px 0px" }}>
-              <FormInput name="code" label="Price" size="large" placeholder="Enter Service Price" />
+              <FormInput
+                name="code"
+                label="Price"
+                size="large"
+                placeholder="Enter Service Price"
+              />
             </div>
           </Col>
         </Row>

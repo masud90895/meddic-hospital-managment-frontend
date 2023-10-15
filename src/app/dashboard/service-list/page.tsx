@@ -155,7 +155,7 @@ const ServiceList = () => {
         ]}
       />
 
-      <ActionBar title="Course List">
+      <ActionBar title="service List">
         <Input
           type="text"
           size="large"
