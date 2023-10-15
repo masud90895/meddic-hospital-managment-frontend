@@ -4,8 +4,8 @@ import React from "react";
 const ChangePassword = () => {
   return (
     <div className="max-w-2xl mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
-      <h1 className="text-4xl font-medium">Reset password</h1>
-      <p className="text-slate-500">Fill up the form to reset the password</p>
+      <h1 className="text-4xl font-medium">Changes password</h1>
+      <p className="text-slate-500">Fill up the form to Change the password</p>
 
       <form action="" className="my-10">
         <div className="flex flex-col space-y-5">

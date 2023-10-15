@@ -29,9 +29,22 @@ const Profile = () => {
     }
   };
 
+  const fakeData = {
+    name: {
+      firstName: "Md Masud",
+      lastName: "Rana",
+    },
+    phone: "01700000000",
+    address: "Dhaka",
+    postcode: "1212",
+    state: "Dhaka",
+    area: "Dhaka",
+    country: "Bangladesh",
+  };
+
   return (
     <div className="container rounded bg-white mt-5 mb-5">
-      <Form submitHandler={adminOnSubmit}>
+      <Form submitHandler={adminOnSubmit} defaultValues={fakeData}>
         <div className="md:grid grid-cols-3 gap-4">
           <div className="col-span-1 border-r">
             <div className="flex flex-col items-center text-center p-3 py-5">

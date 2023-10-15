@@ -7,6 +7,7 @@ import logo from "../../../../public/assists/logo.png";
 import { Layout, Menu } from "antd";
 import Image from "next/image";
 import { sidebarItems } from "./SitebarItems";
+import { USER_ROLE } from "@/constant/role";
 
 const { Sider } = Layout;
 
@@ -16,6 +17,8 @@ interface ISiteBar {
 }
 
 const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
+  const role = USER_ROLE.USER;
+
   return (
     <Sider
       style={{
@@ -47,7 +50,7 @@ const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
         theme="light"
         mode="inline"
         defaultSelectedKeys={["1"]}
-        items={sidebarItems("super_admin")}
+        items={sidebarItems(role)}
       />
     </Sider>
   );
