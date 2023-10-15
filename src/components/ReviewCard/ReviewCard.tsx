@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { Rate } from "antd";
+import { Dropdown, MenuProps, Rate } from "antd";
 import React from "react";
+import { DashOutlined, DeleteOutlined } from "@ant-design/icons";
 
 type IReview = {
   name: string;
@@ -11,8 +12,19 @@ type IReview = {
   image: string;
   category: string;
 };
+
+const items: MenuProps["items"] = [
+  {
+    key: "3",
+    label: (
+      <button>
+        <DeleteOutlined />
+      </button>
+    ),
+  },
+];
+
 const ReviewCard = ({ review }: any) => {
-  console.log("🚀 ~ file: ReviewCard.tsx:12 ~ ReviewCard ~ review:", review);
   return (
     <div className="bg-white w-full max-w-sm  flex-shrink-0 shadow-xl rounded-2xl border">
       <div className="flex items-center justify-between py-4 px-8 bg-gray-200 rounded-t-2xl  bg-opacity-50 ">
@@ -27,7 +39,14 @@ const ReviewCard = ({ review }: any) => {
             <p className="text-gray-600">{review?.email}</p>
           </div>
         </div>
-        <p className="font-sm text-gray-400 font-medium">{review?.createdAt}</p>
+        <div className="flex items-center gap-2">
+          <p className="font-sm text-gray-400 font-medium">
+            {review?.createdAt}
+          </p>
+          <Dropdown menu={{ items }} placement="bottomLeft" arrow>
+            <DashOutlined />
+          </Dropdown>
+        </div>
       </div>
       <div className="flex flex-col justify-between   p-8 bg-white overflow-hidden rounded-b-2xl">
         <div className="mb-6 text-sm text-gray-700 leading-loose h-[100px]">
