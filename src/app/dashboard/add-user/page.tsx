@@ -100,6 +100,14 @@ const AddUserPage = () => {
                   placeholder="Select Role"
                 />
               </Col>
+              {isRoleIsDoctor && (
+                <Col span={12} style={{ margin: "10px 0" }}>
+                  <SpecializationFormField
+                    name="specialization"
+                    label="Specialization"
+                  />
+                </Col>
+              )}
             </Row>
           </div>
           {/* basic information  */}
@@ -117,6 +125,10 @@ const AddUserPage = () => {
               Basic information
             </p>
             <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
+              <Col span={24} style={{ margin: "10px 0" }}>
+                <label htmlFor="image">Profile Image</label>
+                <UploadImage name="file" />
+              </Col>
               <Col span={12} style={{ margin: "10px 0" }}>
                 <FormInput
                   name="name.firstName"
@@ -133,14 +145,10 @@ const AddUserPage = () => {
                   placeholder="Enter last name"
                 />
               </Col>{" "}
-              <Col span={12} style={{ margin: "10px 0" }}>
-                <label htmlFor="image">Profile Image</label>
-                <UploadImage name="file" />
-              </Col>
             </Row>
           </div>
           {/* Other information  */}
-          {isRoleIsDoctor && (
+          {/* {isRoleIsDoctor && (
             <div
               style={{
                 border: "1px solid #d9d9d9",
@@ -167,7 +175,7 @@ const AddUserPage = () => {
                 </Col>
               </Row>
             </div>
-          )}
+          )} */}
           <Button htmlType="submit">submit</Button>
         </Form>
       </div>
