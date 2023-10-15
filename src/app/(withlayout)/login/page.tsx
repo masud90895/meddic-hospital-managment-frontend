@@ -1,16 +1,32 @@
 "use client";
+import { useLoginMutation } from "@/Redux/Redux/features/auth/authApi";
 import InputField from "@/components/InputField/InputField";
+import { message } from "antd";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 const LoginPage = () => {
+  const [login, { isLoading }] = useLoginMutation();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => {
-    console.log(data);
+
+  const onSubmit = async (data: any) => {
+    try {
+      const res = await login(data).unwrap();
+      if (res?.data?.accessToken) {
+        router.push("/");
+        message.success("User logged in successfully!");
+      }
+    } catch (error: any) {
+      console.error(error?.data?.message);
+      message.error(error?.data?.message);
+    }
   };
   return (
     <div className="min-w-screen min-h-screen bg-bgColor flex items-center justify-center px-5 py-5">
@@ -40,6 +56,18 @@ const LoginPage = () => {
                 required={true}
                 type="email"
               />
+
+              {errors?.email && errors?.email?.message === "" && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  Email is Required
+                </p>
+              )}
+              {errors?.email && errors?.email?.message && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  {errors?.email?.message as string}
+                </p>
+              )}
+
               <InputField
                 label="Password"
                 name="password"
@@ -49,6 +77,18 @@ const LoginPage = () => {
                 required={true}
                 type="password"
               />
+
+              {errors?.password && errors?.password?.message === "" && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  Password is Required
+                </p>
+              )}
+              {errors?.password && errors?.password?.message && (
+                <p className="text-rose-500 my-[2px] text-[12px]">
+                  {errors?.password?.message as string}
+                </p>
+              )}
+
               {/* already have account */}
               <div className="flex items-center justify-end mt-2">
                 <Link

@@ -1,35 +1,35 @@
 "use client";
-import { useCreateUserMutation } from "@/Redux/api/registationApi/registationApi";
+import { useRegistrationMutation } from "@/Redux/Redux/features/auth/authApi";
 import InputField from "@/components/InputField/InputField";
+import { Alert, Button, Space, message } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const RegisterPage = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const [createUser, { isLoading,isSuccess }] = useCreateUserMutation();
+  const [registration, { isLoading }] = useRegistrationMutation();
   const router = useRouter();
 
-  const onSubmit = (data: any) => {
-  console.log("🚀 ~ file: page.tsx:19 ~ onSubmit ~ data:", data)
-  try {
-    createUser(data).then((data:any) => {
-        if (data && isSuccess) {
-          console.log("🚀 ~ file: page.tsx:21 ~ createUser ~ data:", data);
-          router.push("/");
-        }
-      });
-  } catch (error) {
-    console.error(error)
-  }
-    
-      
-    
+  const onSubmit = async (data: any) => {
+    try {
+      const res = await registration(data).unwrap();
+      if (res?.success) {
+        await router.push("/login");
+        await messageApi.success("Registration success");
+        reset();
+      }
+    } catch (error: any) {
+      console.error(error?.data?.message);
+      message.error(error?.data?.message);
+    }
   };
 
   return (
@@ -339,12 +339,26 @@ const RegisterPage = () => {
 
               <div className="flex -mx-3 my-[16px]">
                 <div className="w-full px-3 mb-5">
-                  <button
-                    type="submit"
-                    className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
-                  >
-                    REGISTER NOW
-                  </button>
+                  {isLoading ? (
+                    <Button
+                      type="primary"
+                      style={{
+                        backgroundColor: "indigo",
+                        color: "white",
+                      }}
+                      loading
+                      className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    >
+                      Loading
+                    </Button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    >
+                      REGISTER NOW
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
