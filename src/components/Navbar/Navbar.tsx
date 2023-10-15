@@ -12,10 +12,6 @@ import { Drawer } from "antd";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  // const user = {
-  //   name: "John Doe",
-  //   email: "masud",
-  // };
   const user = null;
 
   const showDrawer = () => {

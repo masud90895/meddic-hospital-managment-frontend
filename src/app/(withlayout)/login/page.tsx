@@ -1,6 +1,8 @@
 "use client";
-import { useLoginMutation } from "@/Redux/Redux/features/auth/authApi";
+import { useLoginMutation } from "@/Redux/features/auth/authApi";
 import InputField from "@/components/InputField/InputField";
+import LoadingButton from "@/components/button/LoadingButton";
+import { setLocalStorage } from "@/helpers/token/setLocalstorage";
 import { message } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,7 +14,6 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -20,6 +21,7 @@ const LoginPage = () => {
     try {
       const res = await login(data).unwrap();
       if (res?.data?.accessToken) {
+        setLocalStorage(res?.data?.accessToken);
         router.push("/");
         message.success("User logged in successfully!");
       }
@@ -101,12 +103,16 @@ const LoginPage = () => {
 
               <div className="flex -mx-3 my-[16px]">
                 <div className="w-full px-3 mb-5">
-                  <button
-                    type="submit"
-                    className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
-                  >
-                    Login
-                  </button>
+                  {isLoading ? (
+                    <LoadingButton />
+                  ) : (
+                    <button
+                      type="submit"
+                      className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    >
+                      Login
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,13 +1,13 @@
 "use client";
-import { useRegistrationMutation } from "@/Redux/Redux/features/auth/authApi";
+import { useRegistrationMutation } from "@/Redux/features/auth/authApi";
 import InputField from "@/components/InputField/InputField";
-import { Alert, Button, Space, message } from "antd";
+import LoadingButton from "@/components/button/LoadingButton";
+import { message } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
-  const [messageApi, contextHolder] = message.useMessage();
   const {
     register,
     handleSubmit,
@@ -23,7 +23,7 @@ const RegisterPage = () => {
       const res = await registration(data).unwrap();
       if (res?.success) {
         await router.push("/login");
-        await messageApi.success("Registration success");
+        await message.success("Registration success.Please Login");
         reset();
       }
     } catch (error: any) {
@@ -340,17 +340,7 @@ const RegisterPage = () => {
               <div className="flex -mx-3 my-[16px]">
                 <div className="w-full px-3 mb-5">
                   {isLoading ? (
-                    <Button
-                      type="primary"
-                      style={{
-                        backgroundColor: "indigo",
-                        color: "white",
-                      }}
-                      loading
-                      className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
-                    >
-                      Loading
-                    </Button>
+                    <LoadingButton />
                   ) : (
                     <button
                       type="submit"
