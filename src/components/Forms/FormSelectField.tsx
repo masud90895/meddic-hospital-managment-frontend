@@ -43,7 +43,9 @@ const FormSelectField = ({
 
   return (
     <>
-      <p className="mb-2">{label ? label : null}</p>
+      <p className="mb-1">
+        {label ? <label className="label_text ">{label}</label> : null}
+      </p>
 
       <Controller
         control={control}

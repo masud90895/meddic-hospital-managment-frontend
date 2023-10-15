@@ -25,7 +25,7 @@ const FormDatePicker = ({
 
   return (
     <div>
-      {label ? label : null}
+      {label ? <label className="label_text ">{label}</label> : null}
       <br />
       <Controller
         name={name}
