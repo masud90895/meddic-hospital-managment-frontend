@@ -1,6 +1,4 @@
-import { tokenKey } from "@/helpers/token/tokenKey";
 import { api } from "../../api/apiSlice";
-import { userLoggedIn } from "./authSlice";
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({

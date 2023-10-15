@@ -9,7 +9,7 @@ export const api = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem(tokenKey);
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.set("Authorization", token);
       }
       return headers;
     },
