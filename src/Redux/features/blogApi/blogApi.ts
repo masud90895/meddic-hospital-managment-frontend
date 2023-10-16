@@ -17,6 +17,12 @@ const blogApi = api.injectEndpoints({
       }),
       invalidatesTags: ["blog"],
     }),
+    // get Blog by id
+    getBlogById: builder.query({
+      query: (id: string) => `/blogs/${id}`,
+      providesTags: ["blog"],
+      transformResponse: (response: any) => response.data,
+    }),
     // update Blog
     updateBlog: builder.mutation({
       query: ({ id, body }) => ({
@@ -42,4 +48,5 @@ export const {
   useCreateBlogMutation,
   useUpdateBlogMutation,
   useDeleteBlogMutation,
+  useGetBlogByIdQuery,
 } = blogApi;

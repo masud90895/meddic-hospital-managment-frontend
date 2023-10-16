@@ -17,7 +17,6 @@ const Navbar = () => {
 
   const userLoggedIn = isLoggedIn();
   const user = getUserInfo() as any;
-  console.log("🚀 ~ file: Navbar.tsx:20 ~ Navbar ~ user:", user);
 
   useEffect(() => {
     if (userLoggedIn) {

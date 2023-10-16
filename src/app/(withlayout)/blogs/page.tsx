@@ -38,7 +38,7 @@ const BlogsPages = () => {
             <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">
               {data1?.blogTitle}
             </h3>
-            <span className="text-xs ">
+            <span className="text-xs text-primary ">
               {new Date(data1?.createdAt!).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",

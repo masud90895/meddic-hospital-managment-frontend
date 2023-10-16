@@ -28,7 +28,7 @@ const BlogCard = ({ blog }: Props) => {
       />
 
       <div className="p-[15px] font-poppins">
-        <p className="text-[18px]  text-primary">{time}</p>
+        <p className="text-xs  text-primary">{time}</p>
         <p className="text-[20px] ">{blog.blogTitle}</p>
         <p>
           {blog.blogDescription.length > 80
