@@ -10,9 +10,10 @@ import { RcFile, UploadFile } from "antd/es/upload";
 
 type ImageUploadProps = {
   name: string;
+  updateImage?: string;
 };
 
-const UploadImage = ({ name }: ImageUploadProps) => {
+const UploadImage = ({ name, updateImage }: ImageUploadProps) => {
   const [defaultFileList, setDefaultFileList] = useState<any[]>([]);
   const [progress, setProgress] = useState<number>(0);
 
@@ -62,7 +63,7 @@ const UploadImage = ({ name }: ImageUploadProps) => {
     setDefaultFileList(fileList);
   };
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(updateImage ?? "");
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
