@@ -7,7 +7,7 @@ import { useGetFaqQuery } from "@/Redux/features/faqApi/faqApi";
 const Faqs = () => {
   const { data, isLoading } = useGetFaqQuery(undefined);
 
-  if (isLoading) return <div>loading...</div>;
+ 
 
   const items = data?.map((item: any) => ({
     key: item?.faqId,
@@ -38,7 +38,7 @@ const Faqs = () => {
           or disqualify opportunities.
         </p>
 
-        <FaqComponent size="large" itemData={items} />
+        <FaqComponent size="large" itemData={items} isLoading={isLoading} />
       </div>
     </div>
   );
