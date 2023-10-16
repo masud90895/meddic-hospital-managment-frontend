@@ -35,7 +35,6 @@ const faqApi = api.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: ["faq"],
-      transformResponse: (response: any) => response.data,
     }),
   }),
 });

@@ -6,13 +6,17 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons";
 
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
-import dayjs from "dayjs";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
+import {
+  useDeleteFaqMutation,
+  useGetFaqQuery,
+} from "@/Redux/features/faqApi/faqApi";
+import Swal from "sweetalert2";
 
 const FaqLists = () => {
   const query: Record<string, any> = {};
@@ -22,83 +26,54 @@ const FaqLists = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const { data, isLoading } = useGetFaqQuery(undefined);
+  const [deleteFaq] = useDeleteFaqMutation();
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  // query["searchTerm"] = searchTerm;
+  query["searchTerm"] = searchTerm;
 
   //   const courses = data?.courses;
   //   const meta = data?.meta;
 
   const deleteHandler = async (id: string) => {
-    //   message.loading("Deleting.....");
-    //   try {
-    //     //   console.log(data);
-    //     const res = await deleteCourse(id);
-    //     if (res) {
-    //       message.success("Course Deleted successfully");
-    //     }
-    //   } catch (err: any) {
-    //     //   console.error(err.message);
-    //     message.error(err.message);
-    //   }
+    console.log("🚀 ~ file: page.tsx:42 ~ deleteHandler ~ id:", id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this item?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res: any = await deleteFaq(id);
+          if (res?.success) {
+            message.success("Course Deleted successfully");
+          }
+        } catch (err: any) {
+          console.error(err.data?.message);
+          message.error(err.data?.message);
+        }
+      }
+    });
   };
 
-  const dataSource = [
-    {
-      email: "masudhossainmbs129@gmail.com",
-      firstName: "Md Masud",
-      lastName: "Rana",
-      role: "ADMIN",
-      contactNumber: "01745296294",
-      address: "Thakurgoan",
-      bloodGroup: "O+",
-    },
-  ];
+  const dataSource = data;
 
   const columns = [
     {
-      title: "Full Name",
-
-      render: function (data: Record<string, string>) {
-        const fullName = `${data?.firstName} ${data?.lastName}`;
-        return <>{fullName}</>;
-      },
+      title: "Title",
+      dataIndex: "faqTitle",
       //   sorter: true,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      //   sorter: true,
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      //   sorter: true,
-    },
-    {
-      title: "Contact No",
-      dataIndex: "contactNumber",
-      //   sorter: true,
-    },
-    {
-      title: "Blood Group",
-      dataIndex: "contactNumber",
-      //   sorter: true,
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
-      //   sorter: true,
-    },
-    {
-      title: "CreatedAt",
-      dataIndex: "createdAt",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
+      title: "Description",
+      dataIndex: "faqDescription",
       //   sorter: true,
     },
     {
@@ -118,7 +93,7 @@ const FaqLists = () => {
               </Button>
             </Link>
             <Button
-              onClick={() => deleteHandler(data?.id)}
+              onClick={() => deleteHandler(data?.faqId)}
               type="primary"
               danger
             >
@@ -167,19 +142,19 @@ const FaqLists = () => {
 
       <div className="mt-5">
         <ActionBar title="FAQ Lists">
-          <Input
+          {/* <Input
             type="text"
             size="large"
-            placeholder="Search by name, email, role..."
+            placeholder="Search by Title, Description..."
             style={{
               width: "300px",
             }}
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
-          />
+          /> */}
           <div>
-            <Link href="/dashboard/add-blog">
+            <Link href="/dashboard/add-faq">
               <Button type="primary">Create</Button>
             </Link>
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
@@ -196,7 +171,7 @@ const FaqLists = () => {
       </div>
 
       <UMTable
-        // loading={isLoading}
+        loading={isLoading}
         columns={columns}
         dataSource={dataSource}
         pageSize={size}

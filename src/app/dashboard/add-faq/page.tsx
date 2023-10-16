@@ -18,7 +18,8 @@ const AddFaqPage = () => {
         message.success("FAQ created successfully");
       }
     } catch (err: any) {
-      console.error(err.message);
+      console.error(err?.data?.message);
+      message.error(err?.data?.message);
     }
   };
 
