@@ -5,6 +5,7 @@ const categoryApi = api.injectEndpoints({
     getCategory: builder.query({
       query: () => "/categories",
       providesTags: ["categories"],
+      transformResponse: (response: any) => response.data,
     }),
     createCategory: builder.mutation({
       query: (category) => ({
