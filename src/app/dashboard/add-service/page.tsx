@@ -1,5 +1,6 @@
 "use client";
 
+import { useAddServiceMutation } from "@/Redux/features/serviceApi/serviceApi";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 
@@ -11,17 +12,16 @@ import UploadImage from "@/components/ui/UploadImage";
 import { Button, Col, Row, message } from "antd";
 
 const AddService = () => {
+  const [addService, { isLoading }] = useAddServiceMutation();
+
   const onSubmit = async (data: any) => {
-    console.log(data);
-    message.loading("Creating Service");
     try {
-      // const res: any = await registration(userData);
-      // console.log(res?.data);
-      // // @ts-ignore
-      // if (res?.data?.success) {
-      //   message.success("Successfully Created User");
-      //   router.push("/dashboard/user-list");
-      // }
+      const res: any = await addService(data);
+      console.log(res?.data);
+      // @ts-ignore
+      if (res?.data?.success) {
+        message.success("Successfully Created User");
+      }
     } catch (error: any) {
       console.error(error?.data?.message);
       message.error(error?.data?.message);
@@ -49,6 +49,7 @@ const AddService = () => {
                 label="Service Name"
                 size="large"
                 placeholder="Enter Service Name"
+                required
               />
             </div>
             <div style={{ margin: "10px 0px" }}>
@@ -57,6 +58,7 @@ const AddService = () => {
                 label="Description"
                 size="large"
                 placeholder="Enter Service Description"
+                required
               />
             </div>
           </Col>
@@ -67,6 +69,7 @@ const AddService = () => {
                 label="Location"
                 size="large"
                 placeholder="Enter Location"
+                required
               />
             </div>
             <div style={{ margin: "10px 0px" }}>
@@ -76,11 +79,17 @@ const AddService = () => {
                 size="large"
                 placeholder="Enter Service Price"
                 type="number"
+                required
               />
             </div>
           </Col>
         </Row>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={isLoading}
+          disabled={isLoading}
+        >
           Create Service
         </Button>
       </Form>

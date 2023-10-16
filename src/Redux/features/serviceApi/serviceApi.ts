@@ -3,12 +3,12 @@ import { api } from "@/Redux/api/apiSlice";
 const serviceApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getServices: builder.query({
-      query: () => `/services/create-service`,
+      query: () => `/services`,
       providesTags: ["service"],
     }),
     addService: builder.mutation({
       query: (service) => ({
-        url: `/services`,
+        url: `/services/create-service`,
         method: "POST",
         body: service,
       }),

@@ -20,6 +20,9 @@ import {
   OrderedListOutlined,
   AlignLeftOutlined,
   PlusCircleOutlined,
+  PicLeftOutlined,
+  PicRightOutlined,
+  CarryOutOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "@/constant/role";
@@ -80,6 +83,23 @@ export const sidebarItems = (role: string) => {
           label: <Link href={`/dashboard/user-lists`}>User List</Link>,
           key: `dashboard/dashboard/user-lists`,
           icon: <UsergroupAddOutlined />,
+        },
+      ],
+    },
+    {
+      label: "category management",
+      key: "category-management",
+      icon: <CarryOutOutlined />,
+      children: [
+        {
+          label: <Link href={`/dashboard/add-category`}>Add category</Link>,
+          key: `/dashboard/add-category`,
+          icon: <PicLeftOutlined />,
+        },
+        {
+          label: <Link href={`/dashboard/category-list`}>category List</Link>,
+          key: `/dashboard/category-list`,
+          icon: <PicRightOutlined />,
         },
       ],
     },
