@@ -13,6 +13,23 @@ const userApi = api.injectEndpoints({
       providesTags: ["users"],
       transformResponse: (response: any) => response.data.data,
     }),
+    // user update
+    updateUser: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/users/update-user/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["users"],
+    }),
+    // user delete
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/users/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
