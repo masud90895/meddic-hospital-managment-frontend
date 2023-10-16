@@ -1,8 +1,10 @@
 "use client";
 
+import { useGetCategoryQuery } from "@/Redux/features/categoryApi/categoryApi";
 import { useAddServiceMutation } from "@/Redux/features/serviceApi/serviceApi";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
+import FormSelectField from "@/components/Forms/FormSelectField";
 
 // import FormMultiSelectField from "@/components/Forms/FormMultiSelectField";
 // import { SelectOptions } from "@/components/Forms/FormSelectField";
@@ -12,11 +14,24 @@ import UploadImage from "@/components/ui/UploadImage";
 import { Button, Col, Row, message } from "antd";
 
 const AddService = () => {
+  const { data } = useGetCategoryQuery(undefined);
+
   const [addService, { isLoading }] = useAddServiceMutation();
 
   const onSubmit = async (data: any) => {
+    if (!data?.categoryId) {
+      return message.error("Please Select Category");
+    } else if (!data?.serviceImage) {
+      return message.error("Please Upload Image");
+    }
+
+    const serviceData = {
+      ...data,
+      servicePrice: Number(data?.servicePrice),
+    };
+
     try {
-      const res: any = await addService(data);
+      const res: any = await addService(serviceData);
       console.log(res?.data);
       // @ts-ignore
       if (res?.data?.success) {
@@ -40,7 +55,7 @@ const AddService = () => {
       <Form submitHandler={onSubmit}>
         <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
           <Col span={24} style={{ margin: "10px 0" }}>
-            <UploadImage key="file" name="file" />
+            <UploadImage key="file" name="serviceImage" />
           </Col>
           <Col span={12} style={{ margin: "10px 0" }}>
             <div style={{ margin: "10px 0px" }}>
@@ -82,6 +97,18 @@ const AddService = () => {
                 required
               />
             </div>
+          </Col>
+          <Col span={12} style={{ margin: "10px 0" }}>
+            <FormSelectField
+              name="categoryId"
+              label="Category"
+              size="large"
+              placeholder="Enter Category"
+              options={data?.map((el: any) => ({
+                label: el?.categoryName,
+                value: el?.categoryId,
+              }))}
+            />
           </Col>
         </Row>
         <Button

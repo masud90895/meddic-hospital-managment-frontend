@@ -5,6 +5,7 @@ const serviceApi = api.injectEndpoints({
     getServices: builder.query({
       query: () => `/services`,
       providesTags: ["service"],
+      transformResponse: (response: any) => response.data,
     }),
     addService: builder.mutation({
       query: (service) => ({
