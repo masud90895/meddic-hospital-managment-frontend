@@ -7,8 +7,13 @@ const userApi = api.injectEndpoints({
       providesTags: ["users"],
       transformResponse: (response: any) => response.data,
     }),
-    
+    // get all users
+    getAllUsers: builder.query({
+      query: (search: string) => `/users?searchTerm=${search}`,
+      providesTags: ["users"],
+      transformResponse: (response: any) => response.data.data,
+    }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery, useGetAllUsersQuery } = userApi;

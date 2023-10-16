@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
+import { useGetAllUsersQuery } from "@/Redux/features/userApi/userApi";
 
 const AdminLists = () => {
   const query: Record<string, any> = {};
@@ -23,14 +24,16 @@ const AdminLists = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  // get data
+  const { data, isLoading } = useGetAllUsersQuery(searchTerm);
+
+  console.log("🚀 ~ file: page.tsx:29 ~ AdminLists ~ data:", data);
+
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  // query["searchTerm"] = searchTerm;
-
-  //   const courses = data?.courses;
-  //   const meta = data?.meta;
+  query["searchTerm"] = searchTerm;
 
   const deleteHandler = async (id: string) => {
     //   message.loading("Deleting.....");
@@ -46,22 +49,22 @@ const AdminLists = () => {
     //   }
   };
 
-  const dataSource = [
-    {
-      email: "masudhossainmbs129@gmail.com",
-      firstName: "masud",
-      lastName: "Rana",
-      role: "ADMIN",
-      contactNumber: "01714486218",
-      address: "Dhaka",
-      bloodGroup: "O+",
-    },
-  ];
+  // const dataSource = [
+  //   {
+  //     email: "masudhossainmbs129@gmail.com",
+  //     firstName: "masud",
+  //     lastName: "Rana",
+  //     role: "ADMIN",
+  //     contactNumber: "01714486218",
+  //     address: "Dhaka",
+  //     bloodGroup: "O+",
+  //   },
+  // ];
 
   const columns = [
     {
       title: "Full Name",
-
+      dataIndex: "profile",
       render: function (data: Record<string, string>) {
         const fullName = `${data?.firstName} ${data?.lastName}`;
         return <>{fullName}</>;
@@ -75,23 +78,33 @@ const AdminLists = () => {
     },
     {
       title: "Address",
-      dataIndex: "address",
-      //   sorter: true,
+      dataIndex: "profile",
+      render: function (data: Record<string, string>) {
+        return <>{data?.address ?? "-"}</>;
+      },
     },
     {
       title: "Contact No",
-      dataIndex: "contactNumber",
+      dataIndex: "profile",
+      render: function (data: Record<string, string>) {
+        return <>{data?.contactNumber ?? "-"}</>;
+      },
       //   sorter: true,
     },
     {
       title: "Blood Group",
-      dataIndex: "contactNumber",
+      dataIndex: "profile",
+      render: function (data: Record<string, string>) {
+        return <>{data?.bloodGroup ?? "-"}</>;
+      },
       //   sorter: true,
     },
     {
       title: "Role",
-      dataIndex: "role",
-      //   sorter: true,
+      dataIndex: "profile",
+      render: function (data: Record<string, string>) {
+        return <>{data?.role ?? "-"}</>;
+      },
     },
     {
       title: "CreatedAt",
@@ -106,17 +119,15 @@ const AdminLists = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/admin/course/edit/${data?.id}`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-                onClick={() => console.log(data)}
-                type="primary"
-              >
-                <EditOutlined />
-              </Button>
-            </Link>
+            <Button
+              style={{
+                margin: "0px 5px",
+              }}
+              onClick={() => console.log(data)}
+              type="primary"
+            >
+              <EditOutlined />
+            </Button>
             <Button
               onClick={() => deleteHandler(data?.id)}
               type="primary"
@@ -159,8 +170,8 @@ const AdminLists = () => {
             link: "/dashboard",
           },
           {
-            label: "user-Lists",
-            link: "/dashboard/user-lists",
+            label: "admin-Lists",
+            link: "/dashboard/admin-lists",
           },
         ]}
       />
@@ -179,7 +190,7 @@ const AdminLists = () => {
             }}
           />
           <div>
-            <Link href="/admin/course/create">
+            <Link href="/dashboard/add-admin">
               <Button type="primary">Create</Button>
             </Link>
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
@@ -196,9 +207,9 @@ const AdminLists = () => {
       </div>
 
       <UMTable
-        // loading={isLoading}
+        loading={isLoading}
         columns={columns}
-        dataSource={dataSource}
+        dataSource={data}
         pageSize={size}
         // totalPages="meta?.total"
         showSizeChanger={true}
