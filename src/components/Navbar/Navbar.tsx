@@ -8,11 +8,15 @@ import NavbarMenu from "./NavbarMenu";
 import { PhoneTwoTone } from "@ant-design/icons";
 import { AppstoreOutlined } from "@ant-design/icons";
 import { Drawer } from "antd";
+import { getUserInfo } from "@/helpers/getUserData/getUserData";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const user = null;
+  // const user = getUserInfo();
+  // console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ user:", user)
+
+  const user = true;
 
   const showDrawer = () => {
     setOpen(true);

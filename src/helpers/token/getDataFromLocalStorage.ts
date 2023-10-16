@@ -1,7 +1,8 @@
-import { tokenKey } from "./tokenKey";
-
-export const getDataFromLocalStorage = () => {
-  const localData = localStorage.getItem(tokenKey);
+export const getDataFromLocalStorage = (key: string) => {
+  if (!key || typeof window === "undefined") {
+    return "";
+  }
+  const localData = localStorage.getItem(key);
   if (localData) {
     return JSON.parse(localData);
   }

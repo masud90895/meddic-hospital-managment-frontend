@@ -1,18 +1,19 @@
-
+"use client";
 import { instance as axiosInstance } from "@/helpers/axios/axiosInstance";
 
 import { getDataFromLocalStorage } from "../token/getDataFromLocalStorage";
 import { setLocalStorage } from "../token/setLocalstorage";
 import { config } from "@/confiq";
 import { decodedToken } from "./jwt";
+import { tokenKey } from "../token/tokenKey";
 
 export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
   return setLocalStorage(accessToken as string);
 };
 
 export const getUserInfo = () => {
-  const authToken = getDataFromLocalStorage();
-  // console.log(authToken);
+  const authToken = getDataFromLocalStorage(tokenKey);
+  
   if (authToken) {
     const decodedData = decodedToken(authToken);
     return decodedData;
@@ -22,7 +23,7 @@ export const getUserInfo = () => {
 };
 
 export const isLoggedIn = () => {
-  const authToken = getDataFromLocalStorage();
+  const authToken = getDataFromLocalStorage(tokenKey);
   return !!authToken;
 };
 
