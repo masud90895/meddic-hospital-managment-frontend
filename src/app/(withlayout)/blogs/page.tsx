@@ -2,6 +2,7 @@
 "use client";
 import { useGetBlogQuery } from "@/Redux/features/blogApi/blogApi";
 import BlogCard from "@/components/BlogPage/blogCard";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { IBlogType } from "@/types/BlogType";
 import { Skeleton } from "antd";
 import Link from "next/link";
@@ -24,6 +25,9 @@ const BlogsPages = () => {
 
   return (
     <section className="common">
+      <div className="my-5">
+        <UMBreadCrumb items={[{ label: `Blog`, link: `/blogs` }]} />
+      </div>
       <div className="  md:p-6 p-2 mx-auto space-y-6 sm:space-y-12">
         <Link
           href={`/blogs/${data1?.blogId}`}

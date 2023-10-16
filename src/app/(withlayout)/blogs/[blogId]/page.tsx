@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useGetBlogByIdQuery } from "@/Redux/features/blogApi/blogApi";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { Skeleton } from "antd";
 import React from "react";
 
@@ -19,12 +20,16 @@ const BlogDetails = ({ params }: any) => {
   }
 
   return (
-    <article
-      className=" mx-auto common  mt-8"
-      itemID="#"
-      itemScope={true}
-      itemType="http://schema.org/BlogPosting"
-    >
+    <article className=" mx-auto common  mt-8">
+      <div className="my-5">
+        <UMBreadCrumb
+          items={[
+            { label: `Blog`, link: `/blogs` },
+            { label: "Blog Details", link: `` },
+          ]}
+        />
+      </div>
+
       <div className="w-full mx-auto mb-12 text-left ">
         <img
           src={singleBlog?.blogImage}
