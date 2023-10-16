@@ -26,7 +26,6 @@ const faqApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["faq"],
-      transformResponse: (response: any) => response.data,
     }),
     // delete Faq
     deleteFaq: builder.mutation({

@@ -12,8 +12,28 @@ const SpecializationFormField = ({ name, label }: ACDepartmentFieldProps) => {
   // });
   const data = [
     {
-      label: "Md Masud Rana",
-      value: "Md Masud Rana",
+      label: "Anesthesiology",
+      value: "Anesthesiology",
+    },
+    {
+      label: "Cardiology",
+      value: "Cardiology",
+    },
+    {
+      label: "Dermatology",
+      value: "Dermatology",
+    },
+    {
+      label: "Emergency Medicine",
+      value: "Emergency Medicine",
+    },
+    {
+      label: "Family Medicine",
+      value: "Family Medicine",
+    },
+    {
+      label: "General Surgery",
+      value: "General Surgery",
     },
   ];
   // const academicDepartments = data?.academicDepartments;
@@ -30,6 +50,7 @@ const SpecializationFormField = ({ name, label }: ACDepartmentFieldProps) => {
       name={name}
       label={label}
       options={data as SelectOptions[]}
+      placeholder="Select Specialization"
     />
   );
 };

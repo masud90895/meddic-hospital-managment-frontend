@@ -60,6 +60,7 @@ const FaqLists = () => {
     const id = data?.faqId;
     try {
       const res = await updateFaq({ id, body: editData }).unwrap();
+      
       if (res.success) {
         message.success("FAQ updated successfully");
         setIsEditModalOpen(false);

@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import Form from "../FormComponent/FormComponent";
 import InputField from "../InputField/InputField";
 import { useForm, SubmitHandler } from "react-hook-form";
 import TextArea from "antd/es/input/TextArea";

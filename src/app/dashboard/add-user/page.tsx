@@ -2,61 +2,70 @@
 import { useState } from "react";
 
 import { Button, Col, Row, message } from "antd";
+import { useRouter } from "next/navigation";
+import { useRegistrationMutation } from "@/Redux/features/auth/authApi";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import UploadImage from "@/components/ui/UploadImage";
 import SpecializationFormField from "@/components/Forms/SpecializationFormField";
+import Form from "@/components/Forms/Form";
+import LoadingButton from "@/components/button/LoadingButton";
 
 const AddUserPage = () => {
   const roles = [
     {
-      label: "user",
-      value: "user",
+      label: "USER",
+      value: "USER",
     },
 
     {
-      label: "doctor",
-      value: "doctor",
+      label: "DOCTOR",
+      value: "DOCTOR",
     },
   ];
 
   const [isRoleIsDoctor, setIsRoleIsDoctor] = useState(false);
 
-  const adminOnSubmit = async (values: any) => {
-    const obj = { ...values };
-    const file = obj["file"];
-    delete obj["file"];
-    const data = JSON.stringify(obj);
-    const formData = new FormData();
-    formData.append("file", file as Blob);
-    formData.append("data", data);
-    message.loading("Creating...");
+  const [registration, { isLoading, error }] = useRegistrationMutation();
+  const router = useRouter();
+
+  const handleCreateUserSubmit = async (values: any) => {
+    const userData = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      role: values.role,
+      email: values.email,
+      password: values.password,
+      profileImage: values.file,
+    };
+    message.loading("Creating User");
     try {
-      // const res = await addFacultyWithFormData(formData);
-      // if (!!res) {
-      //   message.success("Faculty created successfully!");
-      // }
-    } catch (err: any) {
-      // console.error(err.message);
+      const res: any = await registration(userData);
+      console.log(res?.data);
+      // @ts-ignore
+      if (res?.data?.success) {
+        message.success("Successfully Created User");
+        router.push("/dashboard/user-list");
+      }
+    } catch (error: any) {
+      console.error(error?.data?.message);
+      message.error(error?.data?.message);
     }
   };
-
-  const base = "super-admin";
   return (
     <div className="container rounded bg-white mt-1 mb-5 p-4">
       <UMBreadCrumb
         items={[
-          { label: `${base}`, link: `/dashboard` },
-          { label: "add-user", link: `/dashboard/add-user` },
+          { label: `Dashboard`, link: `/dashboard` },
+          { label: "User List", link: `/dashboard/add-user` },
         ]}
       />
       <div className="mt-3">
         <div className="mb-3">
           <h1 className="text-lg text-black/70 font-bold">Create New User</h1>
         </div>
-        <Form submitHandler={adminOnSubmit}>
+        <Form submitHandler={handleCreateUserSubmit}>
           {/* faculty information */}
           <div
             style={{
@@ -78,7 +87,8 @@ const AddUserPage = () => {
                   label="Email"
                   type="email"
                   size="large"
-                  placeholder="Enter  email"
+                  placeholder="Enter Email"
+                  required
                 />
               </Col>
               <Col span={12} style={{ margin: "10px 0" }}>
@@ -87,7 +97,8 @@ const AddUserPage = () => {
                   name="password"
                   label="Password"
                   size="large"
-                  placeholder="Enter password"
+                  placeholder="Enter Password"
+                  required
                 />
               </Col>{" "}
               <Col span={12} style={{ margin: "10px 0" }}>
@@ -97,7 +108,7 @@ const AddUserPage = () => {
                   label="User Role"
                   options={roles}
                   size="large"
-                  placeholder="Select Role"
+                  placeholder="Select User Role"
                 />
               </Col>
               {isRoleIsDoctor && (
@@ -127,22 +138,24 @@ const AddUserPage = () => {
             <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
               <Col span={24} style={{ margin: "10px 0" }}>
                 <label htmlFor="image">Profile Image</label>
-                <UploadImage name="file" />
+                <UploadImage key="file" name="file" />
               </Col>
               <Col span={12} style={{ margin: "10px 0" }}>
                 <FormInput
-                  name="name.firstName"
-                  label="First name"
+                  name="firstName"
+                  label="First Name"
                   size="large"
-                  placeholder="Enter first name"
+                  placeholder="Enter First Name"
+                  required
                 />
               </Col>
               <Col span={12} style={{ margin: "10px 0" }}>
                 <FormInput
-                  name="name.lastName"
+                  name="lastName"
                   label="Last Name."
                   size="large"
-                  placeholder="Enter last name"
+                  placeholder="Enter Last Name"
+                  required
                 />
               </Col>{" "}
             </Row>
@@ -176,8 +189,16 @@ const AddUserPage = () => {
               </Row>
             </div>
           )} */}
-          <Button htmlType="submit">submit</Button>
+
+          {isLoading ? (
+            <LoadingButton />
+          ) : (
+            <Button htmlType="submit">submit</Button>
+          )}
         </Form>
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   );
