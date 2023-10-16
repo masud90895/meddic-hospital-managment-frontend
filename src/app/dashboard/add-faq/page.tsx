@@ -1,30 +1,24 @@
 "use client";
-import { useState } from "react";
 
 import { Button, Col, Row, message } from "antd";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import Form from "@/components/Forms/Form";
-import UploadImage from "@/components/ui/UploadImage";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import FormInput from "@/components/Forms/FormInput";
+import { useCreateFaqMutation } from "@/Redux/features/faqApi/faqApi";
+import LoadingButton from "@/components/button/LoadingButton";
 
 const AddFaqPage = () => {
-  const adminOnSubmit = async (values: any) => {
-    const obj = { ...values };
-    const file = obj["file"];
-    delete obj["file"];
-    const data = JSON.stringify(obj);
-    const formData = new FormData();
-    formData.append("file", file as Blob);
-    formData.append("data", data);
-    message.loading("Creating...");
+  const [createFaq, { isLoading }] = useCreateFaqMutation(undefined);
+
+  const faqOnSubmit = async (data: any) => {
     try {
-      // const res = await addFacultyWithFormData(formData);
-      // if (!!res) {
-      //   message.success("Faculty created successfully!");
-      // }
+      const res = await createFaq(data).unwrap();
+      if (res.success) {
+        message.success("FAQ created successfully");
+      }
     } catch (err: any) {
-      // console.error(err.message);
+      console.error(err.message);
     }
   };
 
@@ -41,7 +35,7 @@ const AddFaqPage = () => {
         <div className="mb-3">
           <h1 className="text-lg text-black/70 font-bold">Create New FAQ</h1>
         </div>
-        <Form submitHandler={adminOnSubmit}>
+        <Form submitHandler={faqOnSubmit}>
           {/* faculty information */}
           <div
             style={{
@@ -64,6 +58,7 @@ const AddFaqPage = () => {
                   placeholder="FAQ Title"
                   size="large"
                   type="text"
+                  required
                 />
               </Col>
               <Col span={24} style={{ margin: "10px 0" }}>
@@ -72,12 +67,17 @@ const AddFaqPage = () => {
                   label="FAQ Description"
                   rows={8}
                   placeholder="Enter FAQ Description"
+                  required
                 />
               </Col>{" "}
             </Row>
           </div>
 
-          <Button htmlType="submit">submit</Button>
+          {isLoading ? (
+            <LoadingButton />
+          ) : (
+            <Button htmlType="submit">Create FAQ</Button>
+          )}
         </Form>
         <br />
         <br />

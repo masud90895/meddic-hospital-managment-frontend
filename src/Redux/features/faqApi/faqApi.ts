@@ -11,20 +11,22 @@ const faqApi = api.injectEndpoints({
     // create Faq
     createFaq: builder.mutation({
       query: (body) => ({
-        url: `/faqs`,
+        url: `/faqs/create-faq`,
         method: "POST",
         body,
       }),
       invalidatesTags: ["faq"],
+      // transformResponse: (response: any) => response.data,
     }),
     // update Faq
     updateFaq: builder.mutation({
-      query: ({id,body}) => ({
+      query: ({ id, body }) => ({
         url: `/faqs/update/${id}`,
         method: "PATCH",
         body,
       }),
       invalidatesTags: ["faq"],
+      transformResponse: (response: any) => response.data,
     }),
     // delete Faq
     deleteFaq: builder.mutation({
@@ -33,6 +35,14 @@ const faqApi = api.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: ["faq"],
+      transformResponse: (response: any) => response.data,
     }),
   }),
 });
+
+export const {
+  useGetFaqQuery,
+  useCreateFaqMutation,
+  useUpdateFaqMutation,
+  useDeleteFaqMutation,
+} = faqApi;
