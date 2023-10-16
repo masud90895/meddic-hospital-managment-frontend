@@ -16,7 +16,7 @@ const userApi = api.injectEndpoints({
     // user update
     updateUser: builder.mutation({
       query: ({ id, body }) => ({
-        url: `/users/update-user/${id}`,
+        url: `/users/update-profile/${id}`,
         method: "PATCH",
         body,
       }),

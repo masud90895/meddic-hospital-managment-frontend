@@ -53,6 +53,7 @@ const FormInput = ({
               value={value ? value : field.value}
               required={required}
               disabled={disabled}
+              className={disabled ? "cursor-not-allowed" : ""}
             />
           ) : (
             <Input
@@ -63,6 +64,7 @@ const FormInput = ({
               value={value ? value : field.value}
               required={required}
               disabled={disabled}
+              className={disabled ? "cursor-not-allowed" : ""}
             />
           )
         }
