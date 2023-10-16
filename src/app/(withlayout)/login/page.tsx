@@ -2,7 +2,7 @@
 import { useLoginMutation } from "@/Redux/features/auth/authApi";
 import InputField from "@/components/InputField/InputField";
 import LoadingButton from "@/components/button/LoadingButton";
-import { setLocalStorage } from "@/helpers/token/setLocalstorage";
+import { storeUserInfo } from "@/services/auth.service";
 import { message } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ const LoginPage = () => {
     try {
       const res = await login(data).unwrap();
       if (res?.data?.accessToken) {
-        setLocalStorage(res?.data?.accessToken);
+        storeUserInfo({ accessToken: res?.data?.accessToken });
         router.push("/");
         message.success("User logged in successfully!");
       }

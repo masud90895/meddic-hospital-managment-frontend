@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "/public//assists/logo_Asset-1-1.png";
 import Link from "next/link";
 import { INavbarType } from "@/types/NavbarType";
@@ -8,15 +8,24 @@ import NavbarMenu from "./NavbarMenu";
 import { PhoneTwoTone } from "@ant-design/icons";
 import { AppstoreOutlined } from "@ant-design/icons";
 import { Drawer } from "antd";
-import { getUserInfo } from "@/helpers/getUserData/getUserData";
+import { getUserInfo, isLoggedIn } from "@/services/auth.service";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  // const user = getUserInfo();
-  // console.log("🚀 ~ file: Navbar.tsx:17 ~ Navbar ~ user:", user)
+  const [userLogged, setUserLogged] = useState(false);
 
-  const user = true;
+  const userLoggedIn = isLoggedIn();
+  const user = getUserInfo() as any;
+  console.log("🚀 ~ file: Navbar.tsx:20 ~ Navbar ~ user:", user);
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      setUserLogged(true);
+    } else {
+      setUserLogged(false);
+    }
+  }, [userLoggedIn]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -124,7 +133,7 @@ const Navbar = () => {
 
         {/* user */}
 
-        {user ? (
+        {userLogged ? (
           <div className="flex items-center justify-center ">
             <div className=" relative inline-block text-left dropdown">
               <span className="rounded-md shadow-sm">
@@ -154,7 +163,7 @@ const Navbar = () => {
                   <div className="px-4 py-3">
                     <p className="text-sm leading-5">Signed in as</p>
                     <p className="text-sm font-medium leading-5 text-gray-900 truncate">
-                      masud@gmail.com
+                      {user?.email}
                     </p>
                   </div>
                   <div className="py-1">

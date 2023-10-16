@@ -115,8 +115,8 @@ const ServiceList = () => {
         return (
           <Image
             src={data?.serviceImage}
-            width={30}
-            height={30}
+            width={50}
+            height={50}
             alt=""
             className="rounded-xl"
           />
@@ -164,7 +164,14 @@ const ServiceList = () => {
       title: "Action",
       render: function (data: any) {
         return (
-          <>
+          <div
+            style={{
+              width: "100px",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "5px",
+            }}
+          >
             <Button
               style={{
                 margin: "0px 5px",
@@ -184,7 +191,7 @@ const ServiceList = () => {
             >
               <DeleteOutlined />
             </Button>
-          </>
+          </div>
         );
       },
     },

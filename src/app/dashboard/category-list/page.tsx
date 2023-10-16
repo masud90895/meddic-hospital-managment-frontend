@@ -116,7 +116,14 @@ const CategoriesLists = () => {
       title: "Action",
       render: function (data: any) {
         return (
-          <>
+          <div
+            style={{
+              width: "100px",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "5px",
+            }}
+          >
             <Button
               style={{
                 margin: "0px 5px",
@@ -136,7 +143,7 @@ const CategoriesLists = () => {
             >
               <DeleteOutlined />
             </Button>
-          </>
+          </div>
         );
       },
     },
