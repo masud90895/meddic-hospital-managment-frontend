@@ -60,7 +60,7 @@ const FaqLists = () => {
     const id = data?.faqId;
     try {
       const res = await updateFaq({ id, body: editData }).unwrap();
-      
+
       if (res.success) {
         message.success("FAQ updated successfully");
         setIsEditModalOpen(false);
@@ -115,7 +115,14 @@ const FaqLists = () => {
       title: "Action",
       render: function (data: any) {
         return (
-          <>
+          <div
+            style={{
+              width: "100px",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "5px",
+            }}
+          >
             <Button
               style={{
                 margin: "0px 5px",
@@ -135,7 +142,7 @@ const FaqLists = () => {
             >
               <DeleteOutlined />
             </Button>
-          </>
+          </div>
         );
       },
     },

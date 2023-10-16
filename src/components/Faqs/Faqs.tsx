@@ -1,52 +1,19 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import FaqComponent from "./FaqComponent";
+import { useGetFaqQuery } from "@/Redux/features/faqApi/faqApi";
 
 const Faqs = () => {
-  const items = [
-    {
-      key: "1",
-      label: "How do I make an appointment at Meddic?",
-      children: (
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          rhoncus neque eget eros aliquet, sit amet dignissim nisl venenatis.
-        </p>
-      ),
-    },
-    {
-      key: "2",
-      label: "Do you have a pediatrician?",
-      children: (
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          rhoncus neque eget eros aliquet, sit amet dignissim nisl venenatis.
-        </p>
-      ),
-    },
-    {
-      key: "3",
-      label: "Does your place provide health insurance?",
-      children: (
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          rhoncus neque eget eros aliquet, sit amet dignissim nisl venenatis.
-        </p>
-      ),
-    },
-    {
-      key: "4",
-      label: "What payment methods do you provide?",
-      children: (
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          rhoncus neque eget eros aliquet, sit amet dignissim nisl venenatis.
-          Etiam erat arcu, dapibus at bibendum eget, blandit ut eros. Cras
-          feugiat, sapien eget
-        </p>
-      ),
-    },
-  ];
+  const { data, isLoading } = useGetFaqQuery(undefined);
+
+  if (isLoading) return <div>loading...</div>;
+
+  const items = data?.map((item: any) => ({
+    key: item?.faqId,
+    label: item?.faqTitle,
+    children: <p>{item?.faqDescription}</p>,
+  }));
 
   return (
     <div className="common md:flex gap-10 items-center mb-[60px]">
@@ -59,7 +26,7 @@ const Faqs = () => {
       />
 
       {/* FAQS */}
-      <div className="font-inter my-[20px] md:my-0 flex flex-col md:h-[400px] justify-around md:w-[400px]">
+      <div className="font-inter my-[20px] md:my-0 flex flex-col md:h-[400px] justify-around max-w-[1000px]">
         <p className="text-primary md:text-[20px] text-[16px] font-semibold">
           ABOUT MEDDIC
         </p>
