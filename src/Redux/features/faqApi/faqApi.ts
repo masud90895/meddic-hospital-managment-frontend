@@ -26,10 +26,11 @@ const faqApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["faq"],
+      transformResponse: (response: any) => response.data,
     }),
     // delete Faq
     deleteFaq: builder.mutation({
-      query: (id: string) => ({
+      query: (id) => ({
         url: `/faqs/delete/${id}`,
         method: "DELETE",
       }),
