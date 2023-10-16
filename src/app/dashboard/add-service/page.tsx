@@ -11,36 +11,21 @@ import UploadImage from "@/components/ui/UploadImage";
 import { Button, Col, Row, message } from "antd";
 
 const AddService = () => {
-  // const { data, isLoading } = useCoursesQuery({ limit: 10, page: 1 });
-
-  // const courses = data?.courses;
-  // const coursesOptions = courses?.map((course) => {
-  //   return {
-  //     label: course?.title,
-  //     value: course?.id,
-  //   };
-  // });
-
   const onSubmit = async (data: any) => {
-    // data.credits = parseInt(data?.credits);
-    // const coursePreRequisitesOptions = data?.coursePreRequisites?.map(
-    //   (id: string) => {
-    //     return {
-    //       courseId: id,
-    //     };
-    //   }
-    // );
-    // data.coursePreRequisites = coursePreRequisitesOptions;
-    // message.loading("Creating.....");
-    // try {
-    //   const res = await addCourse(data).unwrap();
-    //   if (res?.id) {
-    //     message.success("Course created successfully");
-    //   }
-    // } catch (err: any) {
-    //   console.error(err.message);
-    //   message.error(err.message);
-    // }
+    console.log(data);
+    message.loading("Creating Service");
+    try {
+      // const res: any = await registration(userData);
+      // console.log(res?.data);
+      // // @ts-ignore
+      // if (res?.data?.success) {
+      //   message.success("Successfully Created User");
+      //   router.push("/dashboard/user-list");
+      // }
+    } catch (error: any) {
+      console.error(error?.data?.message);
+      message.error(error?.data?.message);
+    }
   };
   const base = "admin";
   return (
@@ -55,12 +40,12 @@ const AddService = () => {
       <Form submitHandler={onSubmit}>
         <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
           <Col span={24} style={{ margin: "10px 0" }}>
-            <UploadImage name="file" />
+            <UploadImage key="file" name="file" />
           </Col>
           <Col span={12} style={{ margin: "10px 0" }}>
             <div style={{ margin: "10px 0px" }}>
               <FormInput
-                name="title"
+                name="serviceName"
                 label="Service Name"
                 size="large"
                 placeholder="Enter Service Name"
@@ -68,7 +53,7 @@ const AddService = () => {
             </div>
             <div style={{ margin: "10px 0px" }}>
               <FormInput
-                name="code"
+                name="description"
                 label="Description"
                 size="large"
                 placeholder="Enter Service Description"
@@ -78,7 +63,7 @@ const AddService = () => {
           <Col span={12} style={{ margin: "10px 0" }}>
             <div style={{ margin: "10px 0px" }}>
               <FormInput
-                name="title"
+                name="location"
                 label="Location"
                 size="large"
                 placeholder="Enter Location"
@@ -86,10 +71,11 @@ const AddService = () => {
             </div>
             <div style={{ margin: "10px 0px" }}>
               <FormInput
-                name="code"
+                name="servicePrice"
                 label="Price"
                 size="large"
                 placeholder="Enter Service Price"
+                type="number"
               />
             </div>
           </Col>
