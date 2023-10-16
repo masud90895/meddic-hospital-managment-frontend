@@ -1,5 +1,6 @@
 import { IServiceTypes } from "@/types/Service";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type ServiceCardProps = {
@@ -50,9 +51,9 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <button className="bg-primary text-white px-3 py-1 rounded-full text-[12px]">
           Add to cart
         </button>
-        <button className="bg-white text-primary px-3 py-1 rounded-full text-[12px] border border-primary">
+        <Link href={`services/${service?.serviceId}`} className="bg-white text-primary px-3 py-1 rounded-full text-[12px] border border-primary">
           View details
-        </button>
+        </Link>
       </div>
     </div>
   );

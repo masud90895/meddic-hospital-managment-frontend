@@ -1,4 +1,5 @@
 export type IServiceTypes = {
+  serviceId?: string;
   serviceName: string;
   description: string;
   serviceImage: string | any;

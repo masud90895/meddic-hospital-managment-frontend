@@ -52,10 +52,10 @@ const Navbar = () => {
           name: "Services",
           link: "/services",
         },
-        {
-          name: "Services Details",
-          link: "/services-details",
-        },
+        // {
+        //   name: "Services Details",
+        //   link: "/services-details",
+        // },
       ],
     },
     {
