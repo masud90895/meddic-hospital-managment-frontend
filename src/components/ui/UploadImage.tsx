@@ -14,7 +14,18 @@ type ImageUploadProps = {
 };
 
 const UploadImage = ({ name, updateImage }: ImageUploadProps) => {
-  const [defaultFileList, setDefaultFileList] = useState<any[]>([]);
+  const [defaultFileList, setDefaultFileList] = useState<any[]>(
+    updateImage
+      ? [
+          {
+            uid: "-1",
+            name: "image.png",
+            status: "done",
+            url: updateImage,
+          },
+        ]
+      : []
+  );
   const [progress, setProgress] = useState<number>(0);
 
   const { setValue } = useFormContext();
@@ -63,7 +74,7 @@ const UploadImage = ({ name, updateImage }: ImageUploadProps) => {
     setDefaultFileList(fileList);
   };
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState(updateImage ?? "");
+  const [previewImage, setPreviewImage] = useState("");
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {

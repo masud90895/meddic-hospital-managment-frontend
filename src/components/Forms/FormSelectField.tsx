@@ -19,6 +19,7 @@ type SelectFieldProps = {
   defaultValue?: SelectOptions;
   handleChange?: (el: string) => void;
   setIsRoleIsDoctor?: (el: boolean) => void;
+  required?: boolean;
 };
 
 const FormSelectField = ({
@@ -31,6 +32,7 @@ const FormSelectField = ({
   defaultValue,
   handleChange,
   setIsRoleIsDoctor,
+  required,
 }: SelectFieldProps) => {
   const { control, watch } = useFormContext();
   const srv = watch();
@@ -44,7 +46,8 @@ const FormSelectField = ({
   return (
     <>
       <p className="mb-1">
-        {label ? <label className="label_text ">{label}</label> : null}
+        {label ? <label className="label_text ">{label} </label> : null}
+        {required ? <span className="text-red-500">*</span> : null}
       </p>
 
       <Controller
@@ -58,7 +61,6 @@ const FormSelectField = ({
             value={value}
             style={{ width: "100%" }}
             placeholder={placeholder}
-            
           />
         )}
       />

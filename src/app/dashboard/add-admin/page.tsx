@@ -1,5 +1,6 @@
 "use client";
 
+import { useRegistrationMutation } from "@/Redux/features/auth/authApi";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
@@ -20,22 +21,24 @@ const AddAdminPage = () => {
     },
   ];
 
-  const adminOnSubmit = async (values: any) => {
-    const obj = { ...values };
-    const file = obj["file"];
-    delete obj["file"];
-    const data = JSON.stringify(obj);
-    const formData = new FormData();
-    formData.append("file", file as Blob);
-    formData.append("data", data);
-    message.loading("Creating...");
+  const [registration, { isLoading }] = useRegistrationMutation();
+
+  const adminOnSubmit = async (data: any) => {
+    if (!data?.role) {
+      return message.error("Please Select role");
+    } else if (!data?.profileImage) {
+      return message.error("Please Upload Image");
+    }
+
     try {
-      // const res = await addFacultyWithFormData(formData);
-      // if (!!res) {
-      //   message.success("Faculty created successfully!");
-      // }
+      const res: any = await registration(data);
+      console.log("🚀 ~ file: page.tsx:39 ~ adminOnSubmit ~ res:", res);
+      if (res?.data?.success) {
+        message.success(`${data?.role} created successfully!`);
+      }
     } catch (err: any) {
-      // console.error(err.message);
+      console.error(err?.data?.message);
+      message.error(err?.data?.message);
     }
   };
 
@@ -75,6 +78,7 @@ const AddAdminPage = () => {
                   type="email"
                   size="large"
                   placeholder="Enter email"
+                  required
                 />
               </Col>
               <Col span={12} style={{ margin: "10px 0" }}>
@@ -84,6 +88,7 @@ const AddAdminPage = () => {
                   label="Password"
                   size="large"
                   placeholder="Enter password"
+                  required
                 />
               </Col>{" "}
               <Col span={12} style={{ margin: "10px 0" }}>
@@ -93,6 +98,7 @@ const AddAdminPage = () => {
                   options={roles}
                   size="large"
                   placeholder="Select Role"
+                  required
                 />
               </Col>
             </Row>
@@ -112,20 +118,39 @@ const AddAdminPage = () => {
               Basic information
             </p>
             <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-              <Col span={12} style={{ margin: "10px 0" }}>
-                <FormInput name="firstName" label="First Name" size="large" placeholder="Enter First Name" />
-              </Col>
-              <Col span={12} style={{ margin: "10px 0" }}>
-                <FormInput name="lastName" label="Last Name." size="large" placeholder="Enter Last Name" />
-              </Col>{" "}
-              <Col span={12} style={{ margin: "10px 0" }}>
+              <Col span={24} style={{ margin: "10px 0" }}>
                 <label htmlFor="image">Profile Image</label>
-                <UploadImage name="file" />
+                <UploadImage name="profileImage" key="file" />
               </Col>
+              <Col span={12} style={{ margin: "10px 0" }}>
+                <FormInput
+                  name="firstName"
+                  label="First Name"
+                  size="large"
+                  placeholder="Enter First Name"
+                  required
+                />
+              </Col>
+              <Col span={12} style={{ margin: "10px 0" }}>
+                <FormInput
+                  name="lastName"
+                  label="Last Name."
+                  size="large"
+                  placeholder="Enter Last Name"
+                  required
+                />
+              </Col>{" "}
             </Row>
           </div>
 
-          <Button htmlType="submit">submit</Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+            disabled={isLoading}
+          >
+            submit
+          </Button>
         </Form>
       </div>
     </div>
