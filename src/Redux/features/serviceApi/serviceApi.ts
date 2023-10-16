@@ -3,7 +3,7 @@ import { api } from "@/Redux/api/apiSlice";
 const serviceApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getServices: builder.query({
-      query: () => `/services`,
+      query: (search) => `/services?searchTerm=${search}`,
       providesTags: ["service"],
       transformResponse: (response: any) => response.data,
     }),

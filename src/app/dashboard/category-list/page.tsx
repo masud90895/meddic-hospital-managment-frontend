@@ -12,17 +12,13 @@ import { useState } from "react";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
-import {
-  useDeleteFaqMutation,
-  useUpdateFaqMutation,
-} from "@/Redux/features/faqApi/faqApi";
+
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { Modal } from "antd";
 import ModalForm from "@/components/modal/ModalForm";
 import FormInput from "@/components/Forms/FormInput";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import Form from "@/components/Forms/Form";
-import LoadingButton from "@/components/button/LoadingButton";
 import {
   useDeleteCategoryMutation,
   useGetCategoryQuery,

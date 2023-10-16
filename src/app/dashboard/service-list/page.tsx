@@ -6,13 +6,20 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons";
 
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import dayjs from "dayjs";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
+import {
+  useDeleteServiceMutation,
+  useGetServicesQuery,
+} from "@/Redux/features/serviceApi/serviceApi";
+import { ExclamationCircleFilled } from "@ant-design/icons";
+import { Modal } from "antd";
+const { confirm } = Modal;
 
 const ServiceList = () => {
   const query: Record<string, any> = {};
@@ -23,39 +30,40 @@ const ServiceList = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  const { data, isLoading } = useGetServicesQuery(searchTerm);
+
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  // query["searchTerm"] = searchTerm;
+  query["searchTerm"] = searchTerm;
 
-  //   const courses = data?.courses;
-  //   const meta = data?.meta;
+  // delete
+  const [deleteService] = useDeleteServiceMutation();
 
   const deleteHandler = async (id: string) => {
-    //   message.loading("Deleting.....");
-    //   try {
-    //     //   console.log(data);
-    //     const res = await deleteCourse(id);
-    //     if (res) {
-    //       message.success("Course Deleted successfully");
-    //     }
-    //   } catch (err: any) {
-    //     //   console.error(err.message);
-    //     message.error(err.message);
-    //   }
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleFilled />,
+      content: "Please confirm your action!",
+      async onOk() {
+        try {
+          const res: any = await deleteService(id);
+          if (res?.success) {
+            message.success("service Deleted successfully");
+          }
+        } catch (err: any) {
+          console.error(err.data?.message);
+          message.error(err.data?.message);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
 
-  const dataSource = [
-    {
-      serviceName: "dassadsadsdadd",
-      description: "data.description",
-      location: "data.location",
-      serviceImage: "asdasdasdasdasd",
-      servicePrice: 120,
-      createdAt: "2023-10-13T18:20:09.606Z",
-    },
-  ];
+  // delete end
 
   const columns = [
     {
@@ -108,7 +116,7 @@ const ServiceList = () => {
               </Button>
             </Link>
             <Button
-              onClick={() => deleteHandler(data?.id)}
+              onClick={() => deleteHandler(data?.serviceId)}
               type="primary"
               danger
             >
@@ -168,7 +176,7 @@ const ServiceList = () => {
           }}
         />
         <div>
-          <Link href="/service/add-service">
+          <Link href="/dashboard/add-service">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
@@ -184,9 +192,9 @@ const ServiceList = () => {
       </ActionBar>
 
       <UMTable
-        // loading={isLoading}
+        loading={isLoading}
         columns={columns}
-        dataSource={dataSource}
+        dataSource={data}
         pageSize={size}
         // totalPages="meta?.total"
         showSizeChanger={true}
