@@ -5,6 +5,7 @@ import React from "react";
 import BlogCard from "./blogCard";
 import { useGetBlogQuery } from "@/Redux/features/blogApi/blogApi";
 import { Skeleton } from "antd";
+import Link from "next/link";
 
 const BlogPage = () => {
   const { data, isLoading } = useGetBlogQuery(undefined);
@@ -33,9 +34,9 @@ const BlogPage = () => {
             Articles From Meddic
           </p>
         </div>
-        <div>
+        <Link href={"/blogs"}>
           <button className="appointmentButton">More Article</button>
-        </div>
+        </Link>
       </div>
 
       {/* blogs */}

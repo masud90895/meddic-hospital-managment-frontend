@@ -1,5 +1,6 @@
 import { IBlogType } from "@/types/BlogType";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -14,7 +15,10 @@ const BlogCard = ({ blog }: Props) => {
   });
 
   return (
-    <div className="border-2 border-primary/20 hover:border-primary/80 rounded-xl w-[376px]">
+    <Link
+      href={`/blogs/${blog?.blogId}`}
+      className="border-2 border-primary/20 hover:border-primary/80 rounded-xl w-[376px]"
+    >
       <Image
         src={blog?.blogImage}
         alt="Picture of the author"
@@ -32,7 +36,7 @@ const BlogCard = ({ blog }: Props) => {
             : blog.blogDescription}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

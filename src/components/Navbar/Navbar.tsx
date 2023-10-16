@@ -60,8 +60,8 @@ const Navbar = () => {
       ],
     },
     {
-      name: "Contact",
-      link: "/contact",
+      name: "Blogs",
+      link: "/blogs",
     },
   ];
 
