@@ -6,14 +6,20 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons";
 
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import dayjs from "dayjs";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
-import { useGetAllUsersQuery } from "@/Redux/features/userApi/userApi";
+import {
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+} from "@/Redux/features/userApi/userApi";
+import { Modal } from "antd";
+const { confirm } = Modal;
+import { ExclamationCircleFilled } from "@ant-design/icons";
 
 const AdminLists = () => {
   const query: Record<string, any> = {};
@@ -27,39 +33,39 @@ const AdminLists = () => {
   // get data
   const { data, isLoading } = useGetAllUsersQuery(searchTerm);
 
-  console.log("🚀 ~ file: page.tsx:29 ~ AdminLists ~ data:", data);
-
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
   query["searchTerm"] = searchTerm;
 
+  // delete
+  const [deleteUser] = useDeleteUserMutation();
+
   const deleteHandler = async (id: string) => {
-    //   message.loading("Deleting.....");
-    //   try {
-    //     //   console.log(data);
-    //     const res = await deleteCourse(id);
-    //     if (res) {
-    //       message.success("Course Deleted successfully");
-    //     }
-    //   } catch (err: any) {
-    //     //   console.error(err.message);
-    //     message.error(err.message);
-    //   }
+    confirm({
+      title: "Do you Want to delete these items?",
+      icon: <ExclamationCircleFilled />,
+      content: "Please confirm your action!",
+      async onOk() {
+        try {
+          const res: any = await deleteUser(id);
+
+          if (res?.data?.success) {
+            message.success("User Deleted successfully");
+          }
+        } catch (err: any) {
+          console.error(err.data?.message);
+          message.error(err.data?.message);
+        }
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
 
-  // const dataSource = [
-  //   {
-  //     email: "masudhossainmbs129@gmail.com",
-  //     firstName: "masud",
-  //     lastName: "Rana",
-  //     role: "ADMIN",
-  //     contactNumber: "01714486218",
-  //     address: "Dhaka",
-  //     bloodGroup: "O+",
-  //   },
-  // ];
+  // delete end
 
   const columns = [
     {
@@ -129,7 +135,7 @@ const AdminLists = () => {
               <EditOutlined />
             </Button>
             <Button
-              onClick={() => deleteHandler(data?.id)}
+              onClick={() => deleteHandler(data?.userId)}
               type="primary"
               danger
             >

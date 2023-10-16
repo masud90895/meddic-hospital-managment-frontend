@@ -33,4 +33,9 @@ const userApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetUserQuery, useGetAllUsersQuery } = userApi;
+export const {
+  useGetUserQuery,
+  useGetAllUsersQuery,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} = userApi;
