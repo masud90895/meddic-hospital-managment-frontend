@@ -7,6 +7,13 @@ const serviceApi = api.injectEndpoints({
       providesTags: ["service"],
       transformResponse: (response: any) => response.data,
     }),
+    getSingleService: builder.query({
+      query: (id) => `/services/${id}`,
+      providesTags: ["service"],
+      transformResponse: (response: any) => response.data,
+    }),
+
+
     addService: builder.mutation({
       query: (service) => ({
         url: `/services/create-service`,
@@ -38,4 +45,5 @@ export const {
   useAddServiceMutation,
   useUpdateServiceMutation,
   useDeleteServiceMutation,
+  useGetSingleServiceQuery,
 } = serviceApi;

@@ -19,12 +19,12 @@ const Navbar = () => {
   const user = getUserInfo() as any;
 
   useEffect(() => {
-    if (userLoggedIn) {
+    if (userLoggedIn && user) {
       setUserLogged(true);
     } else {
       setUserLogged(false);
     }
-  }, [userLoggedIn]);
+  }, [userLoggedIn, user]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -221,6 +221,10 @@ const Navbar = () => {
             </div>
           </Link>
         )}
+
+        {/* // test */}
+
+        {/* // end */}
       </div>
     </div>
   );
