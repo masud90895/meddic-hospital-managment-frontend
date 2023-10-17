@@ -2,36 +2,21 @@
 "use client";
 import { useGetSingleServiceQuery } from "@/Redux/features/serviceApi/serviceApi";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { Button, Rate, Skeleton } from "antd";
+import { Button, Empty, Rate, Skeleton } from "antd";
 import React from "react";
 
 import { Fragment } from "react";
 import { Tab } from "@headlessui/react";
 import Form from "@/components/Forms/Form";
 import FormTextArea from "@/components/Forms/FormTextArea";
-import { isLoggedIn } from "@/services/auth.service";
+import { getUserInfo, isLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { Modal, message } from "antd";
 const { confirm } = Modal;
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import FormRating from "@/components/Forms/FormRating";
+import { useCreateRatingMutation } from "@/Redux/features/RatingApi/RatingApi";
 
-const product = {
-  name: "Application UI Icon Pack",
-  version: { name: "1.0", date: "June 5, 2021", datetime: "2021-06-05" },
-  price: "$220",
-  description:
-    "The Application UI Icon Pack comes with over 200 icons in 3 styles: outline, filled, and branded. This playful icon pack is tailored for complex application user interfaces with a friendly and legible look.",
-  highlights: [
-    "200+ SVG icons in 3 unique styles",
-    "Compatible with Figma, Sketch, and Adobe XD",
-    "Drawn on 24 x 24 pixel grid",
-  ],
-  imageSrc:
-    "https://tailwindui.com/img/ecommerce-images/product-page-05-product-01.jpg",
-  imageAlt:
-    "Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles.",
-};
 const reviews = {
   average: 4,
   featured: [
@@ -110,11 +95,22 @@ function classNames(...classes: any) {
 }
 
 const ServiceDetails = ({ params }: any) => {
+  const [createRating, { isLoading: reviewLoading }] =
+    useCreateRatingMutation();
   const userLoggedIn = isLoggedIn();
+
+  const {user} =getUserInfo()
+
+
   const router = useRouter();
   const serviceId = params?.serviceId;
   const { data: singleService, isLoading: singleServiceLoading } =
     useGetSingleServiceQuery(serviceId);
+  console.log(
+    "🚀 ~ file: page.tsx:104 ~ ServiceDetails ~ singleService:",
+    singleService,
+    user
+  );
 
   if (singleServiceLoading) {
     return (
@@ -126,7 +122,13 @@ const ServiceDetails = ({ params }: any) => {
 
   // review
 
-  const handleReview = (data: any) => {
+
+
+
+
+
+
+  const handleReview = async (data: any) => {
     if (!userLoggedIn) {
       confirm({
         title: "Please Login First",
@@ -141,7 +143,21 @@ const ServiceDetails = ({ params }: any) => {
 
       return;
     } else {
-      console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
+      try {
+        const updateData = {
+          reviewComment: data?.reviewComment,
+          reviewRating: data?.reviewRating?.toString(),
+          serviceId,
+        };
+
+        const res: any = await createRating(updateData);
+        if (res?.data?.success) {
+          message.success("Review Added Successfully");
+        }
+      } catch (error: any) {
+        console.error(error);
+        message.error(error?.data?.message);
+      }
     }
   };
 
@@ -400,15 +416,17 @@ const ServiceDetails = ({ params }: any) => {
 
                 <div className="mt-2">
                   <Form submitHandler={handleReview}>
-                    <FormRating name="rating"/>
+                    <FormRating name="reviewRating" />
                     <FormTextArea
-                      name="review"
+                      name="reviewComment"
                       placeholder="Write your review here"
                       required
                       rows={5}
                     />
 
                     <Button
+                      loading={reviewLoading}
+                      disabled={reviewLoading}
                       htmlType="submit"
                       size={"large"}
                       style={{
@@ -420,43 +438,67 @@ const ServiceDetails = ({ params }: any) => {
                   </Form>
                 </div>
 
-                {reviews.featured.map((review, reviewIdx) => (
-                  <div
-                    key={review.id}
-                    className="flex space-x-4 text-sm text-gray-500"
-                  >
-                    <div className="flex-none py-10">
-                      <img
-                        src={review.avatarSrc}
-                        alt=""
-                        className="h-10 w-10 rounded-full bg-gray-100"
-                      />
-                    </div>
-                    <div
-                      className={classNames(
-                        reviewIdx === 0 ? "" : "border-t border-gray-200",
-                        "py-10"
-                      )}
-                    >
-                      <h3 className="font-medium text-gray-900">
-                        {review.author}
-                      </h3>
-                      <p>
-                        <time dateTime={review.datetime}>{review.date}</time>
-                      </p>
-
-                      <div className="mt-4 flex items-center">
-                        <Rate disabled defaultValue={review.rating} />
-                      </div>
-                      <p className="sr-only">{review.rating} out of 5 stars</p>
-
+                {singleService?.reviewAndRatings?.length > 0 ? (
+                  singleService?.reviewAndRatings?.map(
+                    (review: any, reviewIdx: number) => (
                       <div
-                        className="prose prose-sm mt-4 max-w-none text-gray-500"
-                        dangerouslySetInnerHTML={{ __html: review.content }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                        key={reviewIdx}
+                        className="flex space-x-4 text-sm text-gray-500 w-full"
+                      >
+                        <div className="flex-none py-10">
+                          <img
+                            src={
+                              review?.profile?.profileImage ??
+                              "https://www.truckeradvisor.com/media/uploads/profilePics/notFound.jpg"
+                            }
+                            alt=""
+                            className="h-10 w-10 rounded-full bg-gray-100"
+                          />
+                        </div>
+                        <div
+                          className={classNames(
+                            reviewIdx === 0 ? "" : "border-t border-gray-200",
+                            "py-10"
+                          )}
+                        >
+                          <h3 className="font-medium text-gray-900">
+                            {review?.profile?.firstName +
+                              " " +
+                              review?.profile?.lastName}
+                          </h3>
+                          <p>
+                            {new Date(review?.createdAt!).toLocaleDateString(
+                              "en-US",
+                              {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                              }
+                            )}
+                          </p>
+
+                          <div className="mt-4 flex items-center">
+                            <Rate disabled defaultValue={review.reviewRating} />
+                          </div>
+                          <p className="sr-only">
+                            {review?.reviewRating} out of 5 stars
+                          </p>
+
+                          <div
+                            className="prose prose-sm mt-4 max-w-none text-gray-500"
+                            dangerouslySetInnerHTML={{
+                              __html: review?.reviewComment,
+                            }}
+                          />
+                        </div>
+
+                        {/* {review?.profile?.profileId ===  } */}
+                      </div>
+                    )
+                  )
+                ) : (
+                  <Empty description="No Reviews Yet" />
+                )}
               </Tab.Panel>
 
               <Tab.Panel className="text-sm text-gray-500">
