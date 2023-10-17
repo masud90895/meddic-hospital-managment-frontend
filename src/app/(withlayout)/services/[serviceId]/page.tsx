@@ -2,13 +2,18 @@
 "use client";
 import { useGetSingleServiceQuery } from "@/Redux/features/serviceApi/serviceApi";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { Rate, Skeleton } from "antd";
+import { Button, Rate, Skeleton } from "antd";
 import React from "react";
 
 import { Fragment } from "react";
 import { Tab } from "@headlessui/react";
 import Form from "@/components/Forms/Form";
 import FormTextArea from "@/components/Forms/FormTextArea";
+import { isLoggedIn } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
+import { Modal, message } from "antd";
+const { confirm } = Modal;
+import { ExclamationCircleFilled } from "@ant-design/icons";
 
 const product = {
   name: "Application UI Icon Pack",
@@ -104,6 +109,8 @@ function classNames(...classes: any) {
 }
 
 const ServiceDetails = ({ params }: any) => {
+  const userLoggedIn = isLoggedIn();
+  const router = useRouter();
   const serviceId = params?.serviceId;
   const { data: singleService, isLoading: singleServiceLoading } =
     useGetSingleServiceQuery(serviceId);
@@ -116,9 +123,25 @@ const ServiceDetails = ({ params }: any) => {
     );
   }
 
+  // review
+
   const handleReview = (data: any) => {
-    console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
-    return {};
+    if (!userLoggedIn) {
+      confirm({
+        title: "Please Login First",
+        icon: <ExclamationCircleFilled />,
+        content:
+          "You need to login first to give Review. Do you want to login?",
+        onOk() {
+          return router.push("/login");
+        },
+        onCancel() {},
+      });
+
+      return;
+    } else {
+      console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
+    }
   };
 
   return (
@@ -344,6 +367,16 @@ const ServiceDetails = ({ params }: any) => {
                       required
                       rows={5}
                     />
+
+                    <Button
+                      htmlType="submit"
+                      size={"large"}
+                      style={{
+                        marginTop: "10px",
+                      }}
+                    >
+                      Submit
+                    </Button>
                   </Form>
                 </div>
 
