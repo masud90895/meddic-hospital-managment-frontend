@@ -3,23 +3,20 @@ import React from "react";
 import Form from "./Form";
 import FormInput from "./FormInput";
 import FormTextArea from "./FormTextArea";
-import { Button, Modal } from "antd";
-import { getUserInfo, isLoggedIn } from "@/services/auth.service";
+import { Button, Modal, message } from "antd";
+import { isLoggedIn } from "@/services/auth.service";
 const { confirm } = Modal;
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { useCreateFeedBackMutation } from "../../Redux/features/feedBackApi/feedBackApi";
 
 const FeedBackForum = () => {
   const userLoggedIn = isLoggedIn();
-  const user = getUserInfo() as any;
-  const router = useRouter()
+  const router = useRouter();
 
-  console.log(
-    "🚀 ~ file: FeedBackForum.tsx:12 ~ FeedBackForum ~ userLoggedIn:",
-    userLoggedIn
-  );
+  const [createFeedBack, { isLoading }] = useCreateFeedBackMutation();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = async (data: any) => {
     if (!userLoggedIn) {
       confirm({
         title: "Please Login First",
@@ -27,11 +24,26 @@ const FeedBackForum = () => {
         content:
           "You need to login first to give feedback. Do you want to login?",
         onOk() {
-          return router.push("/login");},
+          return router.push("/login");
+        },
         onCancel() {},
       });
 
       return;
+    } else {
+      try {
+        const res = await createFeedBack(data).unwrap();
+        console.log(
+          "🚀 ~ file: FeedBackForum.tsx:35 ~ handleSubmit ~ res:",
+          res
+        );
+        if (res?.success) {
+          message.success("Feedback Submitted Successfully");
+        }
+      } catch (error: any) {
+        console.error(error?.data?.message || "Some thing was wrong");
+        message.error(error?.data?.message || "Some thing was wrong");
+      }
     }
   };
 

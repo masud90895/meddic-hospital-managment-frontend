@@ -35,3 +35,10 @@ const feedBackApi = api.injectEndpoints({
     }),
   }),
 });
+
+export const {
+  useGetAllFeedBackQuery,
+  useCreateFeedBackMutation,
+  useUpdateFeedBackMutation,
+  useDeleteFeedBackMutation,
+} = feedBackApi;

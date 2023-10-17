@@ -20,7 +20,7 @@ export default function Home() {
       <HealthCare />
       <Faqs />
       <BlogPage />
-      {/* <UserReviews /> */}
+      <UserReviews />
       <FeedBackForum />
     </div>
   );
