@@ -99,18 +99,12 @@ const ServiceDetails = ({ params }: any) => {
     useCreateRatingMutation();
   const userLoggedIn = isLoggedIn();
 
-  const {user} =getUserInfo()
-
+  const user = getUserInfo();
 
   const router = useRouter();
   const serviceId = params?.serviceId;
   const { data: singleService, isLoading: singleServiceLoading } =
     useGetSingleServiceQuery(serviceId);
-  console.log(
-    "🚀 ~ file: page.tsx:104 ~ ServiceDetails ~ singleService:",
-    singleService,
-    user
-  );
 
   if (singleServiceLoading) {
     return (
@@ -121,12 +115,6 @@ const ServiceDetails = ({ params }: any) => {
   }
 
   // review
-
-
-
-
-
-
 
   const handleReview = async (data: any) => {
     if (!userLoggedIn) {
@@ -175,7 +163,10 @@ const ServiceDetails = ({ params }: any) => {
 
       return;
     } else {
-      console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
+      Modal.warning({
+        title: "This feature is under maintains",
+        content: "Sorry for the inconvenience",
+      });
     }
   };
   const handleAddToCart = (data: any) => {
