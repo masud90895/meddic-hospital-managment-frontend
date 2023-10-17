@@ -6,6 +6,7 @@ const feedBackApi = api.injectEndpoints({
     getAllFeedBack: builder.query({
       query: () => `/feedback-forms`,
       providesTags: ["FeedBack"],
+      
     }),
     // create
     createFeedBack: builder.mutation({

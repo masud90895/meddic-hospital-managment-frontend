@@ -1,3 +1,5 @@
+"use client";
+import { useGetAllFeedBackQuery } from "@/Redux/features/feedBackApi/feedBackApi";
 import About from "@/components/About/About";
 import Apointment from "@/components/Apointment/Apointment";
 import Banner from "@/components/Banner/Banner";
@@ -10,6 +12,7 @@ import UserReviews from "@/components/Reviews/Reviews";
 import Services from "@/components/Services/Services";
 
 export default function Home() {
+  const { data: reviews, isLoading } = useGetAllFeedBackQuery(undefined);
   return (
     <div>
       <Hero />
@@ -20,7 +23,7 @@ export default function Home() {
       <HealthCare />
       <Faqs />
       <BlogPage />
-      <UserReviews />
+      {!isLoading && <UserReviews data={reviews?.data} />}
       <FeedBackForum />
     </div>
   );
