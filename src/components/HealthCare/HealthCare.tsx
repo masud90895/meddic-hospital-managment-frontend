@@ -71,7 +71,7 @@ const HealthCare = () => {
               <Button
                 style={{
                   backgroundColor: "black",
-                  color: "purple !important",
+                  color: "white !important",
                 }}
                 type="primary"
               >
@@ -87,7 +87,7 @@ const HealthCare = () => {
           <button
             style={{
               backgroundColor: "white",
-              color: "gray !important",
+              color: "#4851D5 !important",
               margin: "5px 0px",
             }}
             className="appointmentButton"
