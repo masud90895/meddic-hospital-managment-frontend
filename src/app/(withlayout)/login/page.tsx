@@ -20,6 +20,7 @@ const LoginPage = () => {
   const onSubmit = async (data: any) => {
     try {
       const res = await login(data).unwrap();
+
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res?.data?.accessToken });
         router.push("/");

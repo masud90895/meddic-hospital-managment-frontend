@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { Modal, message } from "antd";
 const { confirm } = Modal;
 import { ExclamationCircleFilled } from "@ant-design/icons";
+import FormRating from "@/components/Forms/FormRating";
 
 const product = {
   name: "Application UI Icon Pack",
@@ -144,6 +145,42 @@ const ServiceDetails = ({ params }: any) => {
     }
   };
 
+  const handleBuy = (data: any) => {
+    if (!userLoggedIn) {
+      confirm({
+        title: "Please Login First",
+        icon: <ExclamationCircleFilled />,
+        content: "You need to login first to Buy This. Do you want to login?",
+        onOk() {
+          return router.push("/login");
+        },
+        onCancel() {},
+      });
+
+      return;
+    } else {
+      console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
+    }
+  };
+  const handleAddToCart = (data: any) => {
+    if (!userLoggedIn) {
+      confirm({
+        title: "Please Login First",
+        icon: <ExclamationCircleFilled />,
+        content:
+          "You need to login first to Add To Cart This. Do you want to login?",
+        onOk() {
+          return router.push("/login");
+        },
+        onCancel() {},
+      });
+
+      return;
+    } else {
+      console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
+    }
+  };
+
   return (
     <div className="bg-white">
       <div className=" common pt-[20px]">
@@ -206,12 +243,14 @@ const ServiceDetails = ({ params }: any) => {
             {/* buttons */}
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
               <button
+                onClick={handleBuy}
                 type="button"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Pay ৳{singleService?.servicePrice}
               </button>
               <button
+                onClick={handleAddToCart}
                 type="button"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
@@ -361,6 +400,7 @@ const ServiceDetails = ({ params }: any) => {
 
                 <div className="mt-2">
                   <Form submitHandler={handleReview}>
+                    <FormRating name="rating"/>
                     <FormTextArea
                       name="review"
                       placeholder="Write your review here"
