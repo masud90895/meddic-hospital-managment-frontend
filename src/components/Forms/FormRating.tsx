@@ -9,7 +9,12 @@ interface IInput {
   disabled?: boolean;
 }
 
-const FormRating = ({ name, label, required, disabled }: IInput) => {
+const FormRating = ({
+  name,
+  label,
+  required,
+  disabled,
+}: IInput) => {
   const { control, setValue } = useFormContext();
 
   return (

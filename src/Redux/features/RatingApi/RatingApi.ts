@@ -18,10 +18,10 @@ const RatingApi = api.injectEndpoints({
     }),
     // delete reviews
     deleteReview: builder.mutation({
-      query: (body) => ({
-        url: `/review-ratings/delete-review`,
+      query: (id) => ({
+        url: `/review-ratings/${id}`,
         method: "DELETE",
-        body,
+        id,
       }),
       invalidatesTags: ["service"],
     }),

@@ -1,44 +1,18 @@
 "use client";
 import { useGetMyReviewsQuery } from "@/Redux/features/RatingApi/RatingApi";
+import Skeleton from "@/components/Loader/Skeleton";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import { IReview } from "@/types/reviewsType";
+import { Empty } from "antd";
 import React from "react";
-
-type IReview = {
-  name: string;
-  email: string;
-  rating: number;
-  review: string;
-  createdAt: string;
-  image: string;
-  category: string;
-};
 
 const Reviews = () => {
   const { data, isLoading } = useGetMyReviewsQuery(undefined);
-  console.log("🚀 ~ file: page.tsx:19 ~ Reviews ~ data:", data)
 
-  const reviews: IReview[] = [
-    {
-      name: "Masud",
-      email: "masud@gmail.com",
-      rating: 5.0,
-      review: "This is a good course",
-      createdAt: "12/12/12",
-      image: "https://www.w3schools.com/howto/img_avatar.png",
-      category: "React",
-    },
-    {
-      name: "Masud2",
-      email: "masud2@gmail.com",
-      rating: 4.2,
-      review:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, beatae facere magnam, sed error obcaecati iure nobis nesciunt iste,.",
-      createdAt: "12/12/12",
-      image: "https://www.w3schools.com/howto/img_avatar.png",
-      category: "React",
-    },
-  ];
+  if (isLoading) {
+    return <Skeleton />;
+  }
 
   return (
     <div className="container rounded bg-white mt-1 mb-5 p-4 font-inter">
@@ -62,13 +36,20 @@ const Reviews = () => {
       </h3>
 
       <div className="inline-block py-2 px-8 mb-16 text-white bg-indigo-500 rounded-full font-semibold">
-        {reviews?.length} Reviews
+        {data?.length} Reviews
       </div>
 
-      <div className="grid grid-cols-4 justify-between">
-        {reviews?.map((review, index) => (
+      <div className="flex flex-wrap justify-between gap-3">
+        {data?.length > 0 ? (
+          data?.map((review: IReview, index: number) => (
+            <ReviewCard key={index} review={review} />
+          ))
+        ) : (
+          <Empty description="No Reviews Added" />
+        )}
+        {/* {reviews?.map((review, index) => (
           <ReviewCard key={index} review={review} />
-        ))}
+        ))} */}
       </div>
     </div>
   );
