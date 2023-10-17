@@ -71,6 +71,7 @@ const HealthCare = () => {
               <Button
                 style={{
                   backgroundColor: "black",
+                  color: "purple !important",
                 }}
                 type="primary"
               >
