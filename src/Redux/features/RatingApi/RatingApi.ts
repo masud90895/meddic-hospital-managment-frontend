@@ -10,7 +10,26 @@ const RatingApi = api.injectEndpoints({
       }),
       invalidatesTags: ["service"],
     }),
+    // get my reviews
+    getMyReviews: builder.query({
+      query: () => `/review-ratings/my-reviews`,
+      providesTags: ["service"],
+      transformResponse: (response: any) => response.data,
+    }),
+    // delete reviews
+    deleteReview: builder.mutation({
+      query: (body) => ({
+        url: `/review-ratings/delete-review`,
+        method: "DELETE",
+        body,
+      }),
+      invalidatesTags: ["service"],
+    }),
   }),
 });
 
-export const { useCreateRatingMutation } = RatingApi;
+export const {
+  useCreateRatingMutation,
+  useGetMyReviewsQuery,
+  useDeleteReviewMutation,
+} = RatingApi;

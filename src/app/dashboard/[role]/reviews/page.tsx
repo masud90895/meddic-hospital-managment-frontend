@@ -1,3 +1,5 @@
+"use client";
+import { useGetMyReviewsQuery } from "@/Redux/features/RatingApi/RatingApi";
 import ReviewCard from "@/components/ReviewCard/ReviewCard";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import React from "react";
@@ -13,6 +15,9 @@ type IReview = {
 };
 
 const Reviews = () => {
+  const { data, isLoading } = useGetMyReviewsQuery(undefined);
+  console.log("🚀 ~ file: page.tsx:19 ~ Reviews ~ data:", data)
+
   const reviews: IReview[] = [
     {
       name: "Masud",

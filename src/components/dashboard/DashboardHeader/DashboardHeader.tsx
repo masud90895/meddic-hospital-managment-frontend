@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Layout, Button, theme, Dropdown } from "antd";
+import { Layout, Button, theme, Dropdown, message } from "antd";
 import Link from "next/link";
 
 const { Header } = Layout;
@@ -10,23 +10,31 @@ const { Header } = Layout;
 type IHeader = {
   collapsed: boolean;
   setCollapsed: Dispatch<SetStateAction<boolean>>;
+  user: any;
+  handleLogOut: any;
 };
 
-const items = [
-  {
-    key: "1",
-    label: <Link href={'/'}>Home Page</Link>,
-  },
-  {
-    key: "2",
-    label: <button>Logout</button>,
-  },
-];
-
-const DashboardHeader = ({ collapsed, setCollapsed }: IHeader) => {
+const DashboardHeader = ({
+  collapsed,
+  setCollapsed,
+  user,
+  handleLogOut,
+}: IHeader) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const items = [
+    {
+      key: "1",
+      label: <Link href={"/"}>Home Page</Link>,
+    },
+    {
+      key: "2",
+      label: <button onClick={handleLogOut}>Logout</button>,
+    },
+  ];
+
   return (
     <Header style={{ padding: 0, background: colorBgContainer }}>
       <div className="mx-auto ">
@@ -79,9 +87,9 @@ const DashboardHeader = ({ collapsed, setCollapsed }: IHeader) => {
                 />
 
                 <p className="ms-2 hidden text-left text-xs sm:block">
-                  <strong className="block font-medium">Md Masud Rana</strong>
+                  {/* <strong className="block font-medium">Md Masud Rana</strong> */}
 
-                  <span className="text-gray-500"> masud@gmail.com </span>
+                  <span className="text-gray-500">{user?.email} </span>
                 </p>
 
                 <svg

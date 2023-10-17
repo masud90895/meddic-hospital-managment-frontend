@@ -19,14 +19,13 @@ import AddToCard from "../AddToCard/AddToCard";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [isCardOpen, setIsCardOpen] = useState(false); 
+  const [isCardOpen, setIsCardOpen] = useState(false);
   const router = useRouter();
 
   const [userLogged, setUserLogged] = useState(false);
 
   const userLoggedIn = isLoggedIn();
   const user = getUserInfo() as any;
-  console.log("🚀 ~ file: Navbar.tsx:29 ~ Navbar ~ user:", user)
 
   useEffect(() => {
     if (userLoggedIn && user) {
@@ -171,7 +170,7 @@ const Navbar = () => {
               </span>
               <div className="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
                 <div
-                  className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                  className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none z-50"
                   aria-labelledby="headlessui-menu-button-1"
                   id="headlessui-menu-items-117"
                   role="menu"
@@ -185,37 +184,34 @@ const Navbar = () => {
                   <div className="py-1">
                     <Link
                       href="/dashboard"
-                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
                       role="menuitem"
                     >
                       Dashboard
                     </Link>
                     <Link
-                      href="/profile"
-                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                      href={`/profile/${user?.role}`}
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
                       role="menuitem"
                     >
                       Profile Settings
                     </Link>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
-                      role="menuitem"
-                    >
-                      Support
-                    </a>
-                    <span
-                      role="menuitem"
-                      className="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 cursor-not-allowed opacity-50"
-                      aria-disabled="true"
-                    >
-                      New feature (soon)
-                    </span>
+
+                    {/* user add t o card */}
+                    {user?.role === "USER" && (
+                      <button
+                        onClick={() => setIsCardOpen(true)}
+                        className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
+                        role="menuitem"
+                      >
+                        My Cart
+                      </button>
+                    )}
                   </div>
                   <div className="py-1">
                     <button
                       onClick={handleLogOut}
-                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-red-500 hover:text-white rounded"
                       role="menuitem"
                     >
                       Sign out

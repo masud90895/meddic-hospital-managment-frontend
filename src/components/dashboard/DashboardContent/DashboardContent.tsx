@@ -9,9 +9,17 @@ type IContent = {
   children: React.ReactNode;
   collapsed: boolean;
   setCollapsed: Dispatch<SetStateAction<boolean>>;
+  user: any;
+  handleLogOut: any;
 };
 
-const DashboardContents = ({ children, collapsed, setCollapsed }: IContent) => {
+const DashboardContents = ({
+  children,
+  collapsed,
+  setCollapsed,
+  user,
+  handleLogOut,
+}: IContent) => {
   return (
     <Content
       style={{
@@ -19,7 +27,12 @@ const DashboardContents = ({ children, collapsed, setCollapsed }: IContent) => {
         color: "black",
       }}
     >
-      <DashboardHeader collapsed={collapsed} setCollapsed={setCollapsed} />
+      <DashboardHeader
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        user={user}
+        handleLogOut={handleLogOut}
+      />
 
       <div
         style={{

@@ -7,17 +7,18 @@ import logo from "../../../../public/assists/logo.png";
 import { Layout, Menu } from "antd";
 import Image from "next/image";
 import { sidebarItems } from "./SitebarItems";
-import { USER_ROLE } from "@/constant/role";
+import Link from "next/link";
 
 const { Sider } = Layout;
 
 interface ISiteBar {
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  role: any;
 }
 
-const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
-  const role = USER_ROLE.SUPER_ADMIN;
+const DashboardSiteBar = ({ collapsed, setCollapsed, role }: ISiteBar) => {
+  // const role = USER_ROLE.SUPER_ADMIN;
 
   return (
     <Sider
@@ -34,15 +35,19 @@ const DashboardSiteBar = ({ collapsed, setCollapsed }: ISiteBar) => {
       {/* add logo */}
       <div className="my-[23px] w-full flex items-center justify-center">
         {collapsed ? (
-          <Image
-            alt="Logo"
-            src={logo}
-            width={50}
-            height={50}
-            className="w-[30px]"
-          />
+          <Link href={"/"}>
+            <Image
+              alt="Logo"
+              src={logo}
+              width={50}
+              height={50}
+              className="w-[30px]"
+            />
+          </Link>
         ) : (
-          <Image alt="Logo" src={logoWithName} width={100} height={100} />
+          <Link href={"/"}>
+            <Image alt="Logo" src={logoWithName} width={100} height={100} />
+          </Link>
         )}
       </div>
 
