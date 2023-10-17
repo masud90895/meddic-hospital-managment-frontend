@@ -2,7 +2,6 @@
 "use client";
 import React from "react";
 import "./profile.css";
-import InputField from "@/components/InputField/InputField";
 import UploadImage from "@/components/ui/UploadImage";
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";

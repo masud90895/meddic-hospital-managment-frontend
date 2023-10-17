@@ -14,7 +14,7 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import ActionBar from "@/components/ui/ActionBar";
 import UMTable from "@/components/ui/UMTable";
 
-const BookingList = () => {
+const UserBookingList = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -207,4 +207,4 @@ const BookingList = () => {
   );
 };
 
-export default BookingList;
+export default UserBookingList;

@@ -34,18 +34,16 @@ export const sidebarItems = (role: string) => {
       icon: <UsergroupAddOutlined />,
       children: [
         {
-          label: <Link href={`/dashboard/${role}`}>Account Profile</Link>,
+          label: <Link href={`/dashboard/profile`}>Account Profile</Link>,
           icon: <UserOutlined />,
-          key: `/dashboard/${role}/profile`,
+          key: `/dashboard/profile`,
         },
         {
           label: (
-            <Link href={`/dashboard/${role}/change-password`}>
-              Change Password
-            </Link>
+            <Link href={`/dashboard/change-password`}>Change Password</Link>
           ),
           icon: <UsergroupDeleteOutlined />,
-          key: `/dashboard/${role}/change-password`,
+          key: `/dashboard/change-password`,
         },
       ],
     },
@@ -54,16 +52,14 @@ export const sidebarItems = (role: string) => {
   const userSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: (
-        <Link href={`/dashboard/${role}/booking-list`}>My Booking List</Link>
-      ),
+      label: <Link href={`/dashboard/my-booking-list`}>My Booking List</Link>,
       icon: <BookOutlined />,
-      key: `/dashboard/${role}/booking-list`,
+      key: `/dashboard/my-booking-list`,
     },
     {
-      label: <Link href={`/dashboard/${role}/reviews`}>My Reviews</Link>,
+      label: <Link href={`/dashboard/reviews`}>My Reviews</Link>,
       icon: <PlusSquareOutlined />,
-      key: `/dashboard/${role}/reviews`,
+      key: `/dashboard/reviews`,
     },
   ];
 

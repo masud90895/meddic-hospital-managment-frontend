@@ -5,7 +5,7 @@ import Logo from "/public//assists/logo_Asset-1-1.png";
 import Link from "next/link";
 import { INavbarType } from "@/types/NavbarType";
 import NavbarMenu from "./NavbarMenu";
-import { PhoneTwoTone } from "@ant-design/icons";
+// import { PhoneTwoTone } from "@ant-design/icons";
 import { AppstoreOutlined } from "@ant-design/icons";
 import { Drawer, message } from "antd";
 import {
@@ -103,10 +103,10 @@ const Navbar = () => {
 
       <div className="flex gap-5 items-center w-full justify-end  ">
         {/* emergengy call */}
-        <div className="hidden md:flex items-center gap-2 cursor-pointer ">
+        {/* <div className="hidden md:flex items-center gap-2 cursor-pointer ">
           <PhoneTwoTone className="text-primary" />
           <p>Emergency Call</p>
-        </div>
+        </div> */}
 
         {/* apointment */}
         <button
@@ -139,9 +139,9 @@ const Navbar = () => {
             }}
           >
             {NavbarData?.map((nav: INavbarType, i: number) => (
-              <p key={i} className="text-[20px] my-[20px]">
+              <Link href={nav?.link} key={i} className="text-[20px] my-[20px]">
                 {nav.name}
-              </p>
+              </Link>
             ))}
           </Drawer>
         </>
