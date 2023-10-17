@@ -25,6 +25,7 @@ export default function Home() {
       <BlogPage />
       {!isLoading && <UserReviews data={reviews?.data} />}
       <FeedBackForum />
+      
     </div>
   );
 }

@@ -7,16 +7,26 @@ import { INavbarType } from "@/types/NavbarType";
 import NavbarMenu from "./NavbarMenu";
 import { PhoneTwoTone } from "@ant-design/icons";
 import { AppstoreOutlined } from "@ant-design/icons";
-import { Drawer } from "antd";
-import { getUserInfo, isLoggedIn } from "@/services/auth.service";
+import { Drawer, message } from "antd";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUserInfo,
+} from "@/services/auth.service";
+import { tokenKey } from "@/helpers/token/tokenKey";
+import { useRouter } from "next/navigation";
+import AddToCard from "../AddToCard/AddToCard";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isCardOpen, setIsCardOpen] = useState(false); 
+  const router = useRouter();
 
   const [userLogged, setUserLogged] = useState(false);
 
   const userLoggedIn = isLoggedIn();
   const user = getUserInfo() as any;
+  console.log("🚀 ~ file: Navbar.tsx:29 ~ Navbar ~ user:", user)
 
   useEffect(() => {
     if (userLoggedIn && user) {
@@ -63,6 +73,13 @@ const Navbar = () => {
       link: "/blogs",
     },
   ];
+
+  const handleLogOut = () => {
+    removeUserInfo(tokenKey);
+    setUserLogged(false);
+    message.success("Logout Successfully");
+    router.push("/login");
+  };
 
   return (
     <div className="py-[16px] border-b-2 borderColor common flex gap-3 items-center justify-between w-full">
@@ -132,7 +149,7 @@ const Navbar = () => {
 
         {/* user */}
 
-        {userLogged && user ? (
+        {userLogged ? (
           <div className="flex items-center justify-center ">
             <div className=" relative inline-block text-left dropdown">
               <span className="rounded-md shadow-sm">
@@ -197,6 +214,7 @@ const Navbar = () => {
                   </div>
                   <div className="py-1">
                     <button
+                      onClick={handleLogOut}
                       className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"
                       role="menuitem"
                     >
@@ -225,6 +243,10 @@ const Navbar = () => {
         {/* // test */}
 
         {/* // end */}
+
+        {/* card */}
+
+        {userLogged && <AddToCard setOpen={setIsCardOpen} open={isCardOpen} />}
       </div>
     </div>
   );
