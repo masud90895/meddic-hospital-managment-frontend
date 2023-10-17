@@ -3,11 +3,36 @@ import React from "react";
 import Form from "./Form";
 import FormInput from "./FormInput";
 import FormTextArea from "./FormTextArea";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
+import { getUserInfo, isLoggedIn } from "@/services/auth.service";
+const { confirm } = Modal;
+import { ExclamationCircleFilled } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 const FeedBackForum = () => {
+  const userLoggedIn = isLoggedIn();
+  const user = getUserInfo() as any;
+  const router = useRouter()
+
+  console.log(
+    "🚀 ~ file: FeedBackForum.tsx:12 ~ FeedBackForum ~ userLoggedIn:",
+    userLoggedIn
+  );
+
   const handleSubmit = (data: any) => {
-    console.log(data);
+    if (!userLoggedIn) {
+      confirm({
+        title: "Please Login First",
+        icon: <ExclamationCircleFilled />,
+        content:
+          "You need to login first to give feedback. Do you want to login?",
+        onOk() {
+          return router.push("/login");},
+        onCancel() {},
+      });
+
+      return;
+    }
   };
 
   return (

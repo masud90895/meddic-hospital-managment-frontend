@@ -132,7 +132,7 @@ const Navbar = () => {
 
         {/* user */}
 
-        {userLogged ? (
+        {userLogged && user ? (
           <div className="flex items-center justify-center ">
             <div className=" relative inline-block text-left dropdown">
               <span className="rounded-md shadow-sm">
