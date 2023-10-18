@@ -30,14 +30,18 @@ export default function DashboardLayout({
 
   const userLoggedIn = isLoggedIn();
 
-  if (!userLoggedIn) {
+  if (!userLoggedIn && typeof window !== "undefined") {
     router.push("/login");
     return message.error("You are not Authorize user.please login");
   }
 
   return (
     <Layout hasSider>
-      <DashboardSiteBar collapsed={collapsed} setCollapsed={setCollapsed} role={user?.role} />
+      <DashboardSiteBar
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        role={user?.role}
+      />
       <DashboardContents
         collapsed={collapsed}
         setCollapsed={setCollapsed}

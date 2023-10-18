@@ -13,6 +13,7 @@ import { getUserInfo, isLoggedIn } from "@/services/auth.service";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { message } from "antd";
 
 const products = [
   {
@@ -47,7 +48,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Checkout() {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   );
@@ -56,8 +57,9 @@ export default function Example() {
 
   const isUserLogin = isLoggedIn();
 
-  if (!isUserLogin) {
-    return router.push("/login");
+  if (!isUserLogin && typeof window !== "undefined") {
+    router.push("/login");
+    return message.error("You are not Authorize user.please login");
   }
 
   const user: any = getUserInfo();
