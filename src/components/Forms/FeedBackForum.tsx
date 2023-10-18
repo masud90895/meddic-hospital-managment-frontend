@@ -5,8 +5,8 @@ import FormInput from "./FormInput";
 import FormTextArea from "./FormTextArea";
 import { Button, Modal, message } from "antd";
 const { confirm } = Modal;
-import { isLoggedIn } from "@/services/auth.service";
 import { ExclamationCircleFilled } from "@ant-design/icons";
+import { isLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { useCreateFeedBackMutation } from "../../Redux/features/feedBackApi/feedBackApi";
 
@@ -111,7 +111,7 @@ const FeedBackForum = () => {
             <Button
               htmlType="submit"
               type="primary"
-              className="text-white mt-[8px] bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              className="text-white mt-[8px] bg-primary border-0  px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
               style={{
                 background: "#3F51B5",
                 color: "#fff",

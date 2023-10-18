@@ -109,14 +109,15 @@ const Navbar = () => {
         </div> */}
 
         {/* apointment */}
-        <button
+        <Link
+          href={"#appointment"}
           style={{
             boxShadow: " 3px 3px 3px 0px rgba(109,40,217)",
           }}
           className=" hidden md:block appointmentButton"
         >
-          Apointment{" "}
-        </button>
+          Appointment{" "}
+        </Link>
         {/* button and drower */}
         <>
           <button

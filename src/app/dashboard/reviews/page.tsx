@@ -39,7 +39,7 @@ const Reviews = () => {
         {data?.length} Reviews
       </div>
 
-      <div className="flex flex-wrap justify-between gap-3">
+      <div className="grid grid-cols-4  justify-between gap-3">
         {data?.length > 0 ? (
           data?.map((review: IReview, index: number) => (
             <ReviewCard key={index} review={review} />

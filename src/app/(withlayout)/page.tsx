@@ -28,7 +28,7 @@ export default function Home() {
       {!isLoading && <UserReviews data={reviews?.data} />}
       <FeedBackForum />
 
-      <FloatButton.BackTop tooltip="Scroll to top" />
+      <FloatButton.BackTop type="primary" tooltip="Scroll to top" />
     </div>
   );
 }

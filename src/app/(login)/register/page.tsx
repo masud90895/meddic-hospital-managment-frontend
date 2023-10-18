@@ -2,12 +2,16 @@
 import { useRegistrationMutation } from "@/Redux/features/auth/authApi";
 import InputField from "@/components/InputField/InputField";
 import LoadingButton from "@/components/button/LoadingButton";
-import { message } from "antd";
+import { Button, Checkbox, message } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
+  const [check, setIsCheck] = useState(false);
+  console.log("🚀 ~ file: page.tsx:14 ~ RegisterPage ~ check:", check);
   const {
     register,
     handleSubmit,
@@ -29,6 +33,13 @@ const RegisterPage = () => {
     } catch (error: any) {
       console.error(error?.data?.message);
       message.error(error?.data?.message);
+    }
+  };
+
+  const handleError = () => {
+    console.log("hi");
+    if (!check) {
+      message.error("Please check terms and conditions");
     }
   };
 
@@ -327,8 +338,24 @@ const RegisterPage = () => {
                 </p>
               )}
 
+              {/* terms and condition */}
+              <div className="flex items-center font-semibold text-xs mt-1">
+                <Checkbox
+                  onChange={(e: CheckboxChangeEvent) =>
+                    setIsCheck(e.target.checked)
+                  }
+                >
+                  I agree with
+                </Checkbox>
+                <Link
+                  href={"/terms-and-condition"}
+                  className="text-primary underline"
+                >
+                  terms and conditions
+                </Link>
+              </div>
               {/* already have account */}
-              <div className="flex items-center justify-end mt-2">
+              <div className="flex items-center justify-end mt-2 ">
                 <Link
                   href="/login"
                   className="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center"
@@ -344,11 +371,17 @@ const RegisterPage = () => {
                   ) : (
                     <button
                       type="submit"
-                      className="block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      disabled={!check}
+                      onClick={handleError}
+                      className={
+                        "block w-full  mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      }
                     >
                       REGISTER NOW
                     </button>
                   )}
+
+                  
                 </div>
               </div>
             </div>

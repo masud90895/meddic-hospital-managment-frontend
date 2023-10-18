@@ -2,6 +2,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CloseOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 const products = [
   {
@@ -31,10 +32,10 @@ const products = [
   // More products...
 ];
 
-type IAddToCardProps={
-  open:boolean,
-  setOpen:React.Dispatch<React.SetStateAction<boolean>>
-}
+type IAddToCardProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export default function AddToCard({ open, setOpen }: IAddToCardProps) {
   // const [open, setOpen] = useState(true);
@@ -147,12 +148,12 @@ export default function AddToCard({ open, setOpen }: IAddToCardProps) {
                         Shipping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                        <Link
+                          href="/checkout"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>

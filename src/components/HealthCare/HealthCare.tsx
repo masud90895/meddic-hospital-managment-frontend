@@ -1,7 +1,7 @@
 import React from "react";
-import backgroudImage from "../../../public/assists/TaeAugust11.jpg";
 import Image from "next/image";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
+import Link from "next/link";
 
 type BookAppointmentData = {
   _id: number;
@@ -32,6 +32,18 @@ const HealthCare = () => {
       time: "8:00am - 5:00pm",
     },
   ];
+
+  const handleInfo = () => {
+    Modal.info({
+      title: "This feature is under development",
+      content: (
+        <div>
+          <p>Sorry for this problem </p>
+        </div>
+      ),
+      onOk() {},
+    });
+  };
 
   return (
     <div
@@ -68,13 +80,7 @@ const HealthCare = () => {
               {/* <button className="bg-black rounded-xl px-[15px] font-inter text-white text-[12px] ">
                 Book Now
               </button> */}
-              <Button
-                style={{
-                  backgroundColor: "black",
-                  color: "white !important",
-                }}
-                type="primary"
-              >
+              <Button onClick={handleInfo} type="primary">
                 Book Now
               </Button>
             </div>
@@ -82,18 +88,19 @@ const HealthCare = () => {
         </div>
 
         <div>
-          <p className="text-[20px] font-semibold">Time’s not flexible?</p>
+          <p className="text-[20px] font-semibold mb-5">Time’s not flexible?</p>
 
-          <button
+          <Link
+            href={"#appointment"}
             style={{
               backgroundColor: "white",
-              color: "#4851D5 !important",
+              color: "black",
               margin: "5px 0px",
             }}
             className="appointmentButton"
           >
             Make an appointment
-          </button>
+          </Link>
         </div>
       </div>
     </div>

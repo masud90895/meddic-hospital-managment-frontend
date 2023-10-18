@@ -18,7 +18,10 @@ const Apointment = () => {
   };
 
   return (
-    <div className="common md:flex gap-10 items-center mb-[60px]">
+    <div
+      id="appointment"
+      className="common md:flex gap-10 items-center mb-[60px]"
+    >
       <Image
         src="https://askproject.net/meddic/wp-content/uploads/sites/156/2023/10/team-of-doctors-discussing-something-at-hospital-c-FHAY6CS.jpg"
         alt="Picture of the author"
