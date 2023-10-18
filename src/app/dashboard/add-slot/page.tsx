@@ -9,12 +9,10 @@ import FormSelectField from "@/components/Forms/FormSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 
 import { Button, Col, Row, message } from "antd";
-import { useRouter } from "next/navigation";
 
 const AddSlot = () => {
   const [createSlot, { isLoading, isError }] = useCreateSlotMutation();
   // submit
-  const router = useRouter();
 
   const slotOnSubmit = async (data: any) => {
     message.loading("Creating new Slot");
@@ -29,7 +27,7 @@ const AddSlot = () => {
       // @ts-ignore
       if (res?.data && !isError) {
         message.success("Slot created successfully");
-        router.push("/dashboard/booking/booking-list");
+        // router.push("/dashboard/booking/booking-list");
       }
     } catch (err: any) {
       console.error(err?.data?.message);
@@ -42,7 +40,7 @@ const AddSlot = () => {
       <UMBreadCrumb
         items={[
           { label: "dashboard", link: `/dashboard` },
-          { label: "add-booking", link: `/dashboard/add-booking` },
+          { label: "add-slot", link: `/dashboard/add-slot` },
         ]}
       />
       <h1 className="mt-10 font-semibold text-[18px]">Create Slot</h1>

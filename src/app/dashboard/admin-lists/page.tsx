@@ -91,6 +91,12 @@ const AdminLists = () => {
   // get data
   const { data, isLoading } = useGetAllUsersQuery(searchTerm);
 
+  // filter data?.profile?.role === USER_ROLE.SUPER_ADMIN
+  const filteredData = data?.filter(
+    (item: any) =>
+      item?.profile?.role === "SUPER_ADMIN" || item?.profile?.role === "ADMIN"
+  );
+
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
@@ -330,7 +336,7 @@ const AdminLists = () => {
         <UMTable
           loading={isLoading}
           columns={columns}
-          dataSource={data}
+          dataSource={filteredData}
           pageSize={size}
           // totalPages="meta?.total"
           showSizeChanger={true}
