@@ -13,18 +13,6 @@ import Form from "@/components/Forms/Form";
 import LoadingButton from "@/components/button/LoadingButton";
 
 const AddUserPage = () => {
-  const roles = [
-    {
-      label: "USER",
-      value: "USER",
-    },
-
-    {
-      label: "DOCTOR",
-      value: "DOCTOR",
-    },
-  ];
-
   const [isRoleIsDoctor, setIsRoleIsDoctor] = useState(false);
 
   const [registration, { isLoading, error }] = useRegistrationMutation();
@@ -46,7 +34,6 @@ const AddUserPage = () => {
       // @ts-ignore
       if (res?.data?.success) {
         message.success("Successfully Created User");
-        router.push("/dashboard/user-list");
       }
     } catch (error: any) {
       console.error(error?.data?.message);
@@ -101,7 +88,7 @@ const AddUserPage = () => {
                   required
                 />
               </Col>{" "}
-              <Col span={12} style={{ margin: "10px 0" }}>
+              {/* <Col span={12} style={{ margin: "10px 0" }}>
                 <FormSelectField
                   setIsRoleIsDoctor={setIsRoleIsDoctor}
                   name="role"
@@ -110,7 +97,7 @@ const AddUserPage = () => {
                   size="large"
                   placeholder="Select User Role"
                 />
-              </Col>
+              </Col> */}
               {isRoleIsDoctor && (
                 <Col span={12} style={{ margin: "10px 0" }}>
                   <SpecializationFormField
