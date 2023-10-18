@@ -59,8 +59,6 @@ const UserList = () => {
     },
   ];
 
- 
-
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -71,6 +69,9 @@ const UserList = () => {
 
   // get data
   const { data, isLoading } = useGetAllUsersQuery(searchTerm);
+  const filteredData = data?.filter(
+    (item: any) => item?.profile?.role === "USER"
+  );
 
   query["limit"] = size;
   query["page"] = page;
@@ -308,7 +309,7 @@ const UserList = () => {
         <UMTable
           loading={isLoading}
           columns={columns}
-          dataSource={data}
+          dataSource={filteredData}
           pageSize={size}
           // totalPages="meta?.total"
           showSizeChanger={true}
