@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CloseOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { Empty } from "antd";
 
 const products = [
   {
@@ -10,7 +11,7 @@ const products = [
     name: "Throwback Hip Bag",
     href: "#",
     color: "Salmon",
-    price: "$90.00",
+    price: 90,
     quantity: 1,
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
@@ -22,7 +23,7 @@ const products = [
     name: "Medium Stuff Satchel",
     href: "#",
     color: "Blue",
-    price: "$32.00",
+    price: 32,
     quantity: 1,
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
@@ -40,9 +41,19 @@ type IAddToCardProps = {
 export default function AddToCard({ open, setOpen }: IAddToCardProps) {
   // const [open, setOpen] = useState(true);
 
+  // sum of products price
+  const totalPrice = products.reduce(
+    (sum, product) => sum + product.price * product.quantity,
+    0
+  );
+  console.log(
+    "🚀 ~ file: AddToCard.tsx:49 ~ AddToCard ~ totalPrice:",
+    totalPrice
+  );
+
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Dialog as="div" className="relative z-30" onClose={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -93,47 +104,51 @@ export default function AddToCard({ open, setOpen }: IAddToCardProps) {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </div>
-
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
-                                        <a href={product.href}>
-                                          {product.name}
-                                        </a>
-                                      </h3>
-                                      <p className="ml-4">{product.price}</p>
-                                    </div>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                      {product.color}
-                                    </p>
+                            {products?.length > 0 ? (
+                              products.map((product) => (
+                                <li key={product.id} className="flex py-6">
+                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <img
+                                      src={product.imageSrc}
+                                      alt={product.imageAlt}
+                                      className="h-full w-full object-cover object-center"
+                                    />
                                   </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
-                                      Qty {product.quantity}
-                                    </p>
 
-                                    <div className="flex">
-                                      <button
-                                        type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                                      >
-                                        Remove
-                                      </button>
+                                  <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                        <h3>
+                                          <a href={product.href}>
+                                            {product.name}
+                                          </a>
+                                        </h3>
+                                        <p className="ml-4">{product.price}</p>
+                                      </div>
+                                      <p className="mt-1 text-sm text-gray-500">
+                                        {product.color}
+                                      </p>
+                                    </div>
+                                    <div className="flex flex-1 items-end justify-between text-sm">
+                                      <p className="text-gray-500">
+                                        Qty {product.quantity}
+                                      </p>
+
+                                      <div className="flex">
+                                        <button
+                                          type="button"
+                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        >
+                                          Remove
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </li>
-                            ))}
+                                </li>
+                              ))
+                            ) : (
+                              <Empty description="No Products" />
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -142,7 +157,7 @@ export default function AddToCard({ open, setOpen }: IAddToCardProps) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>৳{totalPrice}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.

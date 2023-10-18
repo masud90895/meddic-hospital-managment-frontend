@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Button, theme, Dropdown, message } from "antd";
 import Link from "next/link";
+import { noImage } from "@/helpers/noImage/noImage";
 
 const { Header } = Layout;
 
@@ -82,7 +83,7 @@ const DashboardHeader = ({
                 <span className="sr-only">Menu</span>
                 <img
                   alt="Man"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBtgFFcGDOgUQGTC748i388C4EhfNCkX7rfg&usqp=CAU"
+                  src={noImage}
                   className="h-10 w-10 rounded-full object-cover"
                 />
 

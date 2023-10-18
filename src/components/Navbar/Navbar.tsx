@@ -16,6 +16,7 @@ import {
 import { tokenKey } from "@/helpers/token/tokenKey";
 import { useRouter } from "next/navigation";
 import AddToCard from "../AddToCard/AddToCard";
+import { noImage } from "@/helpers/noImage/noImage";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -81,7 +82,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="py-[16px] border-b-2 borderColor common flex gap-3 items-center justify-between w-full">
+    <div className="py-[16px] border-b-2 borderColor common flex gap-3 items-center justify-between w-full sticky top-0 bg-bgColor z-20">
       {/* logo */}
       <Link href={"/"} className="md:w-full">
         <Image
@@ -133,17 +134,23 @@ const Navbar = () => {
             onClose={onClose}
             open={open}
             className="text-[20px] text-center"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: "column",
-            }}
+            // style={{
+            //   display: "flex",
+            //   justifyContent: "space-between",
+            //   flexDirection: "column",
+            // }}
           >
-            {NavbarData?.map((nav: INavbarType, i: number) => (
-              <Link href={nav?.link} key={i} className="text-[20px] my-[20px]">
-                {nav.name}
-              </Link>
-            ))}
+            <div className="flex flex-col items-center ">
+              {NavbarData?.map((nav: INavbarType, i: number) => (
+                <Link
+                  href={nav?.link}
+                  key={i}
+                  className="text-[20px] my-[10px] text-black"
+                >
+                  {nav.name}
+                </Link>
+              ))}
+            </div>
           </Drawer>
         </>
 
@@ -162,7 +169,7 @@ const Navbar = () => {
                 >
                   <Image
                     className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
-                    src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={noImage}
                     alt=""
                     width={100}
                     height={100}
@@ -176,12 +183,12 @@ const Navbar = () => {
                   id="headlessui-menu-items-117"
                   role="menu"
                 >
-                  <div className="px-4 py-3">
+                  {/* <div className="px-4 py-3">
                     <p className="text-sm leading-5">Signed in as</p>
                     <p className="text-sm font-medium leading-5 text-gray-900 truncate">
                       {user?.email}
                     </p>
-                  </div>
+                  </div> */}
                   <div className="py-1">
                     <Link
                       href="/dashboard"
@@ -191,7 +198,7 @@ const Navbar = () => {
                       Dashboard
                     </Link>
                     <Link
-                      href={`/profile/${user?.role}`}
+                      href={`/dashboard/profile`}
                       className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
                       role="menuitem"
                     >
@@ -199,15 +206,14 @@ const Navbar = () => {
                     </Link>
 
                     {/* user add t o card */}
-                    {user?.role === "USER" && (
-                      <button
-                        onClick={() => setIsCardOpen(true)}
-                        className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
-                        role="menuitem"
-                      >
-                        My Cart
-                      </button>
-                    )}
+
+                    <button
+                      onClick={() => setIsCardOpen(true)}
+                      className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-300 hover:text-black rounded "
+                      role="menuitem"
+                    >
+                      My Cart
+                    </button>
                   </div>
                   <div className="py-1">
                     <button

@@ -25,7 +25,7 @@ export default function Home() {
       <HealthCare />
       <Faqs />
       <BlogPage />
-      {!isLoading && <UserReviews data={reviews?.data} />}
+      {!isLoading && reviews?.data && <UserReviews data={reviews?.data} />}
       <FeedBackForum />
 
       <FloatButton.BackTop type="primary" tooltip="Scroll to top" />
