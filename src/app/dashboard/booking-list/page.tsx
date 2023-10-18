@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ReloadOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, ReloadOutlined } from "@ant-design/icons";
 
 import { Button, Col, Input, Row, Select, message } from "antd";
 import Link from "next/link";
@@ -43,17 +39,13 @@ const BookingList = () => {
   query["appointmentStatus"] = appointmentStatus;
 
   // get data
-  const { data, isLoading } = useGetBookingQuery({ ...query });
+  const { data, isLoading } = useGetBookingQuery(undefined);
 
-  const { data: slotData, isLoading: slotLoading } = useGetSlotQuery({
-    ...query,
-  });
+  const { data: slotData, isLoading: slotLoading } = useGetSlotQuery("");
 
-  const { data: serviceData, isLoading: serviceLoading } = useGetServicesQuery({
-    ...query,
-  });
+  const { data: serviceData, isLoading: serviceLoading } =
+    useGetServicesQuery("");
 
- 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editData, setEditData] = useState<any>(null);
 
@@ -61,19 +53,12 @@ const BookingList = () => {
     useUpdateBookingMutation();
 
   const handleEdit = async (updated: any) => {
-    console.log(updated?.appointmentDate);
-
     const dateString = updated?.appointmentDate?.$d ?? updated?.appointmentDate;
 
-    console.log(dateString, "dateString");
     const dateObject = new Date(dateString);
-
-    console.log(dateObject, "dateObject");
 
     // Get ISO string
     const isoString = dateObject?.toISOString();
-
-    console.log(isoString, "isoString");
 
     const editedData = {
       serviceId: updated?.service.serviceId,
@@ -98,7 +83,7 @@ const BookingList = () => {
     } catch (error: any) {
       console.log(error, "booking errror");
       console.error(error?.data);
-      message.error(error?.data);
+      message.error(error?.data?.message);
       // message.error("Slot May be booked");
     }
   };
@@ -169,8 +154,6 @@ const BookingList = () => {
             >
               <EditOutlined />
             </Button>
-
-           
           </>
         );
       },
@@ -208,7 +191,7 @@ const BookingList = () => {
   };
 
   return (
-    <div className="my-10">
+    <div className="container rounded bg-white mt-1 mb-5 p-4">
       <UMBreadCrumb
         items={[
           {
@@ -246,26 +229,12 @@ const BookingList = () => {
             options={status}
           />
         </div>
-        <div>
-          <Link href="/dashboard/booking/add-booking">
-            <Button type="primary">Create</Button>
-          </Link>
-          {(!!sortBy || !!sortOrder || !!firstName) && (
-            <Button
-              onClick={resetFilters}
-              type="primary"
-              style={{ margin: "0px 5px" }}
-            >
-              <ReloadOutlined />
-            </Button>
-          )}
-        </div>
       </ActionBar>
 
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={data}
+        dataSource={data?.data}
         pageSize={size}
         // totalPages="meta?.total"
         showSizeChanger={true}
@@ -358,7 +327,7 @@ const BookingList = () => {
                     <FormSelectField
                       name="slot.slotId"
                       label="Booking Slot"
-                      options={slotData.map((c: any) => ({
+                      options={slotData?.data?.map((c: any) => ({
                         label: c.slotTime,
                         value: c.slotId,
                       }))}

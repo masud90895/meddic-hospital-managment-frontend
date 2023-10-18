@@ -122,8 +122,8 @@ export const sidebarItems = (role: string) => {
       icon: <DiffOutlined />,
       children: [
         {
-          label: <Link href={`/dashboard/add-booking`}>Add Booking</Link>,
-          key: `/dashboard/add-service`,
+          label: <Link href={`/dashboard/add-slot`}>Add Slot</Link>,
+          key: `/dashboard/add-slot`,
           icon: <FileAddOutlined />,
         },
         {
