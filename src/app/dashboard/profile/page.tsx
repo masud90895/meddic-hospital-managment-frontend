@@ -17,6 +17,7 @@ import {
   useUpdateMyUserInfoMutation,
 } from "@/Redux/features/userApi/userApi";
 import { noImage } from "@/helpers/noImage/noImage";
+import Skeleton from "@/components/Loader/Skeleton";
 
 const Profile = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -83,6 +84,14 @@ const Profile = () => {
       message.error(error?.data?.message);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen common">
+        <Skeleton />
+      </div>
+    );
+  }
   return (
     <>
       <section className="container rounded bg-white mt-1 mb-5 p-4">

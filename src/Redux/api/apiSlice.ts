@@ -23,5 +23,7 @@ export const api = createApi({
     "categories",
     "blog",
     "FeedBack",
+    "booking",
+    'slot'
   ],
 });

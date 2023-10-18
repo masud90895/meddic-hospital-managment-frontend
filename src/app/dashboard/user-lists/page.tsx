@@ -27,10 +27,12 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import UploadImage from "@/components/ui/UploadImage";
-import { USER_ROLE } from "@/constant/role";
+import { getUserInfo } from "@/services/auth.service";
+import { noImage } from "@/helpers/noImage/noImage";
+import { bloodGroup } from "@/constant/common";
 
 const UserList = () => {
-  const userRole = "SUPER_ADMIN";
+  const user: any = getUserInfo();
 
   const superAdminRole = [
     {
@@ -57,40 +59,7 @@ const UserList = () => {
     },
   ];
 
-  const bloodGroup = [
-    {
-      label: "A+",
-      value: "A+",
-    },
-    {
-      label: "A-",
-      value: "A-",
-    },
-    {
-      label: "B+",
-      value: "B+",
-    },
-    {
-      label: "B-",
-      value: "B-",
-    },
-    {
-      label: "O+",
-      value: "O+",
-    },
-    {
-      label: "O-",
-      value: "O-",
-    },
-    {
-      label: "AB+",
-      value: "AB+",
-    },
-    {
-      label: "AB-",
-      value: "AB-",
-    },
-  ];
+ 
 
   const query: Record<string, any> = {};
 
@@ -182,10 +151,7 @@ const UserList = () => {
         return (
           <div className="flex gap-2 items-center">
             <img
-              src={
-                data?.profileImage ??
-                "https://www.smaroadsafety.com/wp-content/uploads/2022/06/no-pic.png"
-              }
+              src={data?.profileImage ?? noImage}
               alt={fullName}
               style={{
                 width: "30px",
@@ -303,14 +269,14 @@ const UserList = () => {
               link: "/dashboard",
             },
             {
-              label: "admin-Lists",
+              label: "user-lists",
               link: "/dashboard/user-lists",
             },
           ]}
         />
 
         <div className="mt-5">
-          <ActionBar title="Admin Lists">
+          <ActionBar title="User Lists">
             <Input
               type="text"
               size="large"
@@ -394,7 +360,8 @@ const UserList = () => {
                   <FormSelectField
                     name="profile.role"
                     label="User Role"
-                    options={ userRole === "SUPER_ADMIN" ? superAdminRole : adminRole
+                    options={
+                      user?.role === "SUPER_ADMIN" ? superAdminRole : adminRole
                     }
                     size="large"
                     placeholder="Select Role"
