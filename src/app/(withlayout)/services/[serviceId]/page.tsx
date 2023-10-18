@@ -17,36 +17,6 @@ import { ExclamationCircleFilled } from "@ant-design/icons";
 import FormRating from "@/components/Forms/FormRating";
 import { useCreateRatingMutation } from "@/Redux/features/RatingApi/RatingApi";
 
-const reviews = {
-  average: 4,
-  featured: [
-    {
-      id: 1,
-      rating: 5,
-      content: `
-        <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-      `,
-      date: "July 16, 2021",
-      datetime: "2021-07-16",
-      author: "Emily Selman",
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      rating: 5,
-      content: `
-        <p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>
-      `,
-      date: "July 12, 2021",
-      datetime: "2021-07-12",
-      author: "Hector Gibbons",
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    // More reviews...
-  ],
-};
 const faqs = [
   {
     question: "What format are these icons?",
@@ -188,6 +158,19 @@ const ServiceDetails = ({ params }: any) => {
     }
   };
 
+  let rating = 0;
+
+  if (
+    singleService?.reviewAndRatings &&
+    singleService?.reviewAndRatings?.length > 0
+  ) {
+    for (const review of singleService?.reviewAndRatings) {
+      rating += Number(review.reviewRating);
+    }
+  }
+
+  
+
   return (
     <div className="bg-white">
       <div className=" common pt-[20px]">
@@ -216,6 +199,16 @@ const ServiceDetails = ({ params }: any) => {
             <div>
               <div className="flex flex-col-reverse">
                 <div className="mt-4">
+                  {rating > 0 && (
+                    <div>
+                      <Rate
+                        value={
+                          rating / singleService?.reviewAndRatings?.length!
+                        }
+                        disabled
+                      />
+                    </div>
+                  )}
                   <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                     {singleService?.serviceName}
                   </h1>
@@ -241,7 +234,6 @@ const ServiceDetails = ({ params }: any) => {
                   <h3 className="sr-only">Reviews</h3>
                   <Rate disabled defaultValue={reviews.average} />
                 </div> */}
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
               </div>
             </div>
 

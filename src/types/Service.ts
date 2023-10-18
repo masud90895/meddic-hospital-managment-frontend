@@ -1,3 +1,5 @@
+import { IReview } from "./reviewsType";
+
 export type IServiceTypes = {
   serviceId?: string;
   serviceName: string;
@@ -7,6 +9,7 @@ export type IServiceTypes = {
   location: string;
   serviceStatus: string;
   category?: ICategoryTypes;
+  reviewAndRatings?: IReview[];
 };
 
 export type ICategoryTypes = {

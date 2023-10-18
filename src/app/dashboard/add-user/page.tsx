@@ -39,7 +39,7 @@ const AddUserPage = () => {
       password: values.password,
       profileImage: values.file,
     };
-    message.loading("Creating User");
+
     try {
       const res: any = await registration(userData);
       console.log(res?.data);
