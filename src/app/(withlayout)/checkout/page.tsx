@@ -460,7 +460,7 @@ export default function Example() {
                             {product.price}
                           </p>
 
-                          <div className="ml-4">
+                          {/* <div className="ml-4">
                             <label htmlFor="quantity" className="sr-only">
                               Quantity
                             </label>
@@ -478,7 +478,7 @@ export default function Example() {
                               <option value={7}>7</option>
                               <option value={8}>8</option>
                             </select>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </li>
