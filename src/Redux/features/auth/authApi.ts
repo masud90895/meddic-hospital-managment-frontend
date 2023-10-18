@@ -18,7 +18,12 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // update user profile
+    
   }),
 });
 
-export const { useLoginMutation, useRegistrationMutation } = authApi;
+export const {
+  useLoginMutation,
+  useRegistrationMutation
+} = authApi;

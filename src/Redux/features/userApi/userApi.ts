@@ -13,6 +13,18 @@ const userApi = api.injectEndpoints({
       providesTags: ["users"],
       transformResponse: (response: any) => response.data.data,
     }),
+
+    updateMyUserInfo: builder.mutation({
+      query: (data) => {
+        console.log(data);
+        return {
+          url: `/users/update-my-email-password`,
+          method: "PATCH",
+          data: data,
+        };
+      },
+      invalidatesTags: ["users"],
+    }),
     // user update
     updateUser: builder.mutation({
       query: ({ id, body }) => ({
@@ -32,17 +44,9 @@ const userApi = api.injectEndpoints({
     }),
     updateMyProfile: builder.mutation({
       query: (data) => ({
-        url: `users/update-my-profile`,
+        url: `/users/update-my-profile`,
         method: "PATCH",
-        data: data,
-      }),
-      invalidatesTags: ["users"],
-    }),
-    updateMyUserInfo: builder.mutation({
-      query: (data) => ({
-        url: `users/update-my-email-password`,
-        method: "PATCH",
-        data: data,
+        body: data,
       }),
       invalidatesTags: ["users"],
     }),
@@ -54,6 +58,6 @@ export const {
   useGetAllUsersQuery,
   useDeleteUserMutation,
   useUpdateUserMutation,
-  useUpdateMyProfileMutation,
   useUpdateMyUserInfoMutation,
+  useUpdateMyProfileMutation,
 } = userApi;

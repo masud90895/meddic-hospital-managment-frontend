@@ -38,13 +38,13 @@ export const sidebarItems = (role: string) => {
           icon: <UserOutlined />,
           key: `/dashboard/profile`,
         },
-        {
-          label: (
-            <Link href={`/dashboard/change-password`}>Change Password</Link>
-          ),
-          icon: <UsergroupDeleteOutlined />,
-          key: `/dashboard/change-password`,
-        },
+        // {
+        //   label: (
+        //     <Link href={`/dashboard/change-password`}>Change Password</Link>
+        //   ),
+        //   icon: <UsergroupDeleteOutlined />,
+        //   key: `/dashboard/change-password`,
+        // },
       ],
     },
   ];

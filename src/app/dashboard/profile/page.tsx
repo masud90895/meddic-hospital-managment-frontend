@@ -25,11 +25,10 @@ const Profile = () => {
 
   const {
     data: myProfileResponse,
-    isError,
     isLoading,
     isFetching,
-    error,
   } = useGetUserQuery(undefined);
+
   const [
     updateMyProfile,
     { isLoading: updateLoadings, isError: isErrorUpdate },
@@ -47,6 +46,7 @@ const Profile = () => {
 
     try {
       const res = await updateMyProfile(updateData).unwrap();
+
       if (res && !isErrorUpdate) {
         message.success("Profile updated successfully");
         setIsEditModalOpen(false);
@@ -67,10 +67,6 @@ const Profile = () => {
       oldPassword: data?.oldPassword,
       newPassword: data?.newPassword,
     };
-    console.log(
-      "🚀 ~ file: page.tsx:70 ~ handleUpdateMyUserInfo ~ updateData:",
-      updateData
-    );
 
     try {
       const res = await updateMyUserInfo(updateData).unwrap();
@@ -124,7 +120,7 @@ const Profile = () => {
               className="font-medium"
               size="middle"
             >
-              Change Email or Password
+              Change Password
             </Button>
             <Button
               onClick={() => {
