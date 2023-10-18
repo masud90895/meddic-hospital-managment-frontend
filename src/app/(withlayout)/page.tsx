@@ -10,9 +10,11 @@ import HealthCare from "@/components/HealthCare/HealthCare";
 import Hero from "@/components/Hero/Hero";
 import UserReviews from "@/components/Reviews/Reviews";
 import Services from "@/components/Services/Services";
+import { FloatButton } from "antd";
 
 export default function Home() {
   const { data: reviews, isLoading } = useGetAllFeedBackQuery(undefined);
+
   return (
     <div>
       <Hero />
@@ -25,7 +27,8 @@ export default function Home() {
       <BlogPage />
       {!isLoading && <UserReviews data={reviews?.data} />}
       <FeedBackForum />
-      
+
+      <FloatButton.BackTop tooltip="Scroll to top" />
     </div>
   );
 }
