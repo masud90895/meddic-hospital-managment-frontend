@@ -28,6 +28,10 @@ const Apointment = () => {
 
   const { data: serviceData, isLoading: serviceLoading } =
     useGetServicesQuery(undefined);
+  console.log(
+    "🚀 ~ file: Apointment.tsx:30 ~ Apointment ~ serviceData:",
+    serviceData
+  );
 
   const [createBooking, { isLoading, isError }] = useCreateBookingMutation();
 
@@ -92,7 +96,9 @@ const Apointment = () => {
           res
         );
         if (res?.success) {
-          message.success("Feedback Submitted Successfully");
+          message.success(
+            "Slot added on your booking.admin will verified and confirm your booking"
+          );
         }
       } catch (error: any) {
         console.error("Some thing was wrong");

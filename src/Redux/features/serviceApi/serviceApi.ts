@@ -3,7 +3,7 @@ import { api } from "@/Redux/api/apiSlice";
 const serviceApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getServices: builder.query({
-      query: (search) => `/services?searchTerm=${search}`,
+      query: (search = "") => `/services?searchTerm=${search}`,
       providesTags: ["service"],
       transformResponse: (response: any) => response.data,
     }),
@@ -12,7 +12,6 @@ const serviceApi = api.injectEndpoints({
       providesTags: ["service"],
       transformResponse: (response: any) => response.data,
     }),
-
 
     addService: builder.mutation({
       query: (service) => ({
