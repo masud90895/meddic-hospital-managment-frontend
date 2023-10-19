@@ -28,6 +28,21 @@ const bookingApi = api.injectEndpoints({
       providesTags: ["booking"],
     }),
 
+    //  /appointment-booking/all-booking-length
+    getAppointmentLength: builder.query({
+      query: () => `${BOOKING_API}/all-booking-length`,
+      providesTags: ["booking"],
+      transformResponse: (response: any) => response.data,
+    }),
+
+    // get my Appointment length
+
+    getMyAppointmentLength: builder.query({
+      query: () => `${BOOKING_API}/my-booking-length`,
+      providesTags: ["booking"],
+      transformResponse: (response: any) => response.data,
+    }),
+
     // updateBooking
     updateBooking: builder.mutation({
       query: ({ id, data }) => ({
@@ -55,4 +70,6 @@ export const {
   useUpdateBookingMutation,
   useDeleteBookingMutation,
   useMyAppointmentQuery,
+  useGetAppointmentLengthQuery,
+  useGetMyAppointmentLengthQuery,
 } = bookingApi;

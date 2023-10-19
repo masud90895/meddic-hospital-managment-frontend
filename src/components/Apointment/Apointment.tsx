@@ -57,21 +57,6 @@ const Apointment = () => {
   // };
 
   const bookingOnSubmit = async (data: any) => {
-    const dateString = data.appointmentDate?.$d;
-    const dateObject = new Date(dateString);
-
-    // Get ISO string
-    const isoString = dateObject.toISOString();
-
-    // console.log(isoString);
-
-    const BookingData = {
-      appointmentDate: isoString,
-      slotId: data.slot.slotId,
-      serviceId: data.service.serviceId,
-    };
-    console.log(BookingData);
-
     if (!userLoggedIn) {
       confirm({
         title: "Please Login First",
@@ -86,6 +71,20 @@ const Apointment = () => {
       return;
     } else {
       try {
+        const dateString = data.appointmentDate?.$d;
+        const dateObject = new Date(dateString);
+
+        // Get ISO string
+        const isoString = dateObject.toISOString();
+
+        // console.log(isoString);
+
+        const BookingData = {
+          appointmentDate: isoString,
+          slotId: data.slot.slotId,
+          serviceId: data.service.serviceId,
+        };
+
         const res = await createBooking(BookingData).unwrap();
         console.log(
           "🚀 ~ file: FeedBackForum.tsx:35 ~ handleSubmit ~ res:",
@@ -131,12 +130,13 @@ const Apointment = () => {
         <Form submitHandler={bookingOnSubmit}>
           <div className="my-[12px] flex flex-col items-center justify-center gap-2 w-full">
             <div style={{ margin: "10px 0px", width: "100%" }}>
-              <FormDatePicker name="appointmentDate" label="Appointment Date" />
+              <FormDatePicker name="appointmentDate" label="Appointment Date"  />
             </div>
             <div style={{ margin: "10px 0px", width: "100%" }}>
               <FormSelectField
                 name="slot.slotId"
                 label="Booking Slot"
+                required
                 options={slotData?.data?.map((c: any) => ({
                   label: c.slotTime,
                   value: c.slotId,
@@ -146,6 +146,7 @@ const Apointment = () => {
             <div style={{ margin: "10px 0px", width: "100%" }}>
               <FormSelectField
                 name="service.serviceId"
+                required
                 label="Service Name"
                 options={serviceData?.map((c: any) => ({
                   label: c.serviceName,

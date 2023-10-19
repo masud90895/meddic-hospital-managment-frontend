@@ -98,7 +98,7 @@ const UserBookingList = () => {
     {
       title: "Contact No",
       dataIndex: "profile",
-      render: (profile: any) => `${profile.contactNumber}`,
+      render: (profile: any) => `${profile.contactNumber ?? "-"}`,
       //   sorter: true,
     },
     {

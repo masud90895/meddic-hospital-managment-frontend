@@ -44,10 +44,10 @@ export default function UserReview({ data }: any) {
   }, []);
 
   return (
-    <section className=" common mb-[100px] bg-gray-100 py-5">
+    <section className=" common mb-[100px] bg-gray-100 py-5 max-h-[600px]">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
         {/* left site card */}
-        <div className="max-w-xl text-start ltr:sm:text-left rtl:sm:text-right">
+        <div className="max-w-xl text-start ltr:sm:text-left rtl:sm:text-right max-h-[600px]">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Read trusted reviews from our customers
           </h2>
@@ -104,7 +104,7 @@ export default function UserReview({ data }: any) {
           </div>
         </div>
 
-        <div className="-mx-6 lg:col-span-2 lg:mx-0">
+        <div className="-mx-6 lg:col-span-2 lg:mx-0 max-h-[600px]">
           {/* main slider */}
           <div id="keen-slider" className="keen-slider">
             {/* card1 */}

@@ -88,6 +88,12 @@ const ServiceDetails = ({ params }: any) => {
     );
   }
 
+  
+    console.log(
+      "🚀 ~ file: page.tsx:81 ~ ServiceDetails ~ singleService:",
+      singleService
+    );
+
   // review
 
   const handleReview = async (data: any) => {

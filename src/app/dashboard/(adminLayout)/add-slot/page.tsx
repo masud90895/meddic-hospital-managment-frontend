@@ -30,6 +30,7 @@ const AddSlot = () => {
       // @ts-ignore
       if (res?.data && !isError) {
         message.success("Slot created successfully");
+        setTime("");
         // router.push("/dashboard/booking/booking-list");
       }
     } catch (err: any) {
@@ -55,6 +56,7 @@ const AddSlot = () => {
             </div> */}
             <div style={{ margin: "10px 0px" }}>
               <TimePicker.RangePicker
+                // value={}
                 use12Hours
                 format="h:mm a"
                 onChange={(time: any, timeString: any) =>

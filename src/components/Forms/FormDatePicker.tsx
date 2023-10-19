@@ -8,6 +8,7 @@ type UMDatePikerProps = {
   label?: string;
   value?: Dayjs;
   size?: "large" | "small";
+  required?: boolean;
 };
 
 const FormDatePicker = ({
@@ -15,6 +16,7 @@ const FormDatePicker = ({
   label,
   onChange,
   size = "large",
+  required,
 }: UMDatePikerProps) => {
   const { control, setValue } = useFormContext();
 
@@ -25,18 +27,26 @@ const FormDatePicker = ({
 
   return (
     <div>
-      {label ? <label className="label_text ">{label}</label> : null}
       <br />
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
-          <DatePicker
-            defaultValue={dayjs(field.value) || Date.now()}
-            size={size}
-            onChange={handleOnChange}
-            style={{ width: "100%" }}
-          />
+          <>
+            {label && (
+              <div className="flex gap-1 items-center mb-1">
+                <label className={`label_text`}>
+                  {label} {required && <span className="text-rose-500">*</span>}
+                </label>
+              </div>
+            )}
+            <DatePicker
+              defaultValue={dayjs(field.value) || Date.now()}
+              size={size}
+              onChange={handleOnChange}
+              style={{ width: "100%" }}
+            />
+          </>
         )}
       />
     </div>
