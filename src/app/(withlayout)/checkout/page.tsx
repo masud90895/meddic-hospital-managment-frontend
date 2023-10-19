@@ -13,22 +13,13 @@ import { getUserInfo, isLoggedIn } from "@/services/auth.service";
 import FormSelectField from "@/components/Forms/FormSelectField";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { message } from "antd";
+import { Empty, message } from "antd";
+import { useAppDispatch, useAppSelector } from "@/Redux/hook";
+import { removeFromCart } from "@/Redux/features/addToCartSlice/addToCartSlice";
+import { IServiceTypes } from "@/types/Service";
+import { noImage } from "@/helpers/noImage/noImage";
+import Link from "next/link";
 
-const products = [
-  {
-    id: 1,
-    title: "Basic Tee",
-    href: "#",
-    price: "৳32.00",
-    color: "Black",
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  // More products...
-];
 const deliveryMethods = [
   {
     id: 1,
@@ -52,6 +43,9 @@ export default function Checkout() {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   );
+  const { cart } = useAppSelector((state) => state.cart);
+
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
 
@@ -62,10 +56,21 @@ export default function Checkout() {
     return message.error("You are not Authorize user.please login");
   }
 
+  const handleRemoveFromCart = (serviceId: string) => {
+    dispatch(removeFromCart(serviceId));
+    message.success("Service removed from cart");
+  };
+
+  const subtotal = cart?.reduce(
+    (total: any, single: any) => total + single.servicePrice,
+    0
+  );
+
   const user: any = getUserInfo();
 
   const handleSubmit = (data: any) => {
-    console.log("🚀 ~ file: page.tsx:51 ~ handleSubmit ~ data:", data);
+    message.info("This feature not added.Insaallah i will add here SSL Commerce")
+
   };
 
   return (
@@ -412,99 +417,89 @@ export default function Checkout() {
               <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
                 <h3 className="sr-only">Items in your cart</h3>
                 <ul role="list" className="divide-y divide-gray-200">
-                  {products.map((product) => (
-                    <li key={product.id} className="flex px-4 py-6 sm:px-6">
-                      <div className="flex-shrink-0">
-                        <Image
-                          src={product.imageSrc}
-                          alt={product.imageAlt}
-                          className="w-20 rounded-md"
-                          height={80}
-                          width={80}
-                        />
-                      </div>
+                  {cart?.length > 0 ? (
+                    cart?.map((service: IServiceTypes) => (
+                      <li
+                        key={service?.serviceId}
+                        className="flex px-4 py-6 sm:px-6"
+                      >
+                        <div className="flex-shrink-0">
+                          <Image
+                            src={service?.serviceImage ?? noImage}
+                            alt={service?.serviceName}
+                            className="w-20 rounded-md"
+                            height={80}
+                            width={80}
+                          />
+                        </div>
 
-                      <div className="ml-6 flex flex-1 flex-col">
-                        <div className="flex">
-                          <div className="min-w-0 flex-1">
-                            <h4 className="text-sm">
-                              <a
-                                href={product.href}
-                                className="font-medium text-gray-700 hover:text-gray-800"
+                        <div className="ml-6 flex flex-1 flex-col">
+                          <div className="flex">
+                            <div className="min-w-0 flex-1">
+                              <h4 className="text-sm">
+                                <Link
+                                  href={`/services/${service?.serviceId}`}
+                                  className="font-medium text-gray-700 hover:text-gray-800"
+                                >
+                                  {service?.serviceName}
+                                </Link>
+                              </h4>
+
+                              <p className="mt-1 text-sm text-gray-500">
+                                {service?.category?.categoryName}
+                              </p>
+                            </div>
+
+                            <div className="ml-4 flow-root flex-shrink-0">
+                              <button
+                                onClick={() =>
+                                  handleRemoveFromCart(service.serviceId!)
+                                }
+                                type="button"
+                                className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
                               >
-                                {product.title}
-                              </a>
-                            </h4>
-                            <p className="mt-1 text-sm text-gray-500">
-                              {product.color}
-                            </p>
-                            <p className="mt-1 text-sm text-gray-500">
-                              {product.size}
-                            </p>
+                                <span className="sr-only">Remove</span>
+                                <TrashIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            </div>
                           </div>
 
-                          <div className="ml-4 flow-root flex-shrink-0">
-                            <button
-                              type="button"
-                              className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                            >
-                              <span className="sr-only">Remove</span>
-                              <TrashIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </button>
+                          <div className="flex flex-1 items-end justify-between pt-2">
+                            <p className="mt-1 text-sm font-medium text-gray-900">
+                              {service?.servicePrice}
+                            </p>
                           </div>
                         </div>
-
-                        <div className="flex flex-1 items-end justify-between pt-2">
-                          <p className="mt-1 text-sm font-medium text-gray-900">
-                            {product.price}
-                          </p>
-
-                          {/* <div className="ml-4">
-                            <label htmlFor="quantity" className="sr-only">
-                              Quantity
-                            </label>
-                            <select
-                              id="quantity"
-                              name="quantity"
-                              className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            >
-                              <option value={1}>1</option>
-                              <option value={2}>2</option>
-                              <option value={3}>3</option>
-                              <option value={4}>4</option>
-                              <option value={5}>5</option>
-                              <option value={6}>6</option>
-                              <option value={7}>7</option>
-                              <option value={8}>8</option>
-                            </select>
-                          </div> */}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
+                      </li>
+                    ))
+                  ) : (
+                    <Empty description="No Product Fount" />
+                  )}
                 </ul>
                 <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Subtotal</dt>
                     <dd className="text-sm font-medium text-gray-900">
-                      $64.00
+                      ৳{subtotal}
                     </dd>
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Shipping</dt>
-                    <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                    <dd className="text-sm font-medium text-gray-900">
+                      ৳120.00
+                    </dd>
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Taxes</dt>
-                    <dd className="text-sm font-medium text-gray-900">$5.52</dd>
+                    <dd className="text-sm font-medium text-gray-900">৳5.52</dd>
                   </div>
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
                     <dd className="text-base font-medium text-gray-900">
-                      $75.52
+                      ৳{cart?.length > 0 ? `${subtotal + 125.52}` : "0"}
                     </dd>
                   </div>
                 </dl>
