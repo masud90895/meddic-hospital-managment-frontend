@@ -2,23 +2,26 @@
 
 import { useCreateSlotMutation } from "@/Redux/features/slotApi/slotApi";
 import Form from "@/components/Forms/Form";
-import FormSelectField from "@/components/Forms/FormSelectField";
+import type { Dayjs } from "dayjs";
 
 // import FormMultiSelectField from "@/components/Forms/FormMultiSelectField";
 // import { SelectOptions } from "@/components/Forms/FormSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 
-import { Button, Col, Row, message } from "antd";
+import { Button, Col, Row, TimePicker, message } from "antd";
+import { useState } from "react";
 
 const AddSlot = () => {
+  const [time, setTime] = useState<any>("");
   const [createSlot, { isLoading, isError }] = useCreateSlotMutation();
-  // submit
-
   const slotOnSubmit = async (data: any) => {
-    message.loading("Creating new Slot");
+    if (!time) {
+      message.error("Please select time slot");
+      return;
+    }
 
     const SlotData = {
-      slotTime: data.slotTime,
+      slotTime: time,
     };
     console.log(SlotData);
     try {
@@ -51,15 +54,17 @@ const AddSlot = () => {
               <FormDatePicker name="booking.Date" label="Appointment Date" />
             </div> */}
             <div style={{ margin: "10px 0px" }}>
-              <FormSelectField
-                name="booking.slot"
-                label="Time Slot"
-                options={[]}
+              <TimePicker.RangePicker
+                use12Hours
+                format="h:mm a"
+                onChange={(time: any, timeString: any) =>
+                  setTime(`${timeString[0]}-${timeString[1]}`)
+                }
               />
             </div>
           </Col>
         </Row>
-        <Button type="primary" htmlType="submit">
+        <Button loading={isLoading} type="primary" htmlType="submit">
           Create Slots
         </Button>
       </Form>
