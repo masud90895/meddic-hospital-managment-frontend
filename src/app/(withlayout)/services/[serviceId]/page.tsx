@@ -16,6 +16,9 @@ const { confirm } = Modal;
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import FormRating from "@/components/Forms/FormRating";
 import { useCreateRatingMutation } from "@/Redux/features/RatingApi/RatingApi";
+import { useAppDispatch } from "@/Redux/hook";
+import { addToCart } from "@/Redux/features/addToCartSlice/addToCartSlice";
+import { IServiceTypes } from "@/types/Service";
 
 const faqs = [
   {
@@ -67,6 +70,7 @@ function classNames(...classes: any) {
 const ServiceDetails = ({ params }: any) => {
   const [createRating, { isLoading: reviewLoading }] =
     useCreateRatingMutation();
+  const dispatch = useAppDispatch();
   const userLoggedIn = isLoggedIn();
 
   const user = getUserInfo();
@@ -139,7 +143,10 @@ const ServiceDetails = ({ params }: any) => {
       });
     }
   };
-  const handleAddToCart = (data: any) => {
+
+  // add to cart
+
+  const handleAddToCart = (addedService: IServiceTypes) => {
     if (!userLoggedIn) {
       confirm({
         title: "Please Login First",
@@ -154,7 +161,8 @@ const ServiceDetails = ({ params }: any) => {
 
       return;
     } else {
-      console.log("🚀 ~ file: page.tsx:119 ~ handleReview ~ data:", data);
+      dispatch(addToCart(addedService));
+      message.success("Service added to cart");
     }
   };
 
@@ -168,8 +176,6 @@ const ServiceDetails = ({ params }: any) => {
       rating += Number(review.reviewRating);
     }
   }
-
-  
 
   return (
     <div className="bg-white">
@@ -249,7 +255,7 @@ const ServiceDetails = ({ params }: any) => {
                 Pay ৳{singleService?.servicePrice}
               </button>
               <button
-                onClick={handleAddToCart}
+                onClick={() => handleAddToCart(singleService)}
                 type="button"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >

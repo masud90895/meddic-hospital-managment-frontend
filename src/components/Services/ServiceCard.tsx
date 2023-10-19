@@ -1,5 +1,7 @@
+import { addToCart } from "@/Redux/features/addToCartSlice/addToCartSlice";
+import { useAppDispatch } from "@/Redux/hook";
 import { IServiceTypes } from "@/types/Service";
-import { Rate } from "antd";
+import { Rate, message } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,6 +18,13 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       rating += Number(review.reviewRating);
     }
   }
+
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (addedService: IServiceTypes) => {
+    dispatch(addToCart(addedService));
+    message.success("Service added to cart");
+  };
 
   return (
     <div className="bg-blue-50/75 border rounded-xl p-[30px] flex flex-col gap-3 font-inter hover:border-primary ease-in duration-100 delay-75 shadow ">
@@ -40,7 +49,8 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       <p className="text-gray-500 font-roboto">
         {service?.description?.length > 50
           ? service?.description.slice(0, 50) + "..."
-          : service?.description}?
+          : service?.description}
+        ?
       </p>
 
       <div className="flex items-center justify-between">
@@ -64,7 +74,10 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       {/* add to card */}
 
       <div className="flex items-center gap-3">
-        <button className="bg-primary text-white px-3 py-1 rounded-full text-[12px]">
+        <button
+          onClick={() => handleAddToCart(service)}
+          className="bg-primary text-white px-3 py-1 rounded-full text-[12px]"
+        >
           Add to cart
         </button>
         <Link

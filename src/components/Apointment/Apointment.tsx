@@ -28,10 +28,6 @@ const Apointment = () => {
 
   const { data: serviceData, isLoading: serviceLoading } =
     useGetServicesQuery(undefined);
-  console.log(
-    "🚀 ~ file: Apointment.tsx:30 ~ Apointment ~ serviceData:",
-    serviceData
-  );
 
   const [createBooking, { isLoading, isError }] = useCreateBookingMutation();
 
@@ -101,8 +97,8 @@ const Apointment = () => {
           );
         }
       } catch (error: any) {
-        console.error("Some thing was wrong");
-        message.error("Some thing was wrong");
+        console.error(error);
+        message.error(error?.data?.message);
       }
     }
   };
