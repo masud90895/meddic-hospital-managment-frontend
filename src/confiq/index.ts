@@ -1,4 +1,4 @@
 "use client";
 export const config = {
-  server_url: process.env.SERVER_URL,
+  server_url: process.env.NEXT_PUBLIC_SERVER_URL,
 };
