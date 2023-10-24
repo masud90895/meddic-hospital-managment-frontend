@@ -1,3 +1,16 @@
+# Authentication : 
+ ### super admin
+ email     : superadmin@superadmin.com
+ password  : 12345678
+
+ ### admin
+ email     : admin@admin.com
+ password  : 12345678
+
+ ### user
+ email     : user@user.com
+ password  : 12345678
+
 # Video Link : 
  https://drive.google.com/file/d/1x4qGjsmPywEyClfz4UQWVisuiXxoEDBF/view?usp=sharing
 
