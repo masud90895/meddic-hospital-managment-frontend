@@ -1,10 +1,45 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Statistic } from "antd";
+import { isLoggedIn } from "@/services/auth.service";
+import { Modal, message } from "antd";
+const { confirm } = Modal;
+import { ExclamationCircleFilled } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 
 const { Countdown } = Statistic;
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 
 const FreeVaccine = () => {
+  const book = getFromLocalStorage("freeVaccine");
+  const [isBook, setIsBook] = useState((book === "true" && true) ?? false);
+  const userLoggedIn = isLoggedIn();
+  const router = useRouter();
+
+  const handleBookNow = () => {
+    // check if user is logged in
+    // if not logged in
+    if (!userLoggedIn) {
+      confirm({
+        title: "Please Login First",
+        icon: <ExclamationCircleFilled />,
+        content: "You need to login first to book. Do you want to login?",
+        onOk() {
+          return router.push("/login");
+        },
+        onCancel() {},
+      });
+
+      return;
+    } else {
+      // if logged in
+      setToLocalStorage("freeVaccine", "true");
+      setIsBook(true);
+      message.success("You have successfully booked");
+    }
+  };
+
   return (
     <div
       className="common grid grid-cols-5 gap-4 items-center h-[700px]"
@@ -119,9 +154,16 @@ const FreeVaccine = () => {
           />
         </div>
         <div>
-          <button className="bg-primary md:text-[18px] px-4 py-2 text-white rounded-lg">
-            Book Now
-          </button>
+          {isBook === true ? (
+            <p className="text-gray-500">You have already booked</p>
+          ) : (
+            <button
+              onClick={handleBookNow}
+              className="bg-primary md:text-[18px] px-4 py-2 text-white rounded-lg"
+            >
+              Book Now
+            </button>
+          )}
         </div>
       </div>
     </div>
