@@ -28,14 +28,14 @@ const Banner = () => {
 
   return (
     <div className="common bg-primary flex flex-col md:flex-row md:gap-3 gap-10  justify-between py-[50px] text-white font-inter border-b-2 border-t-2  border-blue-200">
-      {BannerData.map((data, i) => (
+      {BannerData?.map((data, i) => (
         <div className="flex items-center gap-4 px-[20px]" key={i}>
           <Image
             src={data.image}
             alt="Picture of the author"
             width={80}
             height={80}
-            className="bg-white rounded-full"
+            className="bg-white rounded-full object-cover"
           />
 
           <div className="flex flex-col gap-2">

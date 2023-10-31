@@ -48,7 +48,7 @@ const team = [
 
 export default function Example() {
   return (
-    <div className="bg-white">
+    <div className="bg-bgColor">
       <main className="isolate">
         {/* Hero section */}
         <div className="relative isolate -z-10">

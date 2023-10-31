@@ -280,21 +280,16 @@ const Footer = () => {
 
         <div className="mt-16 border-t border-gray-100 pt-8">
           <p className="text-center text-xs/relaxed text-white">
-            © Company 2022. All rights reserved.
+            © Company 2023. All rights reserved.
             <br />
-            Created with
-            <a
-              href=""
-              className="text-white underline transition hover:text-white/75"
-            >
-              Laravel
+            Created By
+            <a href="" className="text-white  transition hover:text-white/75">
+              {" "} 
+              Md Mahafujur {" "}
             </a>
-            and
-            <a
-              href=""
-              className="text-white underline transition hover:text-white/75"
-            >
-              Laravel Livewire
+            Rahaman {" "}
+            <a href="" className="text-white  transition hover:text-white/75">
+              Masud
             </a>
             .
           </p>
