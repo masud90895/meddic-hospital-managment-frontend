@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const About = () => {
   return (
-    <div className="common md:flex w-full justify-between md:py-[200px] my-[30px] items-center border-b-2">
+    <div className="common md:flex w-full justify-between md:py-[200px] mb-[30px] items-center border-b-2">
       <div className="flex flex-col md:flex-row gap-[50px]">
         <Image
           src={aboutImageOne}

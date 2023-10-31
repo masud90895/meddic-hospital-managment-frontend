@@ -6,6 +6,7 @@ import Banner from "@/components/Banner/Banner";
 import BlogPage from "@/components/BlogPage/BlogPage";
 import Faqs from "@/components/Faqs/Faqs";
 import FeedBackForum from "@/components/Forms/FeedBackForum";
+import FreeVaccine from "@/components/FreeVaccine/FreeVaccine";
 import HealthCare from "@/components/HealthCare/HealthCare";
 import Hero from "@/components/Hero/Hero";
 import UserReviews from "@/components/Reviews/Reviews";
@@ -19,6 +20,7 @@ export default function Home() {
     <div>
       <Hero />
       <Banner />
+      <FreeVaccine />
       <About />
       <Services />
       <Apointment />
