@@ -7,7 +7,7 @@ const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 const FreeVaccine = () => {
   return (
     <div
-      className="common grid grid-cols-5 gap-4 items-center"
+      className="common grid grid-cols-5 gap-4 items-center h-[700px]"
       style={{
         backgroundColor: "rgb(242, 246, 247)",
         backgroundImage:
@@ -31,10 +31,9 @@ const FreeVaccine = () => {
         paddingBottom: "120px",
         paddingTop: "120px",
         WebkitFontSmoothing: "antialiased",
-        height: "700px",
       }}
     >
-      <div className="col-span-2">
+      <div className="md:col-span-2 col-span-4">
         <p
           style={{
             boxSizing: "border-box",
@@ -52,6 +51,7 @@ const FreeVaccine = () => {
           Today&apos;s Hot Offer
         </p>
         <h3
+          className="md:text-[44px] text-[24px] font-bold "
           style={{
             boxSizing: "border-box",
             clear: "both",
@@ -59,7 +59,7 @@ const FreeVaccine = () => {
             colorInterpolation: "sRGB",
             colorRendering: "auto",
             fontFamily: '"Josefin Sans", sans-serif',
-            fontSize: "44px",
+            // fontSize: "44px",
             fontStyle: "normal",
             fontWeight: 700,
             lineHeight: 1.3,
@@ -107,11 +107,19 @@ const FreeVaccine = () => {
           <Countdown
             value={deadline}
             format="D দিন H ঘণ্টা m মিনিট s সেকেন্ড "
+            valueStyle={{
+              color: "#4851D5",
+              backgroundColor: "#fff",
+              padding: "5px",
+              display: "flex",
+              fontSize: "30px",
+              fontWeight: "bold",
+              borderRadius: "5px",
+            }}
           />
         </div>
-
         <div>
-          <button className="bg-primary text-[18px] px-4 py-2 text-white rounded-lg">
+          <button className="bg-primary md:text-[18px] px-4 py-2 text-white rounded-lg">
             Book Now
           </button>
         </div>
