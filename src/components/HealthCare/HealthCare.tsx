@@ -85,7 +85,6 @@ const HealthCare = () => {
                 type="primary"
                 style={{
                   backgroundColor: "white",
-
                   borderRadius: "10px",
                   border: "none",
                   width: "100px",
@@ -109,8 +108,12 @@ const HealthCare = () => {
             href={"#appointment"}
             style={{
               backgroundColor: "white",
-              color: "black",
-              margin: "5px 0px",
+              borderRadius: "10px",
+              border: "none",
+              fontSize: "14px",
+              fontWeight: "bold",
+              color: "#4851D5",
+              cursor: "pointer",
             }}
             className="appointmentButton"
           >
