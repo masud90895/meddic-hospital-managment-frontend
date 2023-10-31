@@ -70,15 +70,15 @@ const ServicesPage = () => {
   }
 
   return (
-    <main className="common md:my-16 my-5">
-      <div className="w-full text-center">
+    <main className="common my-5">
+      {/* <div className="w-full text-center">
         <p className="text-[30px] font-bold">You may also like</p>
 
         <p className="text-xs">
           There are many variations of passages of Lorem Ipsum available, <br />{" "}
           but the majority have suffered alteration in some form,
         </p>
-      </div>
+      </div> */}
 
       <div className="my-5 flex items-center justify-between ">
         <UMBreadCrumb items={[{ label: `Services`, link: `/services` }]} />
