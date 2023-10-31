@@ -103,7 +103,10 @@ const Apointment = () => {
   };
 
   return (
-    <div className="common md:flex gap-10 items-center mb-[60px]">
+    <div
+      id="appointment"
+      className="common md:flex gap-10 items-center mb-[60px]"
+    >
       <Image
         src="https://askproject.net/meddic/wp-content/uploads/sites/156/2023/10/team-of-doctors-discussing-something-at-hospital-c-FHAY6CS.jpg"
         alt="Picture of the author"
@@ -121,16 +124,16 @@ const Apointment = () => {
           Book Your Appointment
         </p>
         <p className="md:w-[500px] text-gray-[400px] font-poppins text-gray-500">
-          The benefits of MEDDPICC are that it allows sellers to quickly qualify
+          The benefits of Meddic are that it allows sellers to quickly qualify
           or disqualify opportunities.
         </p>
 
-        {/* apoinment form */}
+        {/* appointment form */}
 
         <Form submitHandler={bookingOnSubmit}>
           <div className="my-[12px] flex flex-col items-center justify-center gap-2 w-full">
             <div style={{ margin: "10px 0px", width: "100%" }}>
-              <FormDatePicker name="appointmentDate" label="Appointment Date"  />
+              <FormDatePicker name="appointmentDate" label="Appointment Date" />
             </div>
             <div style={{ margin: "10px 0px", width: "100%" }}>
               <FormSelectField

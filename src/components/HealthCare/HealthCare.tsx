@@ -80,7 +80,22 @@ const HealthCare = () => {
               {/* <button className="bg-black rounded-xl px-[15px] font-inter text-white text-[12px] ">
                 Book Now
               </button> */}
-              <Button onClick={handleInfo} type="primary">
+              <Button
+                onClick={handleInfo}
+                type="primary"
+                style={{
+                  backgroundColor: "white",
+
+                  borderRadius: "10px",
+                  border: "none",
+                  width: "100px",
+                  height: "30px",
+                  fontSize: "12px",
+                  fontWeight: "bold",
+                  color: "#4851D5",
+                  cursor: "pointer",
+                }}
+              >
                 Book Now
               </Button>
             </div>

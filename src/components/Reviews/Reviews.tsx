@@ -63,7 +63,7 @@ export default function UserReview({ data }: any) {
             <button
               aria-label="Previous slide"
               id="keen-slider-previous-desktop"
-              className="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+              className="rounded-full border border-[#4851D5] p-3 text-[#4851D5] transition hover:bg-[#666feb] hover:text-white"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export default function UserReview({ data }: any) {
             <button
               aria-label="Next slide"
               id="keen-slider-next-desktop"
-              className="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+              className="rounded-full border border-[#4851D5] p-3 text-[#4851D5] transition hover:bg-[#666feb] hover:text-white"
             >
               <svg
                 className="h-5 w-5 rtl:rotate-180"
@@ -114,7 +114,7 @@ export default function UserReview({ data }: any) {
                 <blockquote className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12">
                   <div>
                     <div className="mt-4">
-                      <p className="text-2xl font-bold text-rose-600 sm:text-3xl">
+                      <p className="text-2xl font-bold text-[#4851D5] sm:text-3xl">
                         {item?.feedbackSubject}
                       </p>
                       <p className="mt-4 leading-relaxed text-gray-700">
@@ -148,7 +148,7 @@ export default function UserReview({ data }: any) {
         <button
           aria-label="Previous slide"
           id="keen-slider-previous"
-          className="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+          className="rounded-full border border-[#4851D5] p-4 text-[#4851D5] transition hover:bg-[#666feb] hover:text-white"
         >
           <svg
             className="h-5 w-5 -rotate-180"
@@ -168,7 +168,7 @@ export default function UserReview({ data }: any) {
         <button
           aria-label="Next slide"
           id="keen-slider-next"
-          className="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white"
+          className="rounded-full border border-[#4851D5] p-4 text-[#4851D5] transition hover:bg-[#666feb] hover:text-white"
         >
           <svg
             className="h-5 w-5 -rotate-180"

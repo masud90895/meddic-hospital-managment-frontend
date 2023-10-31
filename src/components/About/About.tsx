@@ -12,7 +12,7 @@ const About = () => {
           alt="Picture of the author"
           width={500}
           height={500}
-          className="rounded-xl md:w-[300px] md:h-[600px] border-2 md:-mt-[50px] "
+          className="rounded-xl md:w-[300px] md:h-[600px] border-2 md:-mt-[50px] object-cover  "
         />
 
         <Image

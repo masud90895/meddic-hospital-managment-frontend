@@ -28,7 +28,13 @@ export default function Home() {
       {!isLoading && reviews?.data && <UserReviews data={reviews?.data} />}
       <FeedBackForum />
 
-      <FloatButton.BackTop type="primary" tooltip="Scroll to top" />
+      <FloatButton.BackTop
+        type="primary"
+        tooltip="Scroll to top"
+        style={{
+          backgroundColor: "#4851D5",
+        }}
+      />
     </div>
   );
 }
