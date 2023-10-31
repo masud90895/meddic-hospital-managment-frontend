@@ -27,7 +27,7 @@ const Hero = () => {
           We Are Here to Hear <br /> and Heal Your <br /> Health Problems
         </p>
         <p className="md:w-[500px] text-gray-[400px] font-poppins text-gray-500">
-          The benefits of MEDDPICC are that it allows sellers to quickly qualify
+          The benefits of MEDDIC are that it allows sellers to quickly qualify
           or disqualify opportunities before they get too far into the sales
           process and gives sellers a framework to start from.
         </p>
@@ -48,7 +48,7 @@ const Hero = () => {
           alt=""
           width={500}
           height={600}
-          className="md:mt-[90px] md:w-[550px] md:h-[650px]"
+          className="md:mt-[90px] md:max-w-[550px] md:h-[650px] "
         />
       </div>
 

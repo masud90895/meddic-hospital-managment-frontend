@@ -26,6 +26,11 @@ export default function Home() {
       <Faqs />
       <BlogPage />
       {!isLoading && reviews?.data && <UserReviews data={reviews?.data} />}
+      <br className="md:hidden block" />
+      <br className="md:hidden block" />
+      <br className="md:hidden block" />
+      <br className="md:hidden block" />
+
       <FeedBackForum />
 
       <FloatButton.BackTop

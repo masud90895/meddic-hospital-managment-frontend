@@ -48,7 +48,7 @@ const FeedBackForum = () => {
   };
 
   return (
-    <section className="text-gray-600 body-font relative  ">
+    <section className="text-gray-600 body-font relative ">
       <div className="absolute inset-0 bg-indigo-100 ">
         <iframe
           width="100%"

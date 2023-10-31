@@ -114,7 +114,7 @@ export default function UserReview({ data }: any) {
                 <blockquote className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12">
                   <div>
                     <div className="mt-4">
-                      <p className="text-2xl font-bold text-[#4851D5] sm:text-3xl">
+                      <p className="text-2xl font-bold text-gray-800 sm:text-3xl">
                         {item?.feedbackSubject}
                       </p>
                       <p className="mt-4 leading-relaxed text-gray-700">

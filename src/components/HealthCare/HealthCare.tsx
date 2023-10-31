@@ -55,7 +55,7 @@ const HealthCare = () => {
       }}
       className="h-screen common w-full mb-[150px] flex justify-end items-center border-2 border-borderColor"
     >
-      <div className="bg-primary rounded-xl md:p-[60px] p-[10px] font-inter text-white md:w-[720px] md:h-[780px]">
+      <div className="bg-primary rounded-xl md:p-[60px] p-[20px] font-inter text-white md:w-[720px] md:h-[780px]">
         <p className="md:text-[18px] font-semibold pb-[16px]">WORKING HOURS</p>
         <p className="md:text-[45px] text-[25px] font-sans">
           Healthcare at Its Finest
