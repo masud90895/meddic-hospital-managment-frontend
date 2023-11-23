@@ -4,9 +4,11 @@ import aboutImageTwo from "../../../public/assists/about_doctor-2.jpg";
 import Image from "next/image";
 import Link from "next/link";
 
+
 const About = () => {
   return (
     <div className="common md:flex w-full justify-between md:py-[200px] mb-[30px] items-center border-b-2">
+      
       <div className="flex flex-col md:flex-row gap-[50px]">
         <Image
           src={aboutImageOne}
