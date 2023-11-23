@@ -3,11 +3,11 @@ import Image from "next/image";
 import React from "react";
 import FaqComponent from "./FaqComponent";
 import { useGetFaqQuery } from "@/Redux/features/faqApi/faqApi";
+import animationData from "../../../public/lungs-with-coronavirus-ncov19.json";
+import Lottie from "lottie-react";
 
 const Faqs = () => {
   const { data, isLoading } = useGetFaqQuery(undefined);
-
- 
 
   const items = data?.map((item: any) => ({
     key: item?.faqId,
@@ -17,12 +17,18 @@ const Faqs = () => {
 
   return (
     <div className="common md:flex gap-10 items-center mb-[60px]">
-      <Image
+      {/* <Image
         src="https://askproject.net/meddic/wp-content/uploads/sites/156/2023/10/team-of-doctors-discussing-something-at-hospital-c-FHAY6CS.jpg"
         alt="Picture of the author"
         width={500}
         height={500}
         className="rounded-xl md:w-[550px] md:h-[660px] border-2 "
+      /> */}
+
+      <Lottie
+        animationData={animationData}
+        className="md:w-[550px] md:h-[660px] border-2 rounded-lg"
+        loop={true}
       />
 
       {/* FAQS */}

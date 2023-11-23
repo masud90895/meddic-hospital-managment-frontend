@@ -1,22 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Lottie from "lottie-react";
-import DoctorImage from "../../../public/assists/bruno-rodrigues-279xIHymPYY-unsplash-removebg-preview.png";
-import Image from "next/image";
-
 import animationData from "../../../public/virus-disinfection.json";
 
 const Hero = () => {
-  const HeroData = [
-    {
-      name: "25+",
-      description: "Years of Experience",
-    },
-    {
-      name: "140+",
-      description: "Specialist Doctors",
-    },
-  ];
+  // const HeroData = [
+  //   {
+  //     name: "25+",
+  //     description: "Years of Experience",
+  //   },
+  //   {
+  //     name: "140+",
+  //     description: "Specialist Doctors",
+  //   },
+  // ];
 
   return (
     <div className="common h-[740px] md:flex items-center justify-between ">

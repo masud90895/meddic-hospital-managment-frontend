@@ -5,13 +5,16 @@ import FormSelectField from "../Forms/FormSelectField";
 import { useRouter } from "next/navigation";
 import Form from "../Forms/Form";
 import FormDatePicker from "../Forms/FormDatePicker";
-import {  Modal, message } from "antd";
+import { Modal, message } from "antd";
 const { confirm } = Modal;
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { isLoggedIn } from "@/services/auth.service";
 import { useGetSlotQuery } from "@/Redux/features/slotApi/slotApi";
 import { useGetServicesQuery } from "@/Redux/features/serviceApi/serviceApi";
 import { useCreateBookingMutation } from "@/Redux/features/bookingApi/bookingApi";
+
+import Lottie from "lottie-react";
+import animationData from "../../../public/coronavirus-disease.json";
 
 const Apointment = () => {
   const userLoggedIn = isLoggedIn();
@@ -103,12 +106,18 @@ const Apointment = () => {
       id="appointment"
       className="common md:flex gap-10 items-center mb-[60px]"
     >
-      <Image
+      {/* <Image
         src="https://askproject.net/meddic/wp-content/uploads/sites/156/2023/10/team-of-doctors-discussing-something-at-hospital-c-FHAY6CS.jpg"
         alt="Picture of the author"
         width={500}
         height={500}
         className="rounded-xl md:w-[550px] md:h-[660px] border-2 "
+      /> */}
+
+      <Lottie
+        animationData={animationData}
+        className="md:w-[580px] md:h-[660px] border-2 rounded-lg"
+        loop={true}
       />
 
       {/* FAQS */}
