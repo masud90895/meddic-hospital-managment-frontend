@@ -39,8 +39,8 @@ const Banner = () => {
           />
 
           <div className="flex flex-col gap-2">
-            <h3 className="font-semibold text-[20px]">{data.title}</h3>
-            <p>{data.description}</p>
+            <h3 className="font-semibold text-[18px]">{data.title}</h3>
+            <p className="text-[12px]">{data.description}</p>
           </div>
         </div>
       ))}

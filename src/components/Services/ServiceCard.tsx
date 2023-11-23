@@ -27,7 +27,27 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
   };
 
   return (
-    <div className="bg-blue-50/75 border rounded-xl  flex flex-col gap-3 font-inter hover:border-primary ease-in duration-100 delay-75 shadow ">
+    <div
+      className="
+    bg-blue-50/75 
+    border 
+    rounded-xl 
+     flex flex-col
+      gap-3 
+      font-inter 
+      hover:border-primary 
+      ease-in
+       duration-100 
+       delay-75 
+       transform  
+        transition-all
+        hover:shadow-lg
+        cursor-pointer
+        hover:scale-105
+
+
+       "
+    >
       <Image
         alt={service?.serviceName}
         src={service?.serviceImage}
